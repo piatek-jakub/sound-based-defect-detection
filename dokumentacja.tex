@@ -1,0 +1,336 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{tikz}
+\usepackage{xfrac}
+\usepackage{geometry}
+\pgfplotsset{compat=newest}
+\usepackage[table]{colortbl}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{polski}
+\usepackage{multirow}
+\usepackage[english, polish]{babel}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{url}
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+\newgeometry{tmargin=1cm, bmargin=2cm, lmargin=1.2cm, rmargin=1.2cm}
+
+\title{\textbf{Projekt \\\vspace{5mm} \Huge Detekcja uszkodzeń na bazie dźwięków } \\
+\vspace{25mm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.55]{pwrl.png}
+    \label{fig:pwr}
+\end{figure} 
+\vspace{5mm}
+\Large{Projekt przejściowy} \\ \large{Czwartek 17:05}}
+\author{Jakub Piątek 263480\\ Karolina Nowak 263436 \\ Kacper Malinowski 263518 \\ Dawid Różański 263524}
+
+\begin{document}
+\maketitle
+\newpage
+\vspace{35mm}
+\tableofcontents
+
+\newpage
+\section{Opis problemu}
+Współczesne systemy diagnostyczne coraz częściej wykorzystują analizę dźwięku jako jedno z kluczowych narzędzi do oceny stanu technicznego urządzeń. Metody akustyczne pozwalają na wykrywanie anomalii oraz wczesne diagnozowanie uszkodzeń bez konieczności ingerencji w strukturę maszyny. Analiza sygnałów dźwiękowych jest szczególnie istotna w przypadku urządzeń mechanicznych o złożonej dynamice pracy, gdzie nawet niewielkie odchylenia od normy mogą świadczyć o powstawaniu usterek.
+
+Projekt „Detekcja uszkodzeń na bazie dźwięków” koncentruje się na opracowaniu systemu rozpoznawania cech obiektów oraz identyfikacji ich potencjalnych uszkodzeń na podstawie emitowanych dźwięków. Dane wejściowe pochodzą z publicznie dostępnego ToyADMOS Dataset, obejmującego nagrania dźwięków różnych zabawek mechanicznych, takich jak toy car, toy train, toy conveyor, toy plane oraz innych urządzeń wykonujących stałe, powtarzalne ruchy.
+
+Zbiór danych zawiera zarówno nagrania przedstawiające pracujące poprawnie obiekty, jak i takie, które zawierają celowo wprowadzone uszkodzenia lub anomalie pracy. Dzięki temu możliwe jest zbudowanie i przetrenowanie modeli uczenia maszynowego zdolnych do: 
+\begin{itemize}
+    \item klasyfikacji rodzaju obiektu na podstawie jego charakterystyk akustycznych,
+    \item wykrywania odstępstw od normalnej pracy,
+    \item rozpoznawania typu uszkodzenia lub anomalii w strukturze sygnału audio.
+\end{itemize}
+
+Głównym celem projektu jest opracowanie systemu zdolnego do automatycznego rozpoznawania różnych cech obiektów z datasetu ToyADMOS na podstawie ich dźwięków, a w szczególności odróżnianie pracy poprawnej od pracy anormalnej. Aby osiągnąć ten cel, konieczne jest przetworzenie sygnałów audio, ekstrakcja cech (np. MFCC, spektrogramy, cechy czasowo-częstotliwościowe), a następnie budowa i trening odpowiednich modeli analitycznych.
+
+Problem, który staramy się rozwiązać, polega na tym, że różne obiekty mogą generować dźwięki o bardzo podobnym charakterze, szczególnie przy niskim poziomie SNR oraz w warunkach naturalnych. Co więcej, anomalie nie zawsze są jednoznacznie słyszalne, a ich identyfikacja wymaga zaawansowanej analizy widma i dynamiki sygnału. Opracowany system powinien więc potrafić wychwycić subtelne różnice w strukturze dźwięku, które nie są łatwe do wykrycia metodami tradycyjnego odsłuchu.
+
+Rozwiązanie tego problemu ma znaczenie zarówno edukacyjne, jak i praktyczne. Z punktu widzenia przemysłu systemy diagnostyki akustycznej znajdują zastosowanie w predykcyjnym utrzymaniu ruchu, automatycznej kontroli jakości, a także w robotyce i IoT. Projekt pozwala również na zapoznanie się z technikami uczenia maszynowego stosowanymi w detekcji anomalii oraz klasyfikacji sygnałów dźwiękowych, z wykorzystaniem rzeczywistego i dobrze przygotowanego zestawu danych.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{screeny/x1.png}
+    \caption{Fizyczna realizacja obiektów, na bazie których utworzono zbiór ToyADMOS}
+\end{figure}
+
+\newpage
+\section{Przegląd literatury}
+
+\subsection{Detection of defective embedded bearings by sound analysis: a machine learning approach\cite{Bearings}}
+
+Artykuł opisuje rozwiązanie z zakresu uczenia maszynowego (machine learning) dla automatycznej detekcji wadliwych wbudowanych łożysk w urządzeniach AGD na podstawie analizy akustycznej. Jest to podejście konieczne, ponieważ łożyska są instalowane głęboko w urządzeniu na wczesnym etapie produkcji i stają się fizycznie niedostępne po pełnym montażu. Dodatkowo, tradycyjne metody wibracyjne wymagają bezpośredniego dostępu do łożysk, a konwencjonalna analiza Fouriera jest nieskuteczna ze względu na wysoki poziom szumu w sygnałach z linii produkcyjnej.
+
+Kontrola jakości odbywa się poprzez włączenie zmontowanego urządzenia i rejestrowanie sygnału akustycznego za pomocą zewnętrznego czujnika.
+
+Zadanie detekcji potraktowano jako problem klasyfikacji binarnej ("wadliwe" lub "niewadliwe"). Po przeprowadzeniu akwizycji danych (w warunkach laboratoryjnych i na linii produkcyjnej) oraz ich wstępnym przetworzeniu (redukcja szumu, selekcja cech do dziewięciu kluczowych częstotliwości ), przetestowano 67 algorytmów klasyfikacji.
+
+Dla czystych sygnałów laboratoryjnych wybrano Drzewo Decyzyjne ze względu na zadowalającą dokładność w połączeniu z prostotą i intuicyjną implementacją, co było preferowane przez firmę.
+
+Dla głośniejszych sygnałów z linii produkcyjnej najlepszą wydajność osiągnął algorytm IB1 oparty na metryce odległości i metodzie najbliższego sąsiada, który poprawnie klasyfikował wszystkie próbki z tego środowiska.
+
+Rozwiązanie to ma służyć jako narzędzie wspomagające dla techników i zastąpić subiektywną, czasochłonną, ręczną analizę sygnałów akustycznych prowadzoną przez ekspertów.
+
+Wyzwania techniczne przedstawione w artykule:
+\begin{itemize}
+    \item Ograniczona liczba próbek (dostępne są tylko 34 próbki z linii produkcyjnej),
+    \item Wysoki poziom szumu w pomiarach, szczególnie na linii produkcyjnej, wynikający z pracy całego urządzenia oraz innych komponentów. 
+\end{itemize}
+Autorzy wykazali, że stosunek sygnału do szumu (SNR) jest wystarczająco wysoki, aby maskować ważne składowe, co uniemożliwia skuteczne zastosowanie tradycyjnych technik dekompozycji Fouriera.
+
+Mechanizm proponowanego rozwiązania: 
+\begin{itemize}
+    \item Akwizycja danych - pomiary w izolowanym laboratorium oraz bezpośrednio na linii produkcyjnej. Każdy sygnał akustyczny reprezentował ciśnienie akustyczne w decybelach dla 24 częstotliwości,
+    \item Przetwarzanie wstępne danych - zastosowano selekcję cech, redukując wymiarowość z 24 do dziewięciu najbardziej dyskryminujących częstotliwości (na podstawie różnicy średnich wartości). Wykorzystano również selekcję instancji za pomocą współczynnika Silhouette, aby usunąć potencjalnie błędnie oznaczone (zgodnie z manualną analizą ekspertów) lub redundantne sygnały,
+    \item Ewaluacja klasyfikatorów - przeprowadzono porównawcze badanie 67 algorytmów klasyfikacji dla obu środowisk pomiarowych.
+\end{itemize}
+
+Wnioski wynikające z publikacji przedstawiają się następująco:
+\begin{itemize}
+    \item Dla sygnałów laboratoryjnych, pomimo osiągnięcia najwyższej dokładności przez inne metody, jako najlepsze rozwiązanie wybrano Drzewo Decyzyjne (Decision Tree) ze względu na prostotę implementacji i łatwą interpretację reguł klasyfikacji, co było kluczowym wymogiem dla firmy.
+    \item Zaproponowana metodyka dostarcza skutecznego narzędzia do automatyzacji kontroli jakości w przemyśle produkcyjnym, przewyższając manualną analizę ekspertów (wykrywając wady, których nie byli w stanie zidentyfikować ludzie).
+\end{itemize}
+
+\subsection{ToyADMOS: A Dataset of Miniature-Machine Operating Sounds for Anomalous Sound Detection\cite{Dataset}}
+Artykuł wprowadza i opisuje publicznie dostępny, wielkoskalowy zbiór danych o nazwie ToyADMOS, zaprojektowany do badań nad Detekcją Anomalii w Dźwiękach Operacyjnych Maszyn (ADMOS).
+
+Kontekst i Motywacja publikacji wynika z braku swobodnie dostępnych, dużych zbiorów danych dla ADMOS, ponieważ nietypowe dźwięki są rzadkie i kosztowne w zbieraniu, zwłaszcza w przypadku drogich maszyn przemysłowych. W celu stworzenia obszernego zestawu danych autorzy celowo uszkodzili miniaturowe maszyny (zabawki), rejestrując ich dźwięki operacyjne w kontrolowanych warunkach laboratoryjnych.
+
+Struktura i zawartość zbioru danych zbioru ToyADMOS cechuje się trzema podzbiory (zadania ADMOS), z których każdy wykorzystuje inny rodzaj maszyny miniaturowej:
+\begin{itemize}
+    \item Toy car (Samochód-zabawka) - zadanie inspekcji produktu,
+    \item Toy conveyor (Taśmociąg-zabawka) - diagnoza usterek dla maszyny stacjonarnej,
+    \item Toy train (Pociąg-zabawka) - diagnoza usterek dla maszyny ruchomej (wymagająca łączenia obserwacji z wielu kanałów).
+\end{itemize}
+
+Cechy każdego podzbioru przedstawiają się następująco:
+\begin{itemize}
+    \item Ponad 180 godzin normalnych dźwięków operacyjnych,
+    \item Ponad 4000 próbek anomalnych dźwięków zebranych przez celowe uszkodzenie komponentów (np. wał, przekładnie, koła pasowe),
+    \item Dźwięki są rejestrowane za pomocą czterech mikrofonów przy częstotliwości próbkowania 48 kHz,
+    \item Zbiór zawiera również oddzielnie nagrane szumy środowiskowe z rzeczywistej fabryki, emitowane przez głośniki, co umożliwia symulowanie różnych poziomów szumu (SNR).
+\end{itemize}
+
+Kluczowe wnioski i znaczenie dla projektu:
+\begin{itemize}
+    \item Wielozadaniowość - zbiór danych ma zastosowanie nie tylko do podstawowej detekcji anomalii bez nadzoru (unsupervised ADMOS), ale także do zaawansowanych technik uczenia maszynowego, takich jak redukcja szumu, adaptacja domen (wykorzystanie wielu egzemplarzy tego samego typu maszyny o drobnych różnicach w budowie, aby testować zdolność modelu do generalizacji) i uczenie z małej liczby próbek (few-shot learning).
+    \item Benchmark - autorzy udostępniają system referencyjny (baseline) oparty na prostym Autoenkoderze (AE), który wykorzystuje błąd rekonstrukcji jako wskaźnik anomalii.
+    \item Wyniki Testów - badanie wykazało, że system ma trudności z wykrywaniem anomalii, które powodują jedynie niewielkie zmiany w strukturze czasowo-częstotliwościowej dźwięku lub mają niską amplitudę (np. uszkodzona zakrzywiona szyna w przypadku pociągu-zabawki, która jest daleko od wszystkich mikrofonów). Wskazuje to na kierunek dalszych badań w ADMOS – opracowanie metod wrażliwych na subtelne zmiany w sygnale akustycznym.
+\end{itemize}
+
+\subsection{Anomalous sound detection with machine learning: A systematic review\cite{review}}
+
+Przegląd ten dostarcza syntetycznych informacji na temat najczęściej stosowanych metod, zbiorów danych oraz metryk oceny w badaniach nad detekcją anomalii dźwiękowych (ASD). Celem pracy było zidentyfikowanie dominujących technik uczenia maszynowego, popularnych baz danych oraz sposobów przetwarzania i oceny sygnałów audio, a także wskazanie aktualnych trendów w tej dziedzinie.
+
+\textbf{Najpopularniejsze modele ML:} Spośród 33 zidentyfikowanych technik, dwie grupy modeli wyraźnie dominują w literaturze: Autoenkodery (AE) oraz Konwolucyjne Sieci Neuronowe (CNN). Modele te są szeroko stosowane ze względu na swoją skuteczność w detekcji nietypowych sygnałów oraz zdolność do wychwytywania istotnych cech w danych audio.
+
+\textbf{Nowy trend:} W najnowszych badaniach, szczególnie po 2020 roku, zauważalny jest trend wykorzystania Transfer Learningu. Polega on na stosowaniu modeli wstępnie wytrenowanych na dużych zbiorach danych, takich jak ResNet-50, MobileNetV2 czy DenseNet-121, co pozwala na szybsze i bardziej efektywne trenowanie modeli dla specyficznych zastosowań w ASD.
+
+\textbf{Najpopularniejsze zbiory danych:} Analiza literatury wykazała, że najczęściej wykorzystywanymi publicznymi zbiorami danych w badaniach nad ASD są ToyADMOS, MIMII oraz Mivia. Jednocześnie autorzy zwracają uwagę, że znaczna część badań (9 z 31) korzystała z własnych, niestandardowych zbiorów danych, co utrudnia bezpośrednie porównania wyników między publikacjami.
+
+\textbf{Najpopularniejsze metody ekstrakcji cech:} Najczęściej stosowaną metodą przekształcania surowego sygnału audio na reprezentację cechową były współczynniki cepstralne częstotliwości Mel (MFCC). Inne często używane podejścia to Log-Mel Energy oraz Mel-spektrogram, które pozwalają na uchwycenie istotnych cech w dziedzinie częstotliwości i czasie.
+
+\textbf{Najpopularniejsze metryki oceny:} Do oceny skuteczności modeli najczęściej wykorzystywano metryki AUC-ROC (Area Under the Receiver Operating Characteristic curve) oraz F1-score. Obie metryki umożliwiają kompleksową ocenę wydajności systemów detekcji anomalii, zarówno pod kątem zdolności rozróżniania klas, jak i równowagi między precyzją a czułością.
+
+Podsumowując, przegląd wskazuje, że dziedzina detekcji anomalii dźwiękowych jest wciąż aktywnie rozwijana, a główne kierunki badań koncentrują się na wykorzystaniu nowoczesnych architektur uczenia maszynowego, adaptacji modeli wstępnie wytrenowanych oraz standaryzacji zbiorów danych i metod oceny. Wyniki te stanowią solidną podstawę do dalszych badań oraz porównywania efektywności różnych podejść w ASD.
+
+\subsection{Anomalous sound detection using CNN-based models and ensemble \cite{tanaka2023anomalous}}
+Autorzy pracy badają wykorzystanie technik przetwarzania obrazów oraz klasyfikacji pomocniczej, aby polepszyć skuteczność detekcji w systemach monitorowania akustycznego.
+
+Autorzy proponują cztery główne podejścia:
+\begin{enumerate}
+    \item \textbf{Detekcja anomalii na podstawie spektrogramów} z użyciem modelu ResNet18 jako ekstraktora cech. Anomalia oceniana jest poprzez obliczenie odległości Mahalanobisa od rozkładu cech pochodzących z danych normalnych. W procesie trenowania stosowane są augmentacje typowe dla analizy obrazów, takie jak maskowanie czasowe i częstotliwościowe.
+    \item \textbf{Metoda inpainting} inspirowana rozwiązaniami wykorzystywanymi w rekonstrukcji fragmentów obrazów (InTra). Model uczy się odtwarzania zmaskowanych fragmentów spektrogramów, a średni błąd rekonstrukcji pełni funkcję wskaźnika anomalii. Podejście to okazało się konkurencyjne wobec metod bazowych.
+    \item \textbf{Klasyfikacja ustawień maszyny}. Autorzy zauważają, że w danych DCASE można wyróżnić różne ustawienia operacyjne maszyn (np. prędkość, napięcie). Dlatego proponują model autoenkodera, który jednocześnie rekonstruuje części obrazu i przewiduje ustawienie maszyny, poprawiając jakość reprezentacji wykorzystywanej do detekcji anomalii.
+    \item \textbf{Metoda ensemble} dla nowych typów maszyn, w której wynik detektora tworzony jest jako kombinacja wagowa rezultatów modeli wytrenowanych wcześniej dla innych maszyn. Wagi są określane na podstawie klasyfikatora typu maszyny, interpretowanego jako miara podobieństwa między maszynami.
+\end{enumerate}
+
+Wyniki eksperymentalne pokazują, że niektóre z proponowanych metod – zwłaszcza podejście rekonstrukcyjne oraz modele wielozadaniowe – osiągają wyższą skuteczność niż systemy bazowe DCASE dla wybranych kategorii maszyn. Metoda ensemble daje rezultaty mieszane, jednak stanowi ciekawy kierunek dla zastosowań, w których dostęp do danych treningowych jest ograniczony.
+
+Praca wskazuje, że przeniesienie technik z analizy obrazu na grunt analizy akustycznej poprzez reprezentację spektrogramową może istotnie poprawiać wyniki detekcji anomalii, a metody rekonstrukcyjne i klasyfikacyjne mogą zwiększać ogólną jakość systemów monitorowania stanu technicznego.
+
+\subsection{Engine Fault Detection by Sound Analysis and Machine Learning\cite{tpp14156532}}
+Artykuł dotyczy diagnostyki usterek pojazdów na podstawie analizy sygnałów akustycznych rejestrowanych w warunkach rzeczywistych (serwisy samochodowe Ford/Toyota). Autorzy rozważają sześć klas stanu technicznego silnika (m.in. prawidłowy, problemy ze świecami zapłonowymi, przepływem powietrza, elektryką, turbo oraz przednią osią) i proponują system klasyfikacji dźwięków oparty na ekstrakcji cech oraz uczeniu maszynowym.
+
+W części metodologicznej porównano dwie główne grupy cech: współczynniki MFCC (Mel-frequency cepstral coefficients) oraz cechy uzyskane z DWT (Discrete wavelet transform). Dodatkowo przeprowadzono analizę widmową (FFT z podziałem na pasma 100 Hz) oraz selekcję istotnych częstotliwości przy użyciu algorytmu Relief-F. Do klasyfikacji zastosowano algorytm Extreme Learning Machine (ELM), który jest jednowarstwową siecią neuronową o losowej inicjalizacji wag wejściowych i bardzo szybkim procesie uczenia.
+
+Wyniki pokazały wyraźną przewagę cech MFCC nad DWT. Najlepsze rezultaty uzyskano dla 20 współczynników MFCC i klasyfikatora ELM z funkcją aktywacji sine, osiągając średnią dokładność około 92\%. Cechy DWT wypadły słabiej, z maksymalną dokładnością około 84\%. Dodatkowa analiza widmowa wskazała charakterystyczne pasma częstotliwości powiązane z poszczególnymi rodzajami usterek, co może wspierać dalszą interpretację i rozwój systemów diagnostycznych.
+
+We wnioskach autorzy potwierdzają, że MFCC w połączeniu z ELM stanowią skuteczne i niewymagające obliczeniowo rozwiązanie dla detekcji uszkodzeń silników w warunkach serwisowych, przewyższając alternatywne metody oparte na DWT.
+\subsection{Machine learning based approach for automatic defect detection and classification in adhesive joints\cite{SMAGULOVA2024103221}} 
+Artykuł dotyczy automatycznej detekcji i klasyfikacji defektów w złączach klejonych, wykorzystując ultradźwięki (ultrasonic pulse-echo) połączone z metodami uczenia maszynowego. Celem jest wykrycie obecności defektu oraz określenie głębokości defektu w materiale. 
+\begin{itemize}
+    \item Na etapie ekstrakcji cech: z danych ultradźwiękowych (ultrasonic pulse-echo) wyodrębniono 32 cechy
+    \item Jako klasyfikator zastosowano Support Vector Machine (SVM)
+    \item Dane były klasyfikowane w dwóch kategoriach: Defekt lub brak defektu oraz głębokości 1, 2 lub 3
+    \item Do testów użyto różnych podzbiorów cech: „initial”, „single interface”, „minimised”, „tree-based”, „recursive”, „sequential”, „LDA” (Linear Discriminant Analysis) do redukcji albo transformacji cech. 
+\end{itemize}
+Dla klasyfikacji binarnej („defekt vs. brak defektu”): model mający 32 cech osiągnął ponad 90\% dokładności na danych treningowych oraz 83\% na danych testowych.
+
+Dla klasyfikacji głębokości defektu na danych testowych przy użyciu recursive feature subset osiągnięto:
+ok. 97\% dokładności dla głębokości 1 
+ok. 62\% dokładności dla głębokości 2
+ok. 91\% dokładności dla głębokości 3
+
+Wnioski autorów pokazują, że ML-model może skutecznie rozróżniać defekty i nawet klasyfikować ich głębokość w materiale, ale także wskazują na ograniczenia - trudniej jest klasyfikować pośredni poziom głębokości defektu, co może wynikać z mniejszej separowalności cech lub mniejszej liczby przykładów.
+
+\subsection{Anomalous sound event detection: A survey of machine learning based methods and applications\cite{Mnasri2021}}
+
+Artykuł stanowi kompleksowy przegląd metod i zastosowań w dziedzinie wykrywania anomalnych zdarzeń dźwiękowych (ASED – Anomalous Sound Event Detection). Autorzy systematyzują wiedzę obejmującą publikacje do 2021 roku, koncentrując się na wyzwaniach związanych z rzadkością występowania anomalii oraz trudnościami w ich jednoznacznym zdefiniowaniu w porównaniu do standardowej detekcji zdarzeń akustycznych (SED).
+
+W pracy przedstawiono taksonomię metod modelowania, dzieląc je na trzy główne kategorie:
+\begin{itemize}
+    \item \textbf{Metody generatywne} – oparte na klasycznych modelach statystycznych, takich jak GMM (Gaussian Mixture Models) i HMM (Hidden Markov Models), które modelują rozkład prawdopodobieństwa normalnych danych akustycznych,
+    \item \textbf{Metody dyskryminacyjne} – wykorzystujące techniki takie jak jednoklasowe maszyny wektorów nośnych (OC-SVM), które uczą się wyznaczać granicę decyzyjną oddzielającą dane normalne od odstających (outliers),
+    \item \textbf{Metody oparte na uczeniu głębokim} – obejmujące podejścia nadzorowane (CNN, CRNN), pół-nadzorowane (GAN) oraz nienadzorowane (Autoenkodery, VAE, WaveNet). Szczególną uwagę poświęcono metodom opartym na rekonstrukcji sygnału, gdzie anomalia jest wykrywana na podstawie wysokiego błędu rekonstrukcji generowanego przez model wytrenowany wyłącznie na danych prawidłowych.
+\end{itemize}
+
+W kontekście inżynierii cech, autorzy zauważają wyraźną ewolucję od ręcznie dobieranych deskryptorów niskopoziomowych (takich jak MFCC, ZCR, czy parametry spektralne MPEG-7) w stronę reprezentacji uczonych automatycznie (feature learning/embedding) przy użyciu głębokich sieci neuronowych, często z wykorzystaniem transfer learningu z dziedziny przetwarzania obrazów (analiza spektrogramów).
+
+Kluczowe wnioski i wyzwania zidentyfikowane w przeglądzie:
+\begin{itemize}
+    \item \textbf{Nierównowaga danych (Data Scarcity)} – główną barierą w rozwoju ASED jest brak wystarczającej liczby próbek anomalnych. Autorzy wskazują na konieczność rozwoju technik augmentacji danych oraz metod few-shot learning, które pozwalają na trenowanie modeli na bardzo ograniczonej liczbie przykładów błędów.
+    \item \textbf{Obszary zastosowań} – przegląd potwierdza dominację zastosowań w monitoringu przemysłowym (diagnostyka maszyn, zbiory ToyADMOS i MIMII) oraz nadzorze audio (audio surveillance), ale wskazuje również na rosnące znaczenie w opiece zdrowotnej (analiza dźwięków oddechowych i serca).
+    \item \textbf{Ewaluacja} – autorzy podnoszą kwestię adekwatności metryk. W przypadku silnie niezbalansowanych zbiorów standardowe miary (jak Accuracy) mogą być mylące, dlatego rekomendowane jest stosowanie AUC (Area Under ROC Curve) oraz p-AUC (partial-AUC) dla niskich wartości False Positive Rate, co jest kluczowe w systemach przemysłowych unikających fałszywych alarmów.
+\end{itemize}
+
+
+
+
+
+\subsection{Anomalous Sound Detection Based on Machine Activity Detection\cite{nishida2022anomaloussounddetectionbased}}
+
+Autorzy proponują nowatorskie podejście do nienadzorowanej detekcji anomalii (UASD), które wykorzystuje zadanie pomocnicze polegające na wykrywaniu momentów aktywności maszyny (active/inactive). Metoda ta została opracowana, aby rozwiązać problem spadku skuteczności systemów monitorowania w warunkach przemysłowych, gdzie szum otoczenia jest często zbliżony charakterystyką do dźwięku samej maszyny.
+
+Zasada działania opiera się na treningu modelu klasyfikującego ramki czasowe jako "aktywne" lub "nieaktywne" na podstawie danych normalnych. Rozróżniono dwa scenariusze wnioskowania:
+\begin{itemize}
+    \item \textbf{UASD-SAD (z etykietami):} Gdy etykiety aktywności są dostępne podczas testów, jako miarę anomalii wykorzystuje się błąd detekcji aktywności (funkcja straty entropii krzyżowej). Anomalne dźwięki powodują błędną klasyfikację stanu maszyny, generując wysoki wynik błędu.
+    \item \textbf{UASD-OD-SAD (bez etykiet):} Gdy etykiety nie są dostępne, model służy jako ekstraktor cech. Wektory osadzeń (embeddings) z modelu detekcji aktywności są przekazywane do detektora wartości odstających (np. GMM), który wyznacza wynik anomalii.
+\end{itemize}
+
+Eksperymenty przeprowadzone na zbiorze MIMII DUE (Slide rail) wykazały, że proponowane podejście przewyższa konwencjonalne metody oparte na autoenkoderach, szczególnie w warunkach niskiego stosunku sygnału do szumu (SNR) oraz wysokiego podobieństwa szumu do sygnału użytecznego. Autorzy wykazali również, że metoda ta działa komplementarnie do rozwiązań standardowych, a najlepsze rezultaty osiąga się poprzez ich połączenie (ensemble).
+
+
+
+\newpage
+\section{Koncepcja części eksperymentalnej}
+\subsection{Dane wejściowe}
+Danymi wejściowymi w projekcie są krótkie nagrania dźwiękowe o określonej długości, przedstawiające pracę wybranego urządzenia (np. zabawkowego samochodu, przenośnika taśmowego czy miniaturowego pociągu). Każde nagranie pochodzi z zestawu danych, który obejmuje zarówno:
+\begin{itemize}
+    \item nagrania przedstawiające normalną pracę urządzenia,
+    \item nagrania zarejestrowane w sytuacji wystąpienia usterki.
+\end{itemize}
+Każda z usterek powiązana jest z konkretnymi parametrami pracy urządzenia, takimi jak napięcie zasilania, stan elementów mechanicznych czy stopień zużycia podzespołów.
+Przed wykorzystaniem w modelu pliki audio zostaną poddane wstępnemu przetwarzaniu. Obejmuje ono m.in. zastosowanie transformacji Fouriera, która pozwala przekształcić sygnał czasowy w spektrogram.
+
+\subsection{Analizowane wyniki}
+Dane wyjściowe modelu to predykcja stanu urządzenia oparta na analizie dźwięku. Predykcja ma charakter:
+\begin{itemize}
+    \item wieloklasowy – model wybiera jedną z kilku możliwych klas, np. „normalny”, „usterka typu A”, „usterka typu B” itd.,
+    \item wieloparametrowy – model w tym samym czasie ocenia wiele aspektów działania urządzenia.
+\end{itemize}
+Każdy model wykonuje klasyfikację wartości parametrów takich jak:
+\begin{itemize}
+    \item stan mechaniczny (np. wał, koła, taśma, napęd),
+    \item obecność obcych obiektów (np. metallic object),
+    \item stan napięcia (under-voltage, normal, over-voltage),
+    \item inne cechy charakterystyczne dla konkretnego urządzenia.
+\end{itemize}
+Oznacza to, że model generuje wiele predykcji równolegle, a każda z nich odnosi się do innego aspektu działania maszyny.
+
+\subsection{Ocena poprawności działania modelu}
+Ponieważ system jednocześnie ocenia wiele parametrów, do weryfikacji jego skuteczności konieczne jest użycie zestawu różnych kryteriów.
+\begin{enumerate}
+    \item Macierz konfuzji (Confusion Matrix) \newline
+    Dla każdego parametru generowana jest osobna macierz konfuzji, która pozwala ocenić:
+    \begin{itemize}
+        \item ile klasyfikacji było poprawnych,
+        \item jakie błędy popełnił model (pomyłki typu FP i FN),
+        \item które klasy okazały się najtrudniejsze do rozpoznania,
+        \item czy model ma tendencję do dominującej klasy („bias”).
+    \end{itemize}
+    
+    \item AUC–ROC \newline
+    Dla każdego parametru obliczana jest krzywa ROC oraz pole pod krzywą (AUC). \newline
+    Pozwala to ocenić:
+    \begin{itemize}
+        \item separowalność klas,
+        \item jak zmienia się jego skuteczność przy różnych progach decyzyjnych,
+        \item jakość detekcji anomalii przy różnych warunkach pracy.
+    \end{itemize}
+    
+    \item Precision, Recall, F-measure \newline
+    Dla każdej cechy urządzenia wyliczony zostaje zestaw metryk:
+    \begin{itemize}
+        \item Precision – jak często model się nie myli, kiedy zgłasza daną usterkę,
+        \item Recall – jak wiele faktycznie występujących usterek wykrywa,
+        \item F-measure – miara łącząca oba poprzednie wskaźniki, pokazująca zależność między precyzją, a skutecznością wykryć.
+    \end{itemize}
+
+   
+\end{enumerate}
+
+\newpage
+\section{Wybrana architektura rozwiązania}
+
+
+\newpage
+\section{Badania}
+
+\newpage
+\section{Wnioski}
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{Bibliography.bib}
+
+\end{document}
