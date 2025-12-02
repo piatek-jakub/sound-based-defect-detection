@@ -51,8 +51,8 @@ if signal.ndim > 1:
 signal_short = signal[:5*target_fs]
 
 # FFT
-D = librosa.stft(signal_short, n_fft=1024, hop_length=256)
-S_db = librosa.amplitude_to_db(np.abs(D), ref=np.max)
+mfcc_transform = librosa.feature.mfcc(y=signal_short, sr=16000, n_mfcc=20, n_fft=1024, hop_length=512)
+S_db = librosa.amplitude_to_db(np.abs(mfcc_transform), ref=np.max)
 
 # Wyświetlenie spektrogramu
 plt.figure(figsize=(12, 6))
