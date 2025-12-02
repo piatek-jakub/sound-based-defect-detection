@@ -1,0 +1,55 @@
+Name;Straight railway track;Curved railway track;First carriage;Last carriage
+ab01;Normal;Normal;Normal;Chipped wheel axle
+ab02;Normal;Normal;Chipped wheel axle;Normal
+ab03;Normal;Normal;Chipped wheel axle;Chipped wheel axle
+ab04;Normal;Disjointed;Normal;Normal
+ab05;Normal;Disjointed;Normal;Chipped wheel axle
+ab06;Normal;Disjointed;Chipped wheel axle;Normal
+ab07;Normal;Disjointed;Chipped wheel axle;Chipped wheel axle
+ab08;Normal;Obstructing stone;Normal;Normal
+ab09;Normal;Obstructing stone;Normal;Chipped wheel axle
+ab10;Normal;Obstructing stone;Chipped wheel axle;Normal
+ab11;Normal;Obstructing stone;Chipped wheel axle;Chipped wheel axle
+ab12;Normal;Broken;Normal;Normal
+ab13;Normal;Broken;Normal;Chipped wheel axle
+ab14;Normal;Broken;Chipped wheel axle;Normal
+ab15;Normal;Broken;Chipped wheel axle;Chipped wheel axle
+ab16;Disjointed;Normal;Normal;Normal
+ab17;Disjointed;Disjointed;Normal;Normal
+ab18;Disjointed;Disjointed;Normal;Chipped wheel axle
+ab19;Disjointed;Disjointed;Chipped wheel axle;Normal
+ab20;Disjointed;Disjointed;Chipped wheel axle;Chipped wheel axle
+ab21;Disjointed;Obstructing stone;Normal;Normal
+ab22;Disjointed;Obstructing stone;Normal;Chipped wheel axle
+ab23;Disjointed;Obstructing stone;Chipped wheel axle;Normal
+ab24;Disjointed;Obstructing stone;Chipped wheel axle;Chipped wheel axle
+ab25;Disjointed;Broken;Normal;Normal
+ab26;Disjointed;Broken;Normal;Chipped wheel axle
+ab27;Disjointed;Broken;Chipped wheel axle;Normal
+ab28;Disjointed;Broken;Chipped wheel axle;Chipped wheel axle
+ab29;Obstructing stone;Normal;Normal;Normal
+ab30;Obstructing stone;Disjointed;Normal;Normal
+ab31;Obstructing stone;Disjointed;Normal;Chipped wheel axle
+ab32;Obstructing stone;Disjointed;Chipped wheel axle;Normal
+ab33;Obstructing stone;Disjointed;Chipped wheel axle;Chipped wheel axle
+ab34;Obstructing stone;Obstructing stone;Normal;Normal
+ab35;Obstructing stone;Obstructing stone;Normal;Chipped wheel axle
+ab36;Obstructing stone;Obstructing stone;Chipped wheel axle;Normal
+ab37;Obstructing stone;Obstructing stone;Chipped wheel axle;Chipped wheel axle
+ab38;Obstructing stone;Broken;Normal;Normal
+ab39;Obstructing stone;Broken;Normal;Chipped wheel axle
+ab40;Obstructing stone;Broken;Chipped wheel axle;Normal
+ab41;Obstructing stone;Broken;Chipped wheel axle;Chipped wheel axle
+ab42;Broken;Normal;Normal;Normal
+ab43;Broken;Disjointed;Normal;Normal
+ab44;Broken;Disjointed;Normal;Chipped wheel axle
+ab45;Broken;Disjointed;Chipped wheel axle;Normal
+ab46;Broken;Disjointed;Chipped wheel axle;Chipped wheel axle
+ab47;Broken;Obstructing stone;Normal;Normal
+ab48;Broken;Obstructing stone;Normal;Chipped wheel axle
+ab49;Broken;Obstructing stone;Chipped wheel axle;Normal
+ab50;Broken;Obstructing stone;Chipped wheel axle;Chipped wheel axle
+ab51;Broken;Broken;Normal;Normal
+ab52;Broken;Broken;Normal;Chipped wheel axle
+ab53;Broken;Broken;Chipped wheel axle;Normal
+ab54;Broken;Broken;Chipped wheel axle;Chipped wheel axle

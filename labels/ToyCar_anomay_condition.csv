@@ -1,0 +1,54 @@
+Name;Shaft;Gears;Tires;Voltage
+ab01;Normal;Normal;Normal;Under voltage
+ab02;Normal;Normal;Normal;Over voltage
+ab03;Normal;Normal;Coiled (plastic ribbon);Normal
+ab04;Normal;Normal;Coiled (plastic ribbon);Under voltage
+ab05;Normal;Normal;Coiled (plastic ribbon);Over voltage
+ab06;Normal;Normal;Coiled (steel ribbon);Normal
+ab07;Normal;Normal;Coiled (steel ribbon);Under voltage
+ab08;Normal;Normal;Coiled (steel ribbon);Over voltage
+ab09;Normal;Deformed;Normal;Normal
+ab10;Normal;Deformed;Normal;Under voltage
+ab11;Normal;Deformed;Normal;Over voltage
+ab12;Normal;Deformed;Coiled (plastic ribbon);Normal
+ab13;Normal;Deformed;Coiled (plastic ribbon);Under voltage
+ab14;Normal;Deformed;Coiled (plastic ribbon);Over voltage
+ab15;Normal;Deformed;Coiled (steel ribbon);Normal
+ab16;Normal;Deformed;Coiled (steel ribbon);Under voltage
+ab17;Normal;Deformed;Coiled (steel ribbon);Over voltage
+ab18;Normal;Melted;Normal;Normal
+ab19;Normal;Melted;Normal;Under voltage
+ab20;Normal;Melted;Normal;Over voltage
+ab21;Normal;Melted;Coiled (plastic ribbon);Normal
+ab22;Normal;Melted;Coiled (plastic ribbon);Under voltage
+ab23;Normal;Melted;Coiled (plastic ribbon);Over voltage
+ab24;Normal;Melted;Coiled (steel ribbon);Normal
+ab25;Normal;Melted;Coiled (steel ribbon);Under voltage
+ab26;Normal;Melted;Coiled (steel ribbon);Over voltage
+ab27;Bent;Normal;Normal;Normal
+ab28;Bent;Normal;Normal;Under voltage
+ab29;Bent;Normal;Normal;Over voltage
+ab30;Bent;Normal;Coiled (plastic ribbon);Normal
+ab31;Bent;Normal;Coiled (plastic ribbon);Under voltage
+ab32;Bent;Normal;Coiled (plastic ribbon);Over voltage
+ab33;Bent;Normal;Coiled (steel ribbon);Normal
+ab34;Bent;Normal;Coiled (steel ribbon);Under voltage
+ab35;Bent;Normal;Coiled (steel ribbon);Over voltage
+ab36;Bent;Deformed;Normal;Normal
+ab37;Bent;Deformed;Normal;Under voltage
+ab38;Bent;Deformed;Normal;Over voltage
+ab39;Bent;Deformed;Coiled (plastic ribbon);Normal
+ab40;Bent;Deformed;Coiled (plastic ribbon);Under voltage
+ab41;Bent;Deformed;Coiled (plastic ribbon);Over voltage
+ab42;Bent;Deformed;Coiled (steel ribbon);Normal
+ab43;Bent;Deformed;Coiled (steel ribbon);Under voltage
+ab44;Bent;Deformed;Coiled (steel ribbon);Over voltage
+ab45;Bent;Melted;Normal;Normal
+ab46;Bent;Melted;Normal;Under voltage
+ab47;Bent;Melted;Normal;Over voltage
+ab48;Bent;Melted;Coiled (plastic ribbon);Normal
+ab49;Bent;Melted;Coiled (plastic ribbon);Under voltage
+ab50;Bent;Melted;Coiled (plastic ribbon);Over voltage
+ab51;Bent;Melted;Coiled (steel ribbon);Normal
+ab52;Bent;Melted;Coiled (steel ribbon);Under voltage
+ab53;Bent;Melted;Coiled (steel ribbon);Over voltage
