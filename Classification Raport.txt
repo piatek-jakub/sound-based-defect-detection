@@ -1,0 +1,61 @@
+=== Classification Report ===
+                                                       precision    recall  f1-score   support
+
+         Bent_Deformed_Coiled (plastic ribbon)_Normal       0.94      0.80      0.86        20
+   Bent_Deformed_Coiled (plastic ribbon)_Over voltage       0.90      0.95      0.93        20
+  Bent_Deformed_Coiled (plastic ribbon)_Under voltage       0.90      0.95      0.93        20
+           Bent_Deformed_Coiled (steel ribbon)_Normal       0.94      0.85      0.89        20
+     Bent_Deformed_Coiled (steel ribbon)_Over voltage       0.90      0.90      0.90        20
+    Bent_Deformed_Coiled (steel ribbon)_Under voltage       0.83      1.00      0.91        20
+                          Bent_Deformed_Normal_Normal       1.00      1.00      1.00        20
+                    Bent_Deformed_Normal_Over voltage       0.95      1.00      0.98        20
+                   Bent_Deformed_Normal_Under voltage       0.95      1.00      0.98        20
+           Bent_Melted_Coiled (plastic ribbon)_Normal       0.89      0.85      0.87        20
+     Bent_Melted_Coiled (plastic ribbon)_Over voltage       1.00      0.95      0.97        20
+    Bent_Melted_Coiled (plastic ribbon)_Under voltage       0.86      0.90      0.88        20
+             Bent_Melted_Coiled (steel ribbon)_Normal       0.95      1.00      0.98        20
+       Bent_Melted_Coiled (steel ribbon)_Over voltage       0.87      1.00      0.93        20
+      Bent_Melted_Coiled (steel ribbon)_Under voltage       1.00      0.95      0.97        20
+                            Bent_Melted_Normal_Normal       1.00      0.95      0.97        20
+                      Bent_Melted_Normal_Over voltage       1.00      1.00      1.00        20
+                     Bent_Melted_Normal_Under voltage       1.00      0.95      0.97        20
+           Bent_Normal_Coiled (plastic ribbon)_Normal       1.00      1.00      1.00        20
+     Bent_Normal_Coiled (plastic ribbon)_Over voltage       0.95      0.90      0.92        20
+    Bent_Normal_Coiled (plastic ribbon)_Under voltage       1.00      1.00      1.00        20
+             Bent_Normal_Coiled (steel ribbon)_Normal       0.89      0.85      0.87        20
+       Bent_Normal_Coiled (steel ribbon)_Over voltage       0.91      1.00      0.95        20
+      Bent_Normal_Coiled (steel ribbon)_Under voltage       0.94      0.80      0.86        20
+                            Bent_Normal_Normal_Normal       0.95      1.00      0.98        20
+                      Bent_Normal_Normal_Over voltage       1.00      1.00      1.00        20
+                     Bent_Normal_Normal_Under voltage       1.00      0.95      0.97        20
+       Normal_Deformed_Coiled (plastic ribbon)_Normal       0.80      0.75      0.77        16
+ Normal_Deformed_Coiled (plastic ribbon)_Over voltage       0.86      0.95      0.90        20
+Normal_Deformed_Coiled (plastic ribbon)_Under voltage       0.62      0.50      0.56        20
+         Normal_Deformed_Coiled (steel ribbon)_Normal       1.00      0.75      0.86        20
+   Normal_Deformed_Coiled (steel ribbon)_Over voltage       0.58      0.35      0.44        20
+  Normal_Deformed_Coiled (steel ribbon)_Under voltage       0.62      0.40      0.48        20
+                        Normal_Deformed_Normal_Normal       0.73      0.80      0.76        20
+                  Normal_Deformed_Normal_Over voltage       1.00      1.00      1.00        20
+                 Normal_Deformed_Normal_Under voltage       0.88      0.70      0.78        20
+         Normal_Melted_Coiled (plastic ribbon)_Normal       0.95      0.95      0.95        20
+   Normal_Melted_Coiled (plastic ribbon)_Over voltage       0.95      0.95      0.95        20
+  Normal_Melted_Coiled (plastic ribbon)_Under voltage       0.91      1.00      0.95        20
+           Normal_Melted_Coiled (steel ribbon)_Normal       1.00      0.95      0.97        20
+     Normal_Melted_Coiled (steel ribbon)_Over voltage       0.87      1.00      0.93        20
+    Normal_Melted_Coiled (steel ribbon)_Under voltage       0.95      1.00      0.98        20
+                          Normal_Melted_Normal_Normal       1.00      0.95      0.97        20
+                    Normal_Melted_Normal_Over voltage       1.00      0.95      0.97        20
+                   Normal_Melted_Normal_Under voltage       1.00      0.75      0.86        20
+         Normal_Normal_Coiled (plastic ribbon)_Normal       1.00      0.95      0.97        20
+   Normal_Normal_Coiled (plastic ribbon)_Over voltage       1.00      1.00      1.00        20
+  Normal_Normal_Coiled (plastic ribbon)_Under voltage       0.95      1.00      0.98        20
+           Normal_Normal_Coiled (steel ribbon)_Normal       0.95      1.00      0.98        20
+     Normal_Normal_Coiled (steel ribbon)_Over voltage       1.00      1.00      1.00        20
+    Normal_Normal_Coiled (steel ribbon)_Under voltage       0.90      0.95      0.93        20
+                          Normal_Normal_Normal_Normal       0.99      1.00      1.00      5400
+                    Normal_Normal_Normal_Over voltage       1.00      0.90      0.95        20
+                   Normal_Normal_Normal_Under voltage       1.00      0.95      0.97        20
+
+                                             accuracy                           0.98      6456
+                                            macro avg       0.93      0.91      0.91      6456
+                                         weighted avg       0.98      0.98      0.98      6456
