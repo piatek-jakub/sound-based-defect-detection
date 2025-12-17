@@ -1,0 +1,55 @@
+============================================================
+Raport klasyfikacji - Voltage (TEST)
+Dataset: ToyConveyor
+============================================================
+
+=== Classification Report ===
+               precision    recall  f1-score   support
+
+       Normal       0.98      0.99      0.99      1528
+ Over voltage       0.90      0.82      0.86       114
+Under voltage       0.95      0.95      0.95       118
+
+     accuracy                           0.98      1760
+    macro avg       0.95      0.92      0.93      1760
+ weighted avg       0.98      0.98      0.98      1760
+
+
+=== Confusion Matrix ===
+Klasa: Voltage
+
+Rzeczywiste \ Przewidywane	Normal	Over voltage	Under voltage
+Normal	1512	10	6
+Over voltage	20	94	0
+Under voltage	6	0	112
+
+=== Szczegółowe metryki ===
+
+Normal:
+  Precision: 0.9831
+  Recall:    0.9895
+  F1-Score:  0.9863
+  Support:   1528
+
+Over voltage:
+  Precision: 0.9038
+  Recall:    0.8246
+  F1-Score:  0.8624
+  Support:   114
+
+Under voltage:
+  Precision: 0.9492
+  Recall:    0.9492
+  F1-Score:  0.9492
+  Support:   118
+
+
+Macro Average:
+  Precision: 0.9454
+  Recall:    0.9211
+  F1-Score:  0.9326
+
+Weighted Average:
+  Precision: 0.9757
+  Recall:    0.9761
+  F1-Score:  0.9758

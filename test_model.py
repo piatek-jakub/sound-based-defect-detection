@@ -68,7 +68,17 @@ def extract_features(signal, sr=48000, n_mfcc=20):
 
 def load_labels_from_csv(csv_path):
     """Wczytuje labele z pliku CSV i tworzy mapowanie - automatycznie wykrywa kolumny"""
-    df = pd.read_csv(csv_path, sep=';')
+    # Wczytujemy z obsługą błędów parsowania
+    try:
+        df = pd.read_csv(csv_path, sep=';', on_bad_lines='skip', engine='python')
+    except TypeError:
+        # Dla starszych wersji pandas (< 1.3.0)
+        try:
+            df = pd.read_csv(csv_path, sep=';', error_bad_lines=False, warn_bad_lines=True, engine='python')
+        except TypeError:
+            # Dla najstarszych wersji - bez parametru engine
+            df = pd.read_csv(csv_path, sep=';', error_bad_lines=False, warn_bad_lines=True)
+    
     # Pobieramy wszystkie kolumny oprócz 'Name'
     attribute_columns = [col for col in df.columns if col != 'Name']
     
@@ -114,7 +124,7 @@ def get_label_from_filename(filename, label_map, attribute_columns, is_normal=Fa
     return None
 
 def create_classification_report_visualization(y_true, y_pred, label_encoder, attribute_name, 
-                                             reports_dir, subdataset, split_name='test'):
+                                             reports_dir, subdataset):
     """Tworzy wizualizację raportu klasyfikacji z confusion matrix i tabelą metryk"""
     # Pobieramy metryki
     report = classification_report(y_true, y_pred, 
@@ -126,10 +136,10 @@ def create_classification_report_visualization(y_true, y_pred, label_encoder, at
     
     # Zapisujemy dane tekstowe do pliku
     os.makedirs(reports_dir, exist_ok=True)
-    txt_output_path = os.path.join(reports_dir, f"report_{subdataset}_{attribute_name}_{split_name}.txt")
+    txt_output_path = os.path.join(reports_dir, f"report_{subdataset}_{attribute_name}.txt")
     with open(txt_output_path, 'w', encoding='utf-8') as f:
         f.write(f"{'='*60}\n")
-        f.write(f"Raport klasyfikacji - {attribute_name} ({split_name.upper()})\n")
+        f.write(f"Raport klasyfikacji - {attribute_name}\n")
         f.write(f"Dataset: {subdataset}\n")
         f.write(f"{'='*60}\n\n")
         
@@ -186,7 +196,7 @@ def create_classification_report_visualization(y_true, y_pred, label_encoder, at
                 ax=ax1, cbar_kws={'label': 'Liczba próbek'})
     ax1.set_xlabel('Przewidywane', fontsize=12, fontweight='bold', labelpad=10)
     ax1.set_ylabel('Rzeczywiste', fontsize=12, fontweight='bold')
-    ax1.set_title(f'Confusion Matrix - {attribute_name} ({split_name})', 
+    ax1.set_title(f'Confusion Matrix - {attribute_name}', 
                   fontsize=14, fontweight='bold', pad=20)
     plt.setp(ax1.get_xticklabels(), rotation=0, ha='center')
     plt.setp(ax1.get_yticklabels(), rotation=0)
@@ -198,8 +208,10 @@ def create_classification_report_visualization(y_true, y_pred, label_encoder, at
     
     # Przygotowujemy dane do tabeli
     metrics_data = []
+    max_class_name_length = len('Klasa')  # Startujemy od długości nagłówka
     for class_name in label_encoder.classes_:
         if class_name in report:
+            max_class_name_length = max(max_class_name_length, len(class_name))
             metrics_data.append([
                 class_name,
                 f"{report[class_name]['precision']:.3f}",
@@ -209,7 +221,6 @@ def create_classification_report_visualization(y_true, y_pred, label_encoder, at
             ])
     
     # Dodajemy średnie
-    metrics_data.append(['', '', '', '', ''])
     metrics_data.append([
         'Macro Avg',
         f"{report['macro avg']['precision']:.3f}",
@@ -225,11 +236,19 @@ def create_classification_report_visualization(y_true, y_pred, label_encoder, at
         int(report['weighted avg']['support'])
     ])
     
+    # Obliczamy szerokość kolumny "Klasa" na podstawie najdłuższej nazwy (min 0.25, max 0.45)
+    class_col_width = min(0.25 + (max_class_name_length - 10) * 0.015, 0.45)
+    other_col_width = (1.0 - class_col_width) / 4
+    
+    # Znajdujemy indeks wiersza przed średnimi (ostatni wiersz z klasą)
+    separator_row_idx = len([c for c in label_encoder.classes_ if c in report]) + 1  # +1 dla nagłówka
+    
     table = ax2.table(cellText=metrics_data,
                      colLabels=['Klasa', 'Precision', 'Recall', 'F1-Score', 'Support'],
                      cellLoc='center',
                      loc='center',
-                     bbox=[0, 0, 1, 1])
+                     bbox=[0, 0, 1, 1],
+                     colWidths=[class_col_width, other_col_width, other_col_width, other_col_width, other_col_width])
     table.auto_set_font_size(False)
     table.set_fontsize(9)
     table.scale(1, 2)
@@ -238,6 +257,18 @@ def create_classification_report_visualization(y_true, y_pred, label_encoder, at
     for i in range(5):
         table[(0, i)].set_facecolor('#4472C4')
         table[(0, i)].set_text_props(weight='bold', color='white')
+    
+    # Dodajemy grubszą linię jako separator przed średnimi
+    for i in range(5):
+        cell = table[(separator_row_idx, i)]
+        # Ustawiamy grubszą linię dolną dla ostatniego wiersza z klasą
+        cell.set_edgecolor('black')
+        cell.set_linewidth(2)
+        # Ustawiamy również górną linię dla pierwszego wiersza ze średnimi
+        if separator_row_idx + 1 < len(metrics_data) + 1:
+            cell_avg = table[(separator_row_idx + 1, i)]
+            cell_avg.set_edgecolor('black')
+            cell_avg.set_linewidth(2)
     
     ax2.set_title(f'Metryki klasyfikacji - {attribute_name}', 
                   fontsize=12, fontweight='bold', pad=20)
@@ -266,11 +297,11 @@ def create_classification_report_visualization(y_true, y_pred, label_encoder, at
     ax3.set_ylim([0, 1.1])
     ax3.grid(axis='y', alpha=0.3)
     
-    plt.suptitle(f'Raport klasyfikacji - {attribute_name} ({split_name.upper()})', 
+    plt.suptitle(f'Raport klasyfikacji - {attribute_name}', 
                  fontsize=16, fontweight='bold', y=0.98)
     
     # Zapisujemy PNG
-    png_output_path = os.path.join(reports_dir, f"report_{subdataset}_{attribute_name}_{split_name}.png")
+    png_output_path = os.path.join(reports_dir, f"report_{subdataset}_{attribute_name}.png")
     plt.savefig(png_output_path, dpi=300, bbox_inches='tight', facecolor='white')
     plt.close()
     
@@ -371,8 +402,7 @@ for i, attr_name in enumerate(attribute_columns):
         label_encoders[attr_name],
         attr_name,
         reports_dir,
-        subdataset,
-        split_name='test'
+        subdataset
     )
     print(f"Raport PNG zapisany: {png_path}")
     print(f"Raport TXT zapisany: {txt_path}")

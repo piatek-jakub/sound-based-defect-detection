@@ -91,9 +91,9 @@ ab89;Aging;Excessive tension;Attached metallic object 3;Over voltage
 ab90;Aging;Removed;Normal;Normal
 ab91;Aging;Removed;Normal;Under voltage
 ab92;Aging;Normal;Removed;Normal
-ab93;Aging;Normal;Removed;Attached metallic object 2;Normal
-ab94;Aging;Normal;Removed;Attached metallic object 2;Under voltage
-ab95;Aging;Normal;Removed;Attached metallic object 2;Over voltage
-ab96;Aging;Normal;Removed;Attached metallic object 3;Normal
-ab97;Aging;Normal;Removed;Attached metallic object 3;Under voltage
-ab98;Aging;Normal;Removed;Attached metallic object 3;Over voltage
+ab93;Aging;Normal;Attached metallic object 2;Normal
+ab94;Aging;Normal;Attached metallic object 2;Under voltage
+ab95;Aging;Normal;Attached metallic object 2;Over voltage
+ab96;Aging;Normal;Attached metallic object 3;Normal
+ab97;Aging;Normal;Attached metallic object 3;Under voltage
+ab98;Aging;Normal;Attached metallic object 3;Over voltage
