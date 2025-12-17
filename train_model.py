@@ -1,5 +1,4 @@
 import os
-import sys
 import glob
 import numpy as np
 import pandas as pd
@@ -15,29 +14,6 @@ from sklearn.multioutput import MultiOutputClassifier
 import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
-from datetime import datetime
-
-# =========================
-# Klasa do zapisywania wyjścia konsoli do pliku
-# =========================
-class Tee:
-    """Klasa przechwytująca stdout i zapisująca do pliku oraz konsoli"""
-    def __init__(self, file_path):
-        self.file = open(file_path, 'w', encoding='utf-8')
-        self.stdout = sys.stdout
-        
-    def write(self, text):
-        self.file.write(text)
-        self.file.flush()  # Zapewnia natychmiastowy zapis
-        self.stdout.write(text)
-        
-    def flush(self):
-        self.file.flush()
-        self.stdout.flush()
-        
-    def close(self):
-        self.file.close()
-        sys.stdout = self.stdout
 
 # =========================
 # Parametry - ZMIEŃ TUTAJ TYP OBIEKTU
@@ -54,16 +30,6 @@ labels_csv_path = f"labels/{subdataset}_anomay_condition.csv"
 normal_dir = os.path.join(dataset_base, subdataset, "case1", "NormalSound_IND")
 anomaly_dir = os.path.join(dataset_base, subdataset, "case1", "AnomalousSound_IND")
 
-# =========================
-# Inicjalizacja zapisu wyjścia konsoli do pliku
-# =========================
-log_dir = "logs"
-os.makedirs(log_dir, exist_ok=True)
-timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-log_file_path = os.path.join(log_dir, f"train_log_{subdataset}_{timestamp}.txt")
-tee = Tee(log_file_path)
-sys.stdout = tee
-print(f"Log zapisu treningu: {log_file_path}")
 print("="*60)
 
 # =========================
@@ -494,7 +460,6 @@ try:
     joblib.dump(label_encoders, os.path.join(models_dir, f"label_encoders_{subdataset}.joblib"))
     print(f"\nModel zapisany w {models_dir}/")
     print("="*60)
-    print(f"Log zapisany w: {log_file_path}")
     
 except Exception as e:
     print(f"\n{'='*60}")
@@ -502,8 +467,3 @@ except Exception as e:
     print(f"{'='*60}")
     import traceback
     traceback.print_exc()
-    
-finally:
-    # Przywracanie stdout i zamykanie pliku (zawsze, nawet w przypadku błędu)
-    sys.stdout = tee.stdout
-    tee.close()

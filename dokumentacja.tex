@@ -321,10 +321,181 @@ Ponieważ system jednocześnie ocenia wiele parametrów, do weryfikacji jego sku
 
 \newpage
 \section{Wybrana architektura rozwiązania}
+W ramach projektu zaimplementowano system klasyfikacji wieloetykietowej (multi-label classification), który jednocześnie przewiduje wartości wielu parametrów urządzenia na podstawie analizy dźwięku. Architektura składa się z następujących elementów:
 
+\begin{itemize}
+    \item \textbf{Ekstrakcja cech} -- wykorzystano współczynniki MFCC (Mel-frequency cepstral coefficients) jako główną reprezentację sygnału audio. Z każdego nagrania ekstrahowane są cechy statystyczne MFCC (średnia po czasie).
+    \item \textbf{Preprocessing} -- zastosowano standaryzację cech (StandardScaler) w celu normalizacji danych wejściowych.
+    \item \textbf{Klasyfikator} -- wykorzystano model MultiOutputClassifier oparty na regresji logistycznej (Logistic Regression) z solverem LBFGS i klasyfikacją wieloklasową (multinomial).
+    \item \textbf{Kodowanie etykiet} -- dla każdego atrybutu zastosowano osobny LabelEncoder, co pozwala na niezależne kodowanie klas dla różnych parametrów.
+\end{itemize}
+
+Model trenowany jest na 80\% danych, a pozostałe 20\% stanowi zbiór testowy wykorzystywany do ewaluacji.
 
 \newpage
-\section{Badania}
+\section{Wyniki wstępnych eksperymentów}
+W niniejszym rozdziale przedstawiono wyniki wstępnych eksperymentów przeprowadzonych na trzech zbiorach danych: ToyCar, ToyConveyor oraz ToyTrain. Dla każdego zbioru model klasyfikuje niezależnie kilka atrybutów opisujących stan urządzenia. Wyniki przedstawiono w formie macierzy konfuzji oraz tabel z metrykami klasyfikacji.
+
+\subsection{ToyCar}
+Zbiór ToyCar zawiera nagrania samochodu-zabawki. Model klasyfikuje cztery atrybuty: Shaft (wał), Gears (przekładnie), Tires (opony) oraz Voltage (napięcie zasilania).
+
+\subsubsection{Shaft (Wał)}
+Klasyfikacja stanu wału osiągnęła niemal idealne wyniki z dokładnością 100\%. Model bezbłędnie rozróżnia wał zgięty (Bent) od normalnego stanu pracy.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyCar_Shaft.png}
+    \caption{Raport klasyfikacji atrybutu Shaft dla zbioru ToyCar}
+    \label{fig:toycar_shaft}
+\end{figure}
+
+\subsubsection{Gears (Przekładnie)}
+Klasyfikacja stanu przekładni okazała się najtrudniejszym zadaniem w zbiorze ToyCar. Ogólna dokładność wynosi 93\%, jednak metryki dla klas anomalnych są znacznie niższe. Klasa ``Deformed'' (zdeformowane) osiąga F1-Score 0.56, a ``Melted'' (stopione) -- 0.58. Macierz konfuzji pokazuje, że klasy te są często mylone ze sobą oraz z klasą ``Normal''.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyCar_Gears.png}
+    \caption{Raport klasyfikacji atrybutu Gears dla zbioru ToyCar}
+    \label{fig:toycar_gears}
+\end{figure}
+
+\subsubsection{Tires (Opony)}
+Klasyfikacja stanu opon osiągnęła bardzo dobre wyniki z dokładnością 99\%. Model skutecznie rozróżnia opony z nawiniętą plastikową wstążką, stalową wstążką oraz stan normalny. Niewielkie pomyłki występują między klasami ``Coiled (plastic ribbon)'' i ``Coiled (steel ribbon)''.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyCar_Tires.png}
+    \caption{Raport klasyfikacji atrybutu Tires dla zbioru ToyCar}
+    \label{fig:toycar_tires}
+\end{figure}
+
+\subsubsection{Voltage (Napięcie)}
+Klasyfikacja napięcia zasilania osiąga dokładność 96\%. Stan normalny jest rozpoznawany z bardzo wysoką skutecznością (F1-Score 0.98). Klasy ``Over voltage'' i ``Under voltage'' mają niższe metryki -- odpowiednio F1-Score 0.83 i 0.79. Zauważalna jest tendencja do klasyfikowania przypadków ``Under voltage'' jako ``Normal'' (26 przypadków z 87).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyCar_Voltage.png}
+    \caption{Raport klasyfikacji atrybutu Voltage dla zbioru ToyCar}
+    \label{fig:toycar_voltage}
+\end{figure}
+
+\subsection{ToyConveyor}
+Zbiór ToyConveyor zawiera nagrania taśmociągu-zabawki. Model klasyfikuje cztery atrybuty: Voltage (napięcie), Belt (pas), Tail pulley (koło pasowe tylne) oraz Tension pulley (koło napinające).
+
+\subsubsection{Voltage (Napięcie)}
+Klasyfikacja napięcia dla taśmociągu osiąga dokładność 98\%. Wyniki są lepsze niż dla ToyCar -- klasa ``Under voltage'' osiąga F1-Score 0.95. Klasa ``Over voltage'' ma nieco niższy recall (0.82), co oznacza, że część przypadków przepięcia jest klasyfikowana jako stan normalny.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyConveyor_Voltage.png}
+    \caption{Raport klasyfikacji atrybutu Voltage dla zbioru ToyConveyor}
+    \label{fig:toyconveyor_voltage}
+\end{figure}
+
+\subsubsection{Belt (Pas)}
+Klasyfikacja stanu pasa jest najbardziej wymagającym zadaniem w zbiorze ToyConveyor. Ogólna dokładność wynosi 93\%, ale klasy reprezentujące przymocowane metalowe obiekty mają znacznie niższe metryki. ``Attached metallic object 2'' osiąga F1-Score 0.72, a ``Attached metallic object 3'' -- 0.61. Macierz konfuzji pokazuje częste pomyłki między tymi dwiema klasami oraz z klasą ``Normal''. Klasa ``Removed'' ma bardzo małą liczbę próbek (2), co ogranicza wiarygodność jej metryki.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyConveyor_Belt.png}
+    \caption{Raport klasyfikacji atrybutu Belt dla zbioru ToyConveyor}
+    \label{fig:toyconveyor_belt}
+\end{figure}
+
+\subsubsection{Tail pulley (Koło pasowe tylne)}
+Klasyfikacja stanu tylnego koła pasowego osiąga bardzo dobre wyniki z dokładnością 99\%. Wszystkie trzy klasy (``Excessive tension'', ``Normal'', ``Removed'') są rozpoznawane z wysoką skutecznością. Najniższy recall (0.90) występuje dla klasy ``Excessive tension'', gdzie 11 przypadków zostało sklasyfikowanych jako ``Normal''.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyConveyor_Tail pulley.png}
+    \caption{Raport klasyfikacji atrybutu Tail pulley dla zbioru ToyConveyor}
+    \label{fig:toyconveyor_tailpulley}
+\end{figure}
+
+\subsubsection{Tension pulley (Koło napinające)}
+Klasyfikacja stanu koła napinającego osiąga dokładność 98\%. Klasa ``Aging'' (starzenie) jest rozpoznawana z bardzo wysoką skutecznością (F1-Score 0.98). Klasa ``Excessive tension'' ma nieco niższe metryki (F1-Score 0.88), z częściowym myleniem z klasą ``Normal''.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyConveyor_Tension puly.png}
+    \caption{Raport klasyfikacji atrybutu Tension pulley dla zbioru ToyConveyor}
+    \label{fig:toyconveyor_tensionpulley}
+\end{figure}
+
+\subsection{ToyTrain}
+Zbiór ToyTrain zawiera nagrania pociągu-zabawki. Model klasyfikuje cztery atrybuty: First carriage (pierwszy wagon), Last carriage (ostatni wagon), Curved railway track (zakrzywiony tor) oraz Straight railway track (prosty tor).
+
+\subsubsection{Last carriage (Ostatni wagon)}
+Klasyfikacja stanu ostatniego wagonu osiągnęła idealne wyniki z dokładnością 100\%. Model bezbłędnie rozróżnia uszkodzoną oś koła (``Chipped wheel axle'') od stanu normalnego. Jest to najlepszy wynik spośród wszystkich klasyfikowanych atrybutów.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyTrain_Last carriage.png}
+    \caption{Raport klasyfikacji atrybutu Last carriage dla zbioru ToyTrain}
+    \label{fig:toytrain_lastcarriage}
+\end{figure}
+
+\subsubsection{First carriage (Pierwszy wagon)}
+Klasyfikacja stanu pierwszego wagonu osiąga dokładność 95\%. W przeciwieństwie do ostatniego wagonu, wykrywanie uszkodzonej osi koła w pierwszym wagonie jest trudniejsze. Klasa ``Chipped wheel axle'' osiąga recall tylko 0.65, co oznacza, że 43 z 123 przypadków uszkodzenia zostały sklasyfikowane jako ``Normal''.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyTrain_First carriage.png}
+    \caption{Raport klasyfikacji atrybutu First carriage dla zbioru ToyTrain}
+    \label{fig:toytrain_firstcarriage}
+\end{figure}
+
+\subsubsection{Curved railway track (Zakrzywiony tor)}
+Klasyfikacja stanu zakrzywionego toru jest jednym z trudniejszych zadań z dokładnością 94\%. Model rozróżnia cztery klasy: ``Broken'' (złamany), ``Disjointed'' (rozłączony), ``Normal'' oraz ``Obstructing stone'' (przeszkadzający kamień). Klasy anomalne mają relatywnie niskie metryki -- ``Disjointed'' osiąga F1-Score 0.63, a ``Obstructing stone'' -- 0.66. Macierz konfuzji pokazuje wzajemne pomyłki między wszystkimi klasami anomalnymi.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyTrain_Curved railway track.png}
+    \caption{Raport klasyfikacji atrybutu Curved railway track dla zbioru ToyTrain}
+    \label{fig:toytrain_curvedtrack}
+\end{figure}
+
+\subsubsection{Straight railway track (Prosty tor)}
+Klasyfikacja stanu prostego toru osiąga dokładność 97\%, czyli lepszy wynik niż dla toru zakrzywionego. Klasa ``Broken'' jest rozpoznawana z wysoką skutecznością (F1-Score 0.93). Klasy ``Disjointed'' i ``Obstructing stone'' mają niższe metryki -- odpowiednio F1-Score 0.71 i 0.78. Zauważalna jest tendencja do klasyfikowania ``Disjointed'' jako ``Normal'' (15 przypadków z 56).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyTrain_Straight railway track.png}
+    \caption{Raport klasyfikacji atrybutu Straight railway track dla zbioru ToyTrain}
+    \label{fig:toytrain_straighttrack}
+\end{figure}
+
+\subsection{Podsumowanie wyników}
+W tabeli \ref{tab:summary} przedstawiono zestawienie dokładności (accuracy) dla wszystkich klasyfikowanych atrybutów.
+
+\begin{table}[H]
+\centering
+\caption{Zestawienie dokładności klasyfikacji dla wszystkich atrybutów}
+\label{tab:summary}
+\begin{tabular}{|l|l|c|c|}
+\hline
+\textbf{Dataset} & \textbf{Atrybut} & \textbf{Accuracy} & \textbf{Weighted F1} \\
+\hline
+\multirow{4}{*}{ToyCar} & Shaft & 100\% & 1.00 \\
+& Tires & 99\% & 0.99 \\
+& Voltage & 96\% & 0.95 \\
+& Gears & 93\% & 0.93 \\
+\hline
+\multirow{4}{*}{ToyConveyor} & Tail pulley & 99\% & 0.99 \\
+& Voltage & 98\% & 0.98 \\
+& Tension pulley & 98\% & 0.98 \\
+& Belt & 93\% & 0.93 \\
+\hline
+\multirow{4}{*}{ToyTrain} & Last carriage & 100\% & 1.00 \\
+& Straight railway track & 97\% & 0.96 \\
+& First carriage & 95\% & 0.95 \\
+& Curved railway track & 94\% & 0.94 \\
+\hline
+\end{tabular}
+\end{table}
+
+Najwyższe wyniki uzyskano dla atrybutów binarnych z wyraźnie odróżnialnymi klasami (Shaft, Last carriage). Najtrudniejsze do klasyfikacji okazały się atrybuty z wieloma podobnymi klasami anomalnymi (Gears, Belt, Curved railway track).
+
 
 \newpage
 \section{Wnioski}
