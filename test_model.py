@@ -21,6 +21,7 @@ subdataset = "ToyCar"  # <-- ZMIEŃ TUTAJ
 dataset_base = "ToyADMOS dataset"
 target_fs = 48000
 models_dir = "models"
+reports_dir = "reports"
 labels_csv_path = f"labels/{subdataset}_anomay_condition.csv"
 
 model_path = os.path.join(models_dir, f"model_{subdataset}.joblib")
@@ -71,11 +72,27 @@ def load_labels_from_csv(csv_path):
     # Pobieramy wszystkie kolumny oprócz 'Name'
     attribute_columns = [col for col in df.columns if col != 'Name']
     
+    # Walidacja - sprawdzamy czy wszystkie wiersze mają poprawną liczbę kolumn
+    invalid_rows = []
+    for idx, row in df.iterrows():
+        # Sprawdzamy czy są wartości NaN (oznacza brakujące kolumny)
+        if row.isna().any():
+            invalid_rows.append((idx + 2, row['Name'] if pd.notna(row.get('Name')) else f'row {idx + 2}'))
+    
+    if invalid_rows:
+        print(f"UWAGA: Znaleziono {len(invalid_rows)} wierszy z brakującymi wartościami w {csv_path}:")
+        for row_num, name in invalid_rows:
+            print(f"  - Linia {row_num}: {name}")
+        print("Te wiersze mogą powodować problemy w klasyfikacji!")
+    
     label_map = {}
     for _, row in df.iterrows():
         name = row['Name']
+        # Pomijamy wiersze z brakującymi wartościami
+        if pd.isna(name):
+            continue
         # Zapisujemy wszystkie atrybuty dynamicznie
-        label_map[name] = {attr: row[attr] for attr in attribute_columns}
+        label_map[name] = {attr: row[attr] for attr in attribute_columns if pd.notna(row.get(attr))}
     
     return label_map, attribute_columns
 
@@ -97,7 +114,7 @@ def get_label_from_filename(filename, label_map, attribute_columns, is_normal=Fa
     return None
 
 def create_classification_report_visualization(y_true, y_pred, label_encoder, attribute_name, 
-                                             models_dir, subdataset, split_name='test'):
+                                             reports_dir, subdataset, split_name='test'):
     """Tworzy wizualizację raportu klasyfikacji z confusion matrix i tabelą metryk"""
     # Pobieramy metryki
     report = classification_report(y_true, y_pred, 
@@ -107,9 +124,59 @@ def create_classification_report_visualization(y_true, y_pred, label_encoder, at
     # Tworzymy confusion matrix
     cm = confusion_matrix(y_true, y_pred)
     
+    # Zapisujemy dane tekstowe do pliku
+    os.makedirs(reports_dir, exist_ok=True)
+    txt_output_path = os.path.join(reports_dir, f"report_{subdataset}_{attribute_name}_{split_name}.txt")
+    with open(txt_output_path, 'w', encoding='utf-8') as f:
+        f.write(f"{'='*60}\n")
+        f.write(f"Raport klasyfikacji - {attribute_name} ({split_name.upper()})\n")
+        f.write(f"Dataset: {subdataset}\n")
+        f.write(f"{'='*60}\n\n")
+        
+        # Classification Report
+        f.write("=== Classification Report ===\n")
+        f.write(classification_report(y_true, y_pred, target_names=label_encoder.classes_))
+        f.write("\n\n")
+        
+        # Confusion Matrix
+        f.write("=== Confusion Matrix ===\n")
+        f.write(f"Klasa: {attribute_name}\n\n")
+        # Nagłówek
+        f.write("Rzeczywiste \\ Przewidywane")
+        for class_name in label_encoder.classes_:
+            f.write(f"\t{class_name}")
+        f.write("\n")
+        # Wiersze
+        for i, class_name in enumerate(label_encoder.classes_):
+            f.write(f"{class_name}")
+            for j in range(len(label_encoder.classes_)):
+                f.write(f"\t{cm[i, j]}")
+            f.write("\n")
+        f.write("\n")
+        
+        # Szczegółowe metryki
+        f.write("=== Szczegółowe metryki ===\n")
+        for class_name in label_encoder.classes_:
+            if class_name in report:
+                f.write(f"\n{class_name}:\n")
+                f.write(f"  Precision: {report[class_name]['precision']:.4f}\n")
+                f.write(f"  Recall:    {report[class_name]['recall']:.4f}\n")
+                f.write(f"  F1-Score:  {report[class_name]['f1-score']:.4f}\n")
+                f.write(f"  Support:   {int(report[class_name]['support'])}\n")
+        
+        f.write(f"\n\nMacro Average:\n")
+        f.write(f"  Precision: {report['macro avg']['precision']:.4f}\n")
+        f.write(f"  Recall:    {report['macro avg']['recall']:.4f}\n")
+        f.write(f"  F1-Score:  {report['macro avg']['f1-score']:.4f}\n")
+        
+        f.write(f"\nWeighted Average:\n")
+        f.write(f"  Precision: {report['weighted avg']['precision']:.4f}\n")
+        f.write(f"  Recall:    {report['weighted avg']['recall']:.4f}\n")
+        f.write(f"  F1-Score:  {report['weighted avg']['f1-score']:.4f}\n")
+    
     # Tworzymy figure z dwoma subplotami
     fig = plt.figure(figsize=(16, 10))
-    gs = fig.add_gridspec(2, 2, hspace=0.3, wspace=0.3)
+    gs = fig.add_gridspec(2, 2, hspace=0.5, wspace=0.3)
     
     # 1. Confusion Matrix
     ax1 = fig.add_subplot(gs[0, :])
@@ -117,11 +184,11 @@ def create_classification_report_visualization(y_true, y_pred, label_encoder, at
                 xticklabels=label_encoder.classes_,
                 yticklabels=label_encoder.classes_,
                 ax=ax1, cbar_kws={'label': 'Liczba próbek'})
-    ax1.set_xlabel('Przewidywane', fontsize=12, fontweight='bold')
+    ax1.set_xlabel('Przewidywane', fontsize=12, fontweight='bold', labelpad=10)
     ax1.set_ylabel('Rzeczywiste', fontsize=12, fontweight='bold')
     ax1.set_title(f'Confusion Matrix - {attribute_name} ({split_name})', 
                   fontsize=14, fontweight='bold', pad=20)
-    plt.setp(ax1.get_xticklabels(), rotation=45, ha='right')
+    plt.setp(ax1.get_xticklabels(), rotation=0, ha='center')
     plt.setp(ax1.get_yticklabels(), rotation=0)
     
     # 2. Tabela metryk
@@ -194,7 +261,7 @@ def create_classification_report_visualization(y_true, y_pred, label_encoder, at
     ax3.set_title(f'Metryki per klasa - {attribute_name}', 
                   fontsize=12, fontweight='bold', pad=15)
     ax3.set_xticks(x)
-    ax3.set_xticklabels(classes, rotation=45, ha='right')
+    ax3.set_xticklabels(classes, rotation=0, ha='center')
     ax3.legend()
     ax3.set_ylim([0, 1.1])
     ax3.grid(axis='y', alpha=0.3)
@@ -202,12 +269,12 @@ def create_classification_report_visualization(y_true, y_pred, label_encoder, at
     plt.suptitle(f'Raport klasyfikacji - {attribute_name} ({split_name.upper()})', 
                  fontsize=16, fontweight='bold', y=0.98)
     
-    # Zapisujemy
-    output_path = os.path.join(models_dir, f"report_{attribute_name}_{split_name}_{subdataset}.png")
-    plt.savefig(output_path, dpi=300, bbox_inches='tight', facecolor='white')
+    # Zapisujemy PNG
+    png_output_path = os.path.join(reports_dir, f"report_{subdataset}_{attribute_name}_{split_name}.png")
+    plt.savefig(png_output_path, dpi=300, bbox_inches='tight', facecolor='white')
     plt.close()
     
-    return output_path
+    return png_output_path, txt_output_path
 
 # =========================
 # Wczytywanie modelu
@@ -298,13 +365,14 @@ for i, attr_name in enumerate(attribute_columns):
     ))
     
     # Tworzenie wizualizacji
-    report_path = create_classification_report_visualization(
+    png_path, txt_path = create_classification_report_visualization(
         Y[:, i], 
         y_pred[:, i], 
         label_encoders[attr_name],
         attr_name,
-        models_dir,
+        reports_dir,
         subdataset,
         split_name='test'
     )
-    print(f"Raport wizualny zapisany: {report_path}")
+    print(f"Raport PNG zapisany: {png_path}")
+    print(f"Raport TXT zapisany: {txt_path}")

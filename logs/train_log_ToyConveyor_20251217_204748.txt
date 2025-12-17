@@ -1,0 +1,8 @@
+Log zapisu treningu: logs\train_log_ToyConveyor_20251217_204748.txt
+============================================================
+Loading labels from labels/ToyConveyor_anomay_condition.csv...
+
+============================================================
+BŁĄD: Error tokenizing data. C error: Expected 5 fields in line 94, saw 6
+
+============================================================
