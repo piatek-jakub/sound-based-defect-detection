@@ -1,0 +1,80 @@
+Log zapisu treningu: logs\train_log_ToyTrain_20251217_213749.txt
+============================================================
+Loading labels from labels/ToyTrain_anomay_condition.csv...
+Loaded 54 label mappings
+Attribute columns detected: ['Straight railway track', 'Curved railway track', 'First carriage', 'Last carriage']
+Loading 5400 files from ToyADMOS dataset\ToyTrain\case1\NormalSound_IND ...
+Loading 1080 files from ToyADMOS dataset\ToyTrain\case1\AnomalousSound_IND ...
+Loaded 5400 normal samples
+Loaded 1080 anomalous samples
+Extracting MFCC features and assigning labels...
+Straight railway track classes: ['Broken' 'Disjointed' 'Normal' 'Obstructing stone']
+Curved railway track classes: ['Broken' 'Disjointed' 'Normal' 'Obstructing stone']
+First carriage classes: ['Chipped wheel axle' 'Normal']
+Last carriage classes: ['Chipped wheel axle' 'Normal']
+Feature matrix shape: (6480, 40)
+Label matrix shape: (6480, 4)
+Number of attributes: 4
+
+============================================================
+Generowanie raportów wizualnych...
+
+=== Classification Report - Straight railway track ===
+                   precision    recall  f1-score   support
+
+           Broken       0.90      0.95      0.93        60
+       Disjointed       0.77      0.66      0.71        56
+           Normal       0.98      0.99      0.99      1127
+Obstructing stone       0.83      0.74      0.78        53
+
+         accuracy                           0.97      1296
+        macro avg       0.87      0.83      0.85      1296
+     weighted avg       0.96      0.97      0.96      1296
+
+Raport PNG zapisany: reports\report_ToyTrain_Straight railway track.png
+Raport TXT zapisany: reports\report_ToyTrain_Straight railway track.txt
+
+=== Classification Report - Curved railway track ===
+                   precision    recall  f1-score   support
+
+           Broken       0.71      0.82      0.76        73
+       Disjointed       0.69      0.58      0.63        65
+           Normal       0.98      0.99      0.98      1084
+Obstructing stone       0.73      0.59      0.66        74
+
+         accuracy                           0.94      1296
+        macro avg       0.78      0.75      0.76      1296
+     weighted avg       0.93      0.94      0.94      1296
+
+Raport PNG zapisany: reports\report_ToyTrain_Curved railway track.png
+Raport TXT zapisany: reports\report_ToyTrain_Curved railway track.txt
+
+=== Classification Report - First carriage ===
+                    precision    recall  f1-score   support
+
+Chipped wheel axle       0.83      0.65      0.73       123
+            Normal       0.96      0.99      0.98      1173
+
+          accuracy                           0.95      1296
+         macro avg       0.90      0.82      0.85      1296
+      weighted avg       0.95      0.95      0.95      1296
+
+Raport PNG zapisany: reports\report_ToyTrain_First carriage.png
+Raport TXT zapisany: reports\report_ToyTrain_First carriage.txt
+
+=== Classification Report - Last carriage ===
+                    precision    recall  f1-score   support
+
+Chipped wheel axle       1.00      1.00      1.00       112
+            Normal       1.00      1.00      1.00      1184
+
+          accuracy                           1.00      1296
+         macro avg       1.00      1.00      1.00      1296
+      weighted avg       1.00      1.00      1.00      1296
+
+Raport PNG zapisany: reports\report_ToyTrain_Last carriage.png
+Raport TXT zapisany: reports\report_ToyTrain_Last carriage.txt
+
+Model zapisany w models/
+============================================================
+Log zapisany w: logs\train_log_ToyTrain_20251217_213749.txt

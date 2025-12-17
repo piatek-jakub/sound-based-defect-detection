@@ -1,5 +1,5 @@
 ============================================================
-Raport klasyfikacji - Voltage (TEST)
+Raport klasyfikacji - Voltage
 Dataset: ToyConveyor
 ============================================================
 

@@ -1,4 +1,4 @@
-Log zapisu treningu: logs\train_log_ToyConveyor_20251217_205331.txt
+Log zapisu treningu: logs\train_log_ToyConveyor_20251217_212925.txt
 ============================================================
 Loading labels from labels/ToyConveyor_anomay_condition.csv...
 Loaded 98 label mappings
@@ -16,6 +16,17 @@ Voltage classes: ['Normal' 'Over voltage' 'Under voltage']
 Feature matrix shape: (8800, 40)
 Label matrix shape: (8800, 4)
 Number of attributes: 4
+Usunięto stary plik: models\model_ToyConveyor.joblib
+Usunięto stary plik: models\scaler_ToyConveyor.joblib
+Usunięto stary plik: models\label_encoders_ToyConveyor.joblib
+Usunięto stary raport: reports\report_ToyConveyor_Belt_test.png
+Usunięto stary raport: reports\report_ToyConveyor_Tail pulley_test.png
+Usunięto stary raport: reports\report_ToyConveyor_Tension puly_test.png
+Usunięto stary raport: reports\report_ToyConveyor_Voltage_test.png
+Usunięto stary raport: reports\report_ToyConveyor_Belt_test.txt
+Usunięto stary raport: reports\report_ToyConveyor_Tail pulley_test.txt
+Usunięto stary raport: reports\report_ToyConveyor_Tension puly_test.txt
+Usunięto stary raport: reports\report_ToyConveyor_Voltage_test.txt
 
 ============================================================
 Generowanie raportów wizualnych...
@@ -31,8 +42,8 @@ Excessive tension       0.87      0.90      0.88       116
         macro avg       0.95      0.96      0.95      1760
      weighted avg       0.98      0.98      0.98      1760
 
-Raport PNG zapisany: reports\report_ToyConveyor_Tension puly_test.png
-Raport TXT zapisany: reports\report_ToyConveyor_Tension puly_test.txt
+Raport PNG zapisany: reports\report_ToyConveyor_Tension puly.png
+Raport TXT zapisany: reports\report_ToyConveyor_Tension puly.txt
 
 === Classification Report - Tail pulley ===
                    precision    recall  f1-score   support
@@ -45,8 +56,8 @@ Excessive tension       0.96      0.90      0.93       121
         macro avg       0.97      0.96      0.96      1760
      weighted avg       0.99      0.99      0.99      1760
 
-Raport PNG zapisany: reports\report_ToyConveyor_Tail pulley_test.png
-Raport TXT zapisany: reports\report_ToyConveyor_Tail pulley_test.txt
+Raport PNG zapisany: reports\report_ToyConveyor_Tail pulley.png
+Raport TXT zapisany: reports\report_ToyConveyor_Tail pulley.txt
 
 === Classification Report - Belt ===
                             precision    recall  f1-score   support
@@ -60,8 +71,8 @@ Attached metallic object 3       0.66      0.56      0.61       124
                  macro avg       0.83      0.70      0.74      1760
               weighted avg       0.93      0.93      0.93      1760
 
-Raport PNG zapisany: reports\report_ToyConveyor_Belt_test.png
-Raport TXT zapisany: reports\report_ToyConveyor_Belt_test.txt
+Raport PNG zapisany: reports\report_ToyConveyor_Belt.png
+Raport TXT zapisany: reports\report_ToyConveyor_Belt.txt
 
 === Classification Report - Voltage ===
                precision    recall  f1-score   support
@@ -74,17 +85,9 @@ Under voltage       0.95      0.95      0.95       118
     macro avg       0.95      0.92      0.93      1760
  weighted avg       0.98      0.98      0.98      1760
 
-Raport PNG zapisany: reports\report_ToyConveyor_Voltage_test.png
-Raport TXT zapisany: reports\report_ToyConveyor_Voltage_test.txt
-Usunięto stary raport: reports\report_ToyConveyor_Belt_test.png
-Usunięto stary raport: reports\report_ToyConveyor_Tail pulley_test.png
-Usunięto stary raport: reports\report_ToyConveyor_Tension puly_test.png
-Usunięto stary raport: reports\report_ToyConveyor_Voltage_test.png
-Usunięto stary raport: reports\report_ToyConveyor_Belt_test.txt
-Usunięto stary raport: reports\report_ToyConveyor_Tail pulley_test.txt
-Usunięto stary raport: reports\report_ToyConveyor_Tension puly_test.txt
-Usunięto stary raport: reports\report_ToyConveyor_Voltage_test.txt
+Raport PNG zapisany: reports\report_ToyConveyor_Voltage.png
+Raport TXT zapisany: reports\report_ToyConveyor_Voltage.txt
 
 Model zapisany w models/
 ============================================================
-Log zapisany w: logs\train_log_ToyConveyor_20251217_205331.txt
+Log zapisany w: logs\train_log_ToyConveyor_20251217_212925.txt

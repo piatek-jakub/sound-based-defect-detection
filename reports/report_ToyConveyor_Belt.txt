@@ -1,5 +1,5 @@
 ============================================================
-Raport klasyfikacji - Belt (TEST)
+Raport klasyfikacji - Belt
 Dataset: ToyConveyor
 ============================================================
 

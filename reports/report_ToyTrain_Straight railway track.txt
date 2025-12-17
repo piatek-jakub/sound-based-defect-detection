@@ -1,0 +1,63 @@
+============================================================
+Raport klasyfikacji - Straight railway track
+Dataset: ToyTrain
+============================================================
+
+=== Classification Report ===
+                   precision    recall  f1-score   support
+
+           Broken       0.90      0.95      0.93        60
+       Disjointed       0.77      0.66      0.71        56
+           Normal       0.98      0.99      0.99      1127
+Obstructing stone       0.83      0.74      0.78        53
+
+         accuracy                           0.97      1296
+        macro avg       0.87      0.83      0.85      1296
+     weighted avg       0.96      0.97      0.96      1296
+
+
+=== Confusion Matrix ===
+Klasa: Straight railway track
+
+Rzeczywiste \ Przewidywane	Broken	Disjointed	Normal	Obstructing stone
+Broken	57	0	1	2
+Disjointed	0	37	15	4
+Normal	1	6	1118	2
+Obstructing stone	5	5	4	39
+
+=== Szczegółowe metryki ===
+
+Broken:
+  Precision: 0.9048
+  Recall:    0.9500
+  F1-Score:  0.9268
+  Support:   60
+
+Disjointed:
+  Precision: 0.7708
+  Recall:    0.6607
+  F1-Score:  0.7115
+  Support:   56
+
+Normal:
+  Precision: 0.9824
+  Recall:    0.9920
+  F1-Score:  0.9872
+  Support:   1127
+
+Obstructing stone:
+  Precision: 0.8298
+  Recall:    0.7358
+  F1-Score:  0.7800
+  Support:   53
+
+
+Macro Average:
+  Precision: 0.8720
+  Recall:    0.8346
+  F1-Score:  0.8514
+
+Weighted Average:
+  Precision: 0.9634
+  Recall:    0.9653
+  F1-Score:  0.9640

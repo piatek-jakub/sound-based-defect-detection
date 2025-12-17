@@ -1,0 +1,47 @@
+============================================================
+Raport klasyfikacji - First carriage
+Dataset: ToyTrain
+============================================================
+
+=== Classification Report ===
+                    precision    recall  f1-score   support
+
+Chipped wheel axle       0.83      0.65      0.73       123
+            Normal       0.96      0.99      0.98      1173
+
+          accuracy                           0.95      1296
+         macro avg       0.90      0.82      0.85      1296
+      weighted avg       0.95      0.95      0.95      1296
+
+
+=== Confusion Matrix ===
+Klasa: First carriage
+
+Rzeczywiste \ Przewidywane	Chipped wheel axle	Normal
+Chipped wheel axle	80	43
+Normal	16	1157
+
+=== Szczegółowe metryki ===
+
+Chipped wheel axle:
+  Precision: 0.8333
+  Recall:    0.6504
+  F1-Score:  0.7306
+  Support:   123
+
+Normal:
+  Precision: 0.9642
+  Recall:    0.9864
+  F1-Score:  0.9751
+  Support:   1173
+
+
+Macro Average:
+  Precision: 0.8987
+  Recall:    0.8184
+  F1-Score:  0.8529
+
+Weighted Average:
+  Precision: 0.9517
+  Recall:    0.9545
+  F1-Score:  0.9519

@@ -1,0 +1,55 @@
+============================================================
+Raport klasyfikacji - Tires
+Dataset: ToyCar
+============================================================
+
+=== Classification Report ===
+                         precision    recall  f1-score   support
+
+Coiled (plastic ribbon)       0.93      0.93      0.93        75
+  Coiled (steel ribbon)       0.93      0.88      0.90        80
+                 Normal       0.99      1.00      1.00      1137
+
+               accuracy                           0.99      1292
+              macro avg       0.95      0.94      0.94      1292
+           weighted avg       0.99      0.99      0.99      1292
+
+
+=== Confusion Matrix ===
+Klasa: Tires
+
+Rzeczywiste \ Przewidywane	Coiled (plastic ribbon)	Coiled (steel ribbon)	Normal
+Coiled (plastic ribbon)	70	4	1
+Coiled (steel ribbon)	3	70	7
+Normal	2	1	1134
+
+=== Szczegółowe metryki ===
+
+Coiled (plastic ribbon):
+  Precision: 0.9333
+  Recall:    0.9333
+  F1-Score:  0.9333
+  Support:   75
+
+Coiled (steel ribbon):
+  Precision: 0.9333
+  Recall:    0.8750
+  F1-Score:  0.9032
+  Support:   80
+
+Normal:
+  Precision: 0.9930
+  Recall:    0.9974
+  F1-Score:  0.9952
+  Support:   1137
+
+
+Macro Average:
+  Precision: 0.9532
+  Recall:    0.9352
+  F1-Score:  0.9439
+
+Weighted Average:
+  Precision: 0.9858
+  Recall:    0.9861
+  F1-Score:  0.9859

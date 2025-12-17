@@ -1,5 +1,5 @@
 ============================================================
-Raport klasyfikacji - Tail pulley (TEST)
+Raport klasyfikacji - Tail pulley
 Dataset: ToyConveyor
 ============================================================
 

@@ -1,5 +1,5 @@
 ============================================================
-Raport klasyfikacji - Tension puly (TEST)
+Raport klasyfikacji - Tension puly
 Dataset: ToyConveyor
 ============================================================
 
