@@ -1,0 +1,139 @@
+========================================================================================================================
+ANALIZA NIEZBALANSOWANIA DATASETU TOYADMOS
+========================================================================================================================
+
+STATYSTYKI GLOBALNE:
+  Łączna ilość próbek: 331,808
+  Łączna długość nagrań: 15,702,706.82 s (261711.78 min, 4361.86 h)
+
+========================================================================================================================
+
+SZCZEGÓŁOWE STATYSTYKI DLA KAŻDEJ KLASY:
+========================================================================================================================
+Kategoria    | Atrybut                   | Wartość                        | Ilość próbek    | Długość (s)     | Długość (min)   | Długość (h)    
+-------------------------------------------------------------------------------------------------------------------------------------------------
+ToyCar       | Gears                     | Deformed                       |            1436 |        15796.00 |          263.27 |            4.39
+ToyCar       | Gears                     | Melted                         |            1440 |        15840.00 |          264.00 |            4.40
+ToyCar       | Gears                     | Normal                         |           25644 |      1862960.00 |        31049.33 |          517.49
+ToyCar       | Shaft                     | Bent                           |            2160 |        23760.00 |          396.00 |            6.60
+ToyCar       | Shaft                     | Normal                         |           26360 |      1870836.00 |        31180.60 |          519.68
+ToyCar       | Tires                     | Coiled (plastic ribbon)        |            1436 |        15796.00 |          263.27 |            4.39
+ToyCar       | Tires                     | Coiled (steel ribbon)          |            1440 |        15840.00 |          264.00 |            4.40
+ToyCar       | Tires                     | Normal                         |           25644 |      1862960.00 |        31049.33 |          517.49
+ToyCar       | Voltage                   | Normal                         |           25640 |      1862916.00 |        31048.60 |          517.48
+ToyCar       | Voltage                   | Over voltage                   |            1440 |        15840.00 |          264.00 |            4.40
+ToyCar       | Voltage                   | Under voltage                  |            1440 |        15840.00 |          264.00 |            4.40
+ToyConveyor  | Belt                      | Attached metallic object 1     |             720 |         7200.00 |          120.00 |            2.00
+ToyConveyor  | Belt                      | Attached metallic object 2     |            1260 |        12600.00 |          210.00 |            3.50
+ToyConveyor  | Belt                      | Attached metallic object 3     |            1260 |        12600.00 |          210.00 |            3.50
+ToyConveyor  | Belt                      | Normal                         |           23492 |       657360.00 |        10956.00 |          182.60
+ToyConveyor  | Belt                      | Removed                        |              20 |          200.00 |            3.33 |            0.06
+ToyConveyor  | Tail pulley               | Excessive tension              |            1500 |        15000.00 |          250.00 |            4.17
+ToyConveyor  | Tail pulley               | Normal                         |           23892 |       661360.00 |        11022.67 |          183.71
+ToyConveyor  | Tail pulley               | Removed                        |            1360 |        13600.00 |          226.67 |            3.78
+ToyConveyor  | Tension puly              | Aging                          |             540 |         5400.00 |           90.00 |            1.50
+ToyConveyor  | Tension puly              | Excessive tension              |            1980 |        19800.00 |          330.00 |            5.50
+ToyConveyor  | Tension puly              | Normal                         |           24232 |       664760.00 |        11079.33 |          184.66
+ToyConveyor  | Voltage                   | Normal                         |           23772 |       660160.00 |        11002.67 |          183.38
+ToyConveyor  | Voltage                   | Over voltage                   |            1480 |        14800.00 |          246.67 |            4.11
+ToyConveyor  | Voltage                   | Under voltage                  |            1500 |        15000.00 |          250.00 |            4.17
+ToyTrain     | Curved railway track      | Broken                         |            1280 |        14080.00 |          234.67 |            3.91
+ToyTrain     | Curved railway track      | Disjointed                     |            1280 |        14080.00 |          234.67 |            3.91
+ToyTrain     | Curved railway track      | Normal                         |           23264 |       953280.54 |        15888.01 |          264.80
+ToyTrain     | Curved railway track      | Obstructing stone              |            1280 |        14080.00 |          234.67 |            3.91
+ToyTrain     | First carriage            | Chipped wheel axle             |            2080 |        22880.00 |          381.33 |            6.36
+ToyTrain     | First carriage            | Normal                         |           25024 |       972640.54 |        16210.68 |          270.18
+ToyTrain     | Last carriage             | Chipped wheel axle             |            2080 |        22880.00 |          381.33 |            6.36
+ToyTrain     | Last carriage             | Normal                         |           25024 |       972640.54 |        16210.68 |          270.18
+ToyTrain     | Straight railway track    | Broken                         |            1040 |        11440.00 |          190.67 |            3.18
+ToyTrain     | Straight railway track    | Disjointed                     |            1040 |        11440.00 |          190.67 |            3.18
+ToyTrain     | Straight railway track    | Normal                         |           23984 |       961200.54 |        16020.01 |          267.00
+ToyTrain     | Straight railway track    | Obstructing stone              |            1040 |        11440.00 |          190.67 |            3.18
+ToyCar       | EnvironmentalNoise        | CNT                            |             288 |       172800.00 |         2880.00 |           48.00
+ToyConveyor  | EnvironmentalNoise        | CNT                            |             864 |       518400.13 |         8640.00 |          144.00
+ToyTrain     | EnvironmentalNoise        | CNT                            |            1152 |       691200.53 |        11520.01 |          192.00
+
+========================================================================================================================
+
+ANALIZA NIEZBALANSOWANIA WEDŁUG KATEGORII I ATRYBUTÓW:
+========================================================================================================================
+
+Kategoria: ToyCar
+------------------------------------------------------------------------------------------------------------------------
+
+  Atrybut: Gears
+    Deformed                       | Próbki:  1,436 (  5.6%) | Długość:   15796.00 s (  0.8%)
+    Melted                         | Próbki:  1,440 (  5.6%) | Długość:   15840.00 s (  0.9%)
+    Normal                         | Próbki: 25,644 (100.0%) | Długość: 1862960.00 s (100.0%)
+
+  Atrybut: Shaft
+    Bent                           | Próbki:  2,160 (  8.2%) | Długość:   23760.00 s (  1.3%)
+    Normal                         | Próbki: 26,360 (100.0%) | Długość: 1870836.00 s (100.0%)
+
+  Atrybut: Tires
+    Coiled (plastic ribbon)        | Próbki:  1,436 (  5.6%) | Długość:   15796.00 s (  0.8%)
+    Coiled (steel ribbon)          | Próbki:  1,440 (  5.6%) | Długość:   15840.00 s (  0.9%)
+    Normal                         | Próbki: 25,644 (100.0%) | Długość: 1862960.00 s (100.0%)
+
+  Atrybut: Voltage
+    Normal                         | Próbki: 25,640 (100.0%) | Długość: 1862916.00 s (100.0%)
+    Over voltage                   | Próbki:  1,440 (  5.6%) | Długość:   15840.00 s (  0.9%)
+    Under voltage                  | Próbki:  1,440 (  5.6%) | Długość:   15840.00 s (  0.9%)
+
+  EnvironmentalNoise:
+    CNT: 288 próbek, 172800.00 s (2880.00 min)
+
+Kategoria: ToyConveyor
+------------------------------------------------------------------------------------------------------------------------
+
+  Atrybut: Belt
+    Attached metallic object 1     | Próbki:    720 (  3.1%) | Długość:    7200.00 s (  1.1%)
+    Attached metallic object 2     | Próbki:  1,260 (  5.4%) | Długość:   12600.00 s (  1.9%)
+    Attached metallic object 3     | Próbki:  1,260 (  5.4%) | Długość:   12600.00 s (  1.9%)
+    Normal                         | Próbki: 23,492 (100.0%) | Długość:  657360.00 s (100.0%)
+    Removed                        | Próbki:     20 (  0.1%) | Długość:     200.00 s (  0.0%)
+
+  Atrybut: Tail pulley
+    Excessive tension              | Próbki:  1,500 (  6.3%) | Długość:   15000.00 s (  2.3%)
+    Normal                         | Próbki: 23,892 (100.0%) | Długość:  661360.00 s (100.0%)
+    Removed                        | Próbki:  1,360 (  5.7%) | Długość:   13600.00 s (  2.1%)
+
+  Atrybut: Tension puly
+    Aging                          | Próbki:    540 (  2.2%) | Długość:    5400.00 s (  0.8%)
+    Excessive tension              | Próbki:  1,980 (  8.2%) | Długość:   19800.00 s (  3.0%)
+    Normal                         | Próbki: 24,232 (100.0%) | Długość:  664760.00 s (100.0%)
+
+  Atrybut: Voltage
+    Normal                         | Próbki: 23,772 (100.0%) | Długość:  660160.00 s (100.0%)
+    Over voltage                   | Próbki:  1,480 (  6.2%) | Długość:   14800.00 s (  2.2%)
+    Under voltage                  | Próbki:  1,500 (  6.3%) | Długość:   15000.00 s (  2.3%)
+
+  EnvironmentalNoise:
+    CNT: 864 próbek, 518400.13 s (8640.00 min)
+
+Kategoria: ToyTrain
+------------------------------------------------------------------------------------------------------------------------
+
+  Atrybut: Curved railway track
+    Broken                         | Próbki:  1,280 (  5.5%) | Długość:   14080.00 s (  1.5%)
+    Disjointed                     | Próbki:  1,280 (  5.5%) | Długość:   14080.00 s (  1.5%)
+    Normal                         | Próbki: 23,264 (100.0%) | Długość:  953280.54 s (100.0%)
+    Obstructing stone              | Próbki:  1,280 (  5.5%) | Długość:   14080.00 s (  1.5%)
+
+  Atrybut: First carriage
+    Chipped wheel axle             | Próbki:  2,080 (  8.3%) | Długość:   22880.00 s (  2.4%)
+    Normal                         | Próbki: 25,024 (100.0%) | Długość:  972640.54 s (100.0%)
+
+  Atrybut: Last carriage
+    Chipped wheel axle             | Próbki:  2,080 (  8.3%) | Długość:   22880.00 s (  2.4%)
+    Normal                         | Próbki: 25,024 (100.0%) | Długość:  972640.54 s (100.0%)
+
+  Atrybut: Straight railway track
+    Broken                         | Próbki:  1,040 (  4.3%) | Długość:   11440.00 s (  1.2%)
+    Disjointed                     | Próbki:  1,040 (  4.3%) | Długość:   11440.00 s (  1.2%)
+    Normal                         | Próbki: 23,984 (100.0%) | Długość:  961200.54 s (100.0%)
+    Obstructing stone              | Próbki:  1,040 (  4.3%) | Długość:   11440.00 s (  1.2%)
+
+  EnvironmentalNoise:
+    CNT: 1,152 próbek, 691200.53 s (11520.01 min)
+
