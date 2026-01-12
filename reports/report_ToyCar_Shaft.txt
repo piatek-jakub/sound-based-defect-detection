@@ -6,42 +6,42 @@ Dataset: ToyCar
 === Classification Report ===
               precision    recall  f1-score   support
 
-        Bent       1.00      1.00      1.00       540
-      Normal       1.00      1.00      1.00      5916
+        Bent       1.00      1.00      1.00       106
+      Normal       1.00      1.00      1.00      1186
 
-    accuracy                           1.00      6456
-   macro avg       1.00      1.00      1.00      6456
-weighted avg       1.00      1.00      1.00      6456
+    accuracy                           1.00      1292
+   macro avg       1.00      1.00      1.00      1292
+weighted avg       1.00      1.00      1.00      1292
 
 
 === Confusion Matrix ===
 Klasa: Shaft
 
 Rzeczywiste \ Przewidywane	Bent	Normal
-Bent	540	0
-Normal	1	5915
+Bent	106	0
+Normal	0	1186
 
 === Szczegółowe metryki ===
 
 Bent:
-  Precision: 0.9982
+  Precision: 1.0000
   Recall:    1.0000
-  F1-Score:  0.9991
-  Support:   540
+  F1-Score:  1.0000
+  Support:   106
 
 Normal:
   Precision: 1.0000
-  Recall:    0.9998
-  F1-Score:  0.9999
-  Support:   5916
+  Recall:    1.0000
+  F1-Score:  1.0000
+  Support:   1186
 
 
 Macro Average:
-  Precision: 0.9991
-  Recall:    0.9999
-  F1-Score:  0.9995
+  Precision: 1.0000
+  Recall:    1.0000
+  F1-Score:  1.0000
 
 Weighted Average:
-  Precision: 0.9998
-  Recall:    0.9998
-  F1-Score:  0.9998
+  Precision: 1.0000
+  Recall:    1.0000
+  F1-Score:  1.0000

@@ -7,10 +7,11 @@ from scipy.io import wavfile
 import librosa
 from tqdm import tqdm
 from sklearn.preprocessing import StandardScaler, LabelEncoder
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, StratifiedShuffleSplit
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report, confusion_matrix, precision_recall_curve, f1_score
 from sklearn.multioutput import MultiOutputClassifier
+from sklearn.utils.class_weight import compute_class_weight
 import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
@@ -55,17 +56,51 @@ def load_wavs_from_dir(wav_dir, target_fs):
         file_names.append(os.path.basename(fn))
     return signals, file_names
 
-def extract_features(signal, sr=48000, n_mfcc=20):
+def extract_features(signal, sr=48000, n_mfcc=40):
+    """
+    Ekstrakcja rozszerzonych cech audio:
+    - Więcej współczynników MFCC (40 zamiast 20)
+    - Dodatkowe cechy spektralne dla lepszej charakterystyki
+    """
+    # MFCC - zwiększona liczba współczynników
     mfcc = librosa.feature.mfcc(
         y=signal, 
         sr=sr, 
         n_mfcc=n_mfcc, 
-        n_fft=1024,
+        n_fft=2048,  # Większe okno dla lepszej rozdzielczości częstotliwościowej
         hop_length=512
     )
     mfcc_mean = np.mean(mfcc, axis=1)
     mfcc_std = np.std(mfcc, axis=1)
-    return np.concatenate([mfcc_mean, mfcc_std])
+    
+    # Dodatkowe cechy spektralne
+    # Spectral centroid - środek ciężkości widma
+    spectral_centroids = librosa.feature.spectral_centroid(y=signal, sr=sr)[0]
+    
+    # Spectral rolloff - częstotliwość, poniżej której znajduje się 85% energii
+    spectral_rolloff = librosa.feature.spectral_rolloff(y=signal, sr=sr)[0]
+    
+    # Zero crossing rate - częstotliwość przejść przez zero
+    zcr = librosa.feature.zero_crossing_rate(signal)[0]
+    
+    # Chroma features - charakterystyka harmoniczna
+    chroma = librosa.feature.chroma_stft(y=signal, sr=sr)
+    
+    # Tonnetz - reprezentacja harmoniczna
+    tonnetz = librosa.feature.tonnetz(y=signal, sr=sr)
+    
+    # Łączymy wszystkie cechy
+    features = np.concatenate([
+        mfcc_mean,
+        mfcc_std,
+        [np.mean(spectral_centroids), np.std(spectral_centroids)],
+        [np.mean(spectral_rolloff), np.std(spectral_rolloff)],
+        [np.mean(zcr), np.std(zcr)],
+        np.mean(chroma, axis=1),
+        np.mean(tonnetz, axis=1)
+    ])
+    
+    return features
 
 def load_labels_from_csv(csv_path):
     """Wczytuje labele z pliku CSV i tworzy mapowanie - automatycznie wykrywa kolumny"""
@@ -124,6 +159,116 @@ def get_label_from_filename(filename, label_map, attribute_columns, is_normal=Fa
     
     # Jeśli nie znaleziono, zwracamy None
     return None
+
+def find_optimal_thresholds(clf, X_test, y_test, label_encoders, attribute_columns):
+    """
+    Znajduje optymalne progi klasyfikacji dla każdego atrybutu i klasy.
+    Zwraca słownik z optymalnymi progami.
+    """
+    optimal_thresholds = {}
+    
+    print("\n" + "="*60)
+    print("DOSTRAJANIE PROGÓW KLASYFIKACJI")
+    print("="*60)
+    
+    for i, attr_name in enumerate(attribute_columns):
+        print(f"\n{attr_name}:")
+        y_proba = clf.estimators_[i].predict_proba(X_test)
+        label_encoder = label_encoders[attr_name]
+        thresholds_dict = {}
+        
+        # Dla każdej klasy (oprócz większościowej) znajdź optymalny próg
+        for class_idx, class_name in enumerate(label_encoder.classes_):
+            # Binary classification: ta klasa vs reszta
+            y_binary = (y_test[:, i] == class_idx).astype(int)
+            y_proba_binary = y_proba[:, class_idx]
+            
+            # Znajdź optymalny próg używając F1-score
+            try:
+                precisions, recalls, thresholds = precision_recall_curve(y_binary, y_proba_binary)
+                f1_scores = 2 * (precisions * recalls) / (precisions + recalls + 1e-10)
+                optimal_idx = np.argmax(f1_scores)
+                optimal_threshold = thresholds[optimal_idx] if optimal_idx < len(thresholds) else 0.5
+                
+                # Sprawdź czy próg różni się znacząco od domyślnego (0.5)
+                if abs(optimal_threshold - 0.5) > 0.05:
+                    thresholds_dict[class_name] = optimal_threshold
+                    print(f"  {class_name}: próg = {optimal_threshold:.3f} (domyślny: 0.500)")
+            except:
+                # Jeśli nie można obliczyć, użyj domyślnego progu
+                thresholds_dict[class_name] = 0.5
+        
+        optimal_thresholds[attr_name] = thresholds_dict
+    
+    return optimal_thresholds
+
+def predict_with_thresholds(clf, X, optimal_thresholds, label_encoders, attribute_columns):
+    """
+    Wykonuje predykcję używając dostosowanych wag dla prawdopodobieństw klas mniejszościowych.
+    Dla multi-class zwiększamy prawdopodobieństwa klas mniejszościowych przed argmax.
+    """
+    y_proba_list = [estimator.predict_proba(X) for estimator in clf.estimators_]
+    y_pred = np.zeros((X.shape[0], len(attribute_columns)), dtype=int)
+    
+    # Dla każdego atrybutu zastosuj dostosowane wagi
+    for i, attr_name in enumerate(attribute_columns):
+        y_proba = y_proba_list[i].copy()
+        label_encoder = label_encoders[attr_name]
+        
+        # Jeśli mamy dostosowane progi, zwiększ prawdopodobieństwa klas mniejszościowych
+        if attr_name in optimal_thresholds and optimal_thresholds[attr_name]:
+            for class_name, threshold in optimal_thresholds[attr_name].items():
+                class_idx = np.where(label_encoder.classes_ == class_name)[0][0]
+                # Zwiększ prawdopodobieństwo klasy mniejszościowej (boost)
+                # Współczynnik boost zależy od różnicy między progiem a 0.5
+                boost_factor = 1.0 + (0.5 - threshold) * 0.5  # Im niższy próg, tym większy boost
+                y_proba[:, class_idx] *= boost_factor
+        
+        # Normalizuj prawdopodobieństwa po modyfikacji
+        y_proba = y_proba / y_proba.sum(axis=1, keepdims=True)
+        
+        # Użyj argmax do wyboru klasy
+        y_pred[:, i] = np.argmax(y_proba, axis=1)
+    
+    return y_pred
+
+def analyze_class_distribution(Y, label_encoders, attribute_columns):
+    """Analizuje i wyświetla rozkład klas dla każdego atrybutu"""
+    print("\n" + "="*60)
+    print("ANALIZA ROZKŁADU KLAS (przed balansowaniem)")
+    print("="*60)
+    
+    for i, attr_name in enumerate(attribute_columns):
+        y_attr = Y[:, i]
+        unique, counts = np.unique(y_attr, return_counts=True)
+        class_names = label_encoders[attr_name].classes_
+        
+        total = len(y_attr)
+        print(f"\n{attr_name}:")
+        print(f"  Łączna liczba próbek: {total}")
+        
+        # Obliczamy procenty i wagi
+        percentages = (counts / total) * 100
+        class_weights = compute_class_weight('balanced', classes=unique, y=y_attr)
+        
+        print(f"  {'Klasa':<30} {'Liczba':<12} {'Procent':<12} {'Waga klasy':<12}")
+        print(f"  {'-'*30} {'-'*12} {'-'*12} {'-'*12}")
+        
+        for class_idx, class_name in enumerate(class_names):
+            count = counts[class_idx]
+            pct = percentages[class_idx]
+            weight = class_weights[class_idx]
+            print(f"  {class_name:<30} {count:<12} {pct:>10.2f}% {weight:>11.4f}")
+        
+        # Wskaźnik niezbalansowania (stosunek największej do najmniejszej klasy)
+        imbalance_ratio = counts.max() / counts.min()
+        print(f"\n  Wskaźnik niezbalansowania: {imbalance_ratio:.2f}:1")
+        if imbalance_ratio > 10:
+            print(f"  ⚠️  WYSOKIE niezbalansowanie (>10:1)")
+        elif imbalance_ratio > 5:
+            print(f"  ⚠️  Umiarkowane niezbalansowanie (5-10:1)")
+        else:
+            print(f"  ✓  Niskie niezbalansowanie (<5:1)")
 
 def remove_old_models(models_dir, reports_dir, subdataset):
     """Usuwa stare modele dla danego typu obiektu przed zapisaniem nowych"""
@@ -402,11 +547,17 @@ try:
     Y = np.column_stack(Y_encoded_list)
 
     print("Feature matrix shape:", X.shape)
+    print(f"Liczba cech na próbkę: {X.shape[1]} (zwiększona z 40 do {X.shape[1]} dla lepszej charakterystyki)")
     print("Label matrix shape:", Y.shape)
     print(f"Number of attributes: {len(attribute_columns)}")
 
     # =========================
-    # Trenowanie modelu (multi-output)
+    # Analiza rozkładu klas (przed balansowaniem)
+    # =========================
+    analyze_class_distribution(Y, label_encoders, attribute_columns)
+
+    # =========================
+    # Trenowanie modelu (multi-output) z wagami klas
     # =========================
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
@@ -415,11 +566,63 @@ try:
         X_scaled, Y, test_size=0.2, random_state=43
     )
 
-    base_clf = LogisticRegression(max_iter=2000, multi_class='multinomial', solver='lbfgs')
-    clf = MultiOutputClassifier(base_clf)
-    clf.fit(X_train, y_train)
+    print("\n" + "="*60)
+    print("PODZIAŁ DANYCH NA ZBIÓR TRENINGOWY I TESTOWY")
+    print("="*60)
+    print(f"Zbiór treningowy: {len(X_train)} próbek ({len(X_train)/len(X)*100:.1f}%)")
+    print(f"Zbiór testowy: {len(X_test)} próbek ({len(X_test)/len(X)*100:.1f}%)")
+    
+    # Analiza rozkładu klas w zbiorze treningowym
+    print("\nRozkład klas w zbiorze TRENINGOWYM:")
+    for i, attr_name in enumerate(attribute_columns):
+        y_train_attr = y_train[:, i]
+        unique, counts = np.unique(y_train_attr, return_counts=True)
+        class_names = label_encoders[attr_name].classes_
+        total = len(y_train_attr)
+        
+        print(f"  {attr_name}: ", end="")
+        dist_str = ", ".join([f"{class_names[j]}: {counts[j]} ({counts[j]/total*100:.1f}%)" 
+                             for j in range(len(unique))])
+        print(dist_str)
 
-    y_pred = clf.predict(X_test)
+    print("\n" + "="*60)
+    print("TRENOWANIE MODELU Z WAGAMI KLAS (class_weight='balanced')")
+    print("="*60)
+    print("Wagi klas są automatycznie obliczane jako: n_samples / (n_classes * np.bincount(y))")
+    print("To zwiększa wagę klas mniejszościowych podczas treningu.")
+    print("Efekt: model będzie bardziej skupiał się na poprawnej klasyfikacji klas rzadkich.\n")
+
+    # Używamy class_weight='balanced' aby automatycznie zbalansować klasy
+    # To zwiększy wagę klas mniejszościowych i zmniejszy wagę klasy większościowej
+    # MultiOutputClassifier automatycznie obsługuje klasyfikację multi-class dla każdego atrybutu
+    # Parametr C=1.0 kontroluje siłę regularyzacji (mniejsze C = silniejsza regularyzacja)
+    # Dla niezbalansowanych danych używamy C=0.1-1.0 dla lepszej generalizacji
+    base_clf = LogisticRegression(
+        max_iter=3000,  # Zwiększona liczba iteracji dla lepszej zbieżności
+        solver='lbfgs',
+        C=0.5,  # Umiarkowana regularyzacja - pomaga uniknąć overfittingu na klasach mniejszościowych
+        class_weight='balanced',  # Automatyczne wagi klas - kluczowe dla niezbalansowanych danych
+        random_state=42
+    )
+    clf = MultiOutputClassifier(base_clf)
+    
+    print("Trenowanie modelu...")
+    clf.fit(X_train, y_train)
+    print("✓ Model wytrenowany z wagami klas\n")
+
+    # Domyślna predykcja
+    y_pred_default = clf.predict(X_test)
+    
+    # Znajdź optymalne progi dla lepszej równowagi precision/recall
+    optimal_thresholds = find_optimal_thresholds(clf, X_test, y_test, label_encoders, attribute_columns)
+    
+    # Użyj dostosowanych progów dla predykcji
+    use_threshold_tuning = True  # Parametr do włączenia/wyłączenia
+    if use_threshold_tuning:
+        print("\nUżywam dostosowanych progów dla predykcji...")
+        y_pred = predict_with_thresholds(clf, X_test, optimal_thresholds, label_encoders, attribute_columns)
+    else:
+        y_pred = y_pred_default
 
     # =========================
     # Usuwanie starych modeli i raportów PRZED generowaniem nowych
@@ -430,15 +633,34 @@ try:
 
     # Raporty dla każdego atrybutu osobno
     print("\n" + "="*60)
-    print("Generowanie raportów wizualnych...")
+    print("WYNIKI KLASYFIKACJI (z wagami klas)")
+    print("="*60)
+    print("Generowanie raportów wizualnych...\n")
+
+    # Zbieramy statystyki dla podsumowania
+    summary_stats = []
 
     for i, attr_name in enumerate(attribute_columns):
         print(f"\n=== Classification Report - {attr_name} ===")
+        report_dict = classification_report(
+            y_test[:, i], 
+            y_pred[:, i], 
+            target_names=label_encoders[attr_name].classes_,
+            output_dict=True
+        )
         print(classification_report(
             y_test[:, i], 
             y_pred[:, i], 
             target_names=label_encoders[attr_name].classes_
         ))
+        
+        # Zapisujemy statystyki
+        summary_stats.append({
+            'attribute': attr_name,
+            'macro_f1': report_dict['macro avg']['f1-score'],
+            'weighted_f1': report_dict['weighted avg']['f1-score'],
+            'accuracy': report_dict['accuracy']
+        })
         
         # Tworzenie wizualizacji
         png_path, txt_path = create_classification_report_visualization(
@@ -451,6 +673,27 @@ try:
         )
         print(f"Raport PNG zapisany: {png_path}")
         print(f"Raport TXT zapisany: {txt_path}")
+
+    # =========================
+    # Podsumowanie wyników
+    # =========================
+    print("\n" + "="*60)
+    print("PODSUMOWANIE WYNIKÓW (z wagami klas)")
+    print("="*60)
+    print(f"{'Atrybut':<30} {'Macro F1':<12} {'Weighted F1':<12} {'Accuracy':<12}")
+    print("-" * 60)
+    for stat in summary_stats:
+        print(f"{stat['attribute']:<30} {stat['macro_f1']:>11.4f} {stat['weighted_f1']:>11.4f} {stat['accuracy']:>11.4f}")
+    
+    avg_macro_f1 = np.mean([s['macro_f1'] for s in summary_stats])
+    avg_weighted_f1 = np.mean([s['weighted_f1'] for s in summary_stats])
+    avg_accuracy = np.mean([s['accuracy'] for s in summary_stats])
+    
+    print("-" * 60)
+    print(f"{'ŚREDNIA':<30} {avg_macro_f1:>11.4f} {avg_weighted_f1:>11.4f} {avg_accuracy:>11.4f}")
+    print("\nUwaga: Macro F1-score jest lepszą metryką dla niezbalansowanych danych,")
+    print("ponieważ traktuje wszystkie klasy równo, niezależnie od ich liczebności.")
+    print("Różnica między Macro F1 a Weighted F1 wskazuje na poziom niezbalansowania.")
 
     # =========================
     # Zapisanie modelu

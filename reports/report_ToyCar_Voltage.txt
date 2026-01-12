@@ -6,50 +6,50 @@ Dataset: ToyCar
 === Classification Report ===
                precision    recall  f1-score   support
 
-       Normal       0.98      0.99      0.98      5736
- Over voltage       0.92      0.87      0.90       360
-Under voltage       0.87      0.74      0.80       360
+       Normal       1.00      0.97      0.98      1131
+ Over voltage       0.80      0.96      0.87        74
+Under voltage       0.79      0.92      0.85        87
 
-     accuracy                           0.97      6456
-    macro avg       0.92      0.87      0.89      6456
- weighted avg       0.97      0.97      0.97      6456
+     accuracy                           0.97      1292
+    macro avg       0.86      0.95      0.90      1292
+ weighted avg       0.97      0.97      0.97      1292
 
 
 === Confusion Matrix ===
 Klasa: Voltage
 
 Rzeczywiste \ Przewidywane	Normal	Over voltage	Under voltage
-Normal	5677	26	33
-Over voltage	40	314	6
-Under voltage	93	0	267
+Normal	1098	14	19
+Over voltage	1	71	2
+Under voltage	3	4	80
 
 === Szczegółowe metryki ===
 
 Normal:
-  Precision: 0.9771
-  Recall:    0.9897
+  Precision: 0.9964
+  Recall:    0.9708
   F1-Score:  0.9834
-  Support:   5736
+  Support:   1131
 
 Over voltage:
-  Precision: 0.9235
-  Recall:    0.8722
-  F1-Score:  0.8971
-  Support:   360
+  Precision: 0.7978
+  Recall:    0.9595
+  F1-Score:  0.8712
+  Support:   74
 
 Under voltage:
-  Precision: 0.8725
-  Recall:    0.7417
-  F1-Score:  0.8018
-  Support:   360
+  Precision: 0.7921
+  Recall:    0.9195
+  F1-Score:  0.8511
+  Support:   87
 
 
 Macro Average:
-  Precision: 0.9244
-  Recall:    0.8679
-  F1-Score:  0.8941
+  Precision: 0.8621
+  Recall:    0.9499
+  F1-Score:  0.9019
 
 Weighted Average:
-  Precision: 0.9683
-  Recall:    0.9693
-  F1-Score:  0.9684
+  Precision: 0.9712
+  Recall:    0.9667
+  F1-Score:  0.9681

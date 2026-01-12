@@ -6,50 +6,50 @@ Dataset: ToyCar
 === Classification Report ===
                          precision    recall  f1-score   support
 
-Coiled (plastic ribbon)       0.97      0.96      0.96       356
-  Coiled (steel ribbon)       0.95      0.93      0.94       360
-                 Normal       1.00      1.00      1.00      5740
+Coiled (plastic ribbon)       0.96      0.99      0.97        75
+  Coiled (steel ribbon)       0.94      0.97      0.96        80
+                 Normal       1.00      0.99      1.00      1137
 
-               accuracy                           0.99      6456
-              macro avg       0.97      0.96      0.97      6456
-           weighted avg       0.99      0.99      0.99      6456
+               accuracy                           0.99      1292
+              macro avg       0.97      0.99      0.98      1292
+           weighted avg       0.99      0.99      0.99      1292
 
 
 === Confusion Matrix ===
 Klasa: Tires
 
 Rzeczywiste \ Przewidywane	Coiled (plastic ribbon)	Coiled (steel ribbon)	Normal
-Coiled (plastic ribbon)	340	12	4
-Coiled (steel ribbon)	8	334	18
-Normal	3	5	5732
+Coiled (plastic ribbon)	74	1	0
+Coiled (steel ribbon)	1	78	1
+Normal	2	4	1131
 
 === Szczegółowe metryki ===
 
 Coiled (plastic ribbon):
-  Precision: 0.9687
-  Recall:    0.9551
-  F1-Score:  0.9618
-  Support:   356
+  Precision: 0.9610
+  Recall:    0.9867
+  F1-Score:  0.9737
+  Support:   75
 
 Coiled (steel ribbon):
-  Precision: 0.9516
-  Recall:    0.9278
-  F1-Score:  0.9395
-  Support:   360
+  Precision: 0.9398
+  Recall:    0.9750
+  F1-Score:  0.9571
+  Support:   80
 
 Normal:
-  Precision: 0.9962
-  Recall:    0.9986
-  F1-Score:  0.9974
-  Support:   5740
+  Precision: 0.9991
+  Recall:    0.9947
+  F1-Score:  0.9969
+  Support:   1137
 
 
 Macro Average:
-  Precision: 0.9721
-  Recall:    0.9605
-  F1-Score:  0.9662
+  Precision: 0.9666
+  Recall:    0.9855
+  F1-Score:  0.9759
 
 Weighted Average:
-  Precision: 0.9922
-  Recall:    0.9923
-  F1-Score:  0.9922
+  Precision: 0.9932
+  Recall:    0.9930
+  F1-Score:  0.9931
