@@ -1,0 +1,55 @@
+============================================================
+Raport klasyfikacji - Tail pulley
+Dataset: ToyConveyor
+============================================================
+
+=== Classification Report ===
+                   precision    recall  f1-score   support
+
+Excessive tension       0.94      1.00      0.97       121
+           Normal       1.00      0.99      1.00      1551
+          Removed       0.99      0.99      0.99        88
+
+         accuracy                           0.99      1760
+        macro avg       0.98      0.99      0.98      1760
+     weighted avg       0.99      0.99      0.99      1760
+
+
+=== Confusion Matrix ===
+Klasa: Tail pulley
+
+Rzeczywiste \ Przewidywane	Excessive tension	Normal	Removed
+Excessive tension	121	0	0
+Normal	8	1542	1
+Removed	0	1	87
+
+=== Szczegółowe metryki ===
+
+Excessive tension:
+  Precision: 0.9380
+  Recall:    1.0000
+  F1-Score:  0.9680
+  Support:   121
+
+Normal:
+  Precision: 0.9994
+  Recall:    0.9942
+  F1-Score:  0.9968
+  Support:   1551
+
+Removed:
+  Precision: 0.9886
+  Recall:    0.9886
+  F1-Score:  0.9886
+  Support:   88
+
+
+Macro Average:
+  Precision: 0.9753
+  Recall:    0.9943
+  F1-Score:  0.9845
+
+Weighted Average:
+  Precision: 0.9946
+  Recall:    0.9943
+  F1-Score:  0.9944

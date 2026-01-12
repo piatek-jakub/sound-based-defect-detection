@@ -1,0 +1,55 @@
+============================================================
+Raport klasyfikacji - Tension puly
+Dataset: ToyConveyor
+============================================================
+
+=== Classification Report ===
+                   precision    recall  f1-score   support
+
+            Aging       0.98      1.00      0.99       111
+Excessive tension       0.97      1.00      0.98       116
+           Normal       1.00      1.00      1.00      1533
+
+         accuracy                           1.00      1760
+        macro avg       0.98      1.00      0.99      1760
+     weighted avg       1.00      1.00      1.00      1760
+
+
+=== Confusion Matrix ===
+Klasa: Tension puly
+
+Rzeczywiste \ Przewidywane	Aging	Excessive tension	Normal
+Aging	111	0	0
+Excessive tension	0	116	0
+Normal	2	4	1527
+
+=== Szczegółowe metryki ===
+
+Aging:
+  Precision: 0.9823
+  Recall:    1.0000
+  F1-Score:  0.9911
+  Support:   111
+
+Excessive tension:
+  Precision: 0.9667
+  Recall:    1.0000
+  F1-Score:  0.9831
+  Support:   116
+
+Normal:
+  Precision: 1.0000
+  Recall:    0.9961
+  F1-Score:  0.9980
+  Support:   1533
+
+
+Macro Average:
+  Precision: 0.9830
+  Recall:    0.9987
+  F1-Score:  0.9907
+
+Weighted Average:
+  Precision: 0.9967
+  Recall:    0.9966
+  F1-Score:  0.9966
