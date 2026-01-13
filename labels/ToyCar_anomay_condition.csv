@@ -1,54 +1,54 @@
 Name;Shaft;Gears;Tires;Voltage
-ab01;Normal;Normal;Normal;Under voltage
-ab02;Normal;Normal;Normal;Over voltage
-ab03;Normal;Normal;Coiled (plastic ribbon);Normal
-ab04;Normal;Normal;Coiled (plastic ribbon);Under voltage
-ab05;Normal;Normal;Coiled (plastic ribbon);Over voltage
-ab06;Normal;Normal;Coiled (steel ribbon);Normal
-ab07;Normal;Normal;Coiled (steel ribbon);Under voltage
-ab08;Normal;Normal;Coiled (steel ribbon);Over voltage
-ab09;Normal;Deformed;Normal;Normal
-ab10;Normal;Deformed;Normal;Under voltage
-ab11;Normal;Deformed;Normal;Over voltage
-ab12;Normal;Deformed;Coiled (plastic ribbon);Normal
-ab13;Normal;Deformed;Coiled (plastic ribbon);Under voltage
-ab14;Normal;Deformed;Coiled (plastic ribbon);Over voltage
-ab15;Normal;Deformed;Coiled (steel ribbon);Normal
-ab16;Normal;Deformed;Coiled (steel ribbon);Under voltage
-ab17;Normal;Deformed;Coiled (steel ribbon);Over voltage
-ab18;Normal;Melted;Normal;Normal
-ab19;Normal;Melted;Normal;Under voltage
-ab20;Normal;Melted;Normal;Over voltage
-ab21;Normal;Melted;Coiled (plastic ribbon);Normal
-ab22;Normal;Melted;Coiled (plastic ribbon);Under voltage
-ab23;Normal;Melted;Coiled (plastic ribbon);Over voltage
-ab24;Normal;Melted;Coiled (steel ribbon);Normal
-ab25;Normal;Melted;Coiled (steel ribbon);Under voltage
-ab26;Normal;Melted;Coiled (steel ribbon);Over voltage
-ab27;Bent;Normal;Normal;Normal
-ab28;Bent;Normal;Normal;Under voltage
-ab29;Bent;Normal;Normal;Over voltage
-ab30;Bent;Normal;Coiled (plastic ribbon);Normal
-ab31;Bent;Normal;Coiled (plastic ribbon);Under voltage
-ab32;Bent;Normal;Coiled (plastic ribbon);Over voltage
-ab33;Bent;Normal;Coiled (steel ribbon);Normal
-ab34;Bent;Normal;Coiled (steel ribbon);Under voltage
-ab35;Bent;Normal;Coiled (steel ribbon);Over voltage
-ab36;Bent;Deformed;Normal;Normal
-ab37;Bent;Deformed;Normal;Under voltage
-ab38;Bent;Deformed;Normal;Over voltage
-ab39;Bent;Deformed;Coiled (plastic ribbon);Normal
-ab40;Bent;Deformed;Coiled (plastic ribbon);Under voltage
-ab41;Bent;Deformed;Coiled (plastic ribbon);Over voltage
-ab42;Bent;Deformed;Coiled (steel ribbon);Normal
-ab43;Bent;Deformed;Coiled (steel ribbon);Under voltage
-ab44;Bent;Deformed;Coiled (steel ribbon);Over voltage
-ab45;Bent;Melted;Normal;Normal
-ab46;Bent;Melted;Normal;Under voltage
-ab47;Bent;Melted;Normal;Over voltage
-ab48;Bent;Melted;Coiled (plastic ribbon);Normal
-ab49;Bent;Melted;Coiled (plastic ribbon);Under voltage
-ab50;Bent;Melted;Coiled (plastic ribbon);Over voltage
-ab51;Bent;Melted;Coiled (steel ribbon);Normal
-ab52;Bent;Melted;Coiled (steel ribbon);Under voltage
-ab53;Bent;Melted;Coiled (steel ribbon);Over voltage
+ab01;Normal;Normal;Normal;Wrong voltage
+ab02;Normal;Normal;Normal;Wrong voltage
+ab03;Normal;Normal;Defect;Normal
+ab04;Normal;Normal;Defect;Wrong voltage
+ab05;Normal;Normal;Defect;Wrong voltage
+ab06;Normal;Normal;Defect;Normal
+ab07;Normal;Normal;Defect;Wrong voltage
+ab08;Normal;Normal;Defect;Wrong voltage
+ab09;Normal;Defect;Normal;Normal
+ab10;Normal;Defect;Normal;Wrong voltage
+ab11;Normal;Defect;Normal;Wrong voltage
+ab12;Normal;Defect;Defect;Normal
+ab13;Normal;Defect;Defect;Wrong voltage
+ab14;Normal;Defect;Defect;Wrong voltage
+ab15;Normal;Defect;Defect;Normal
+ab16;Normal;Defect;Defect;Wrong voltage
+ab17;Normal;Defect;Defect;Wrong voltage
+ab18;Normal;Defect;Normal;Normal
+ab19;Normal;Defect;Normal;Wrong voltage
+ab20;Normal;Defect;Normal;Wrong voltage
+ab21;Normal;Defect;Defect;Normal
+ab22;Normal;Defect;Defect;Wrong voltage
+ab23;Normal;Defect;Defect;Wrong voltage
+ab24;Normal;Defect;Defect;Normal
+ab25;Normal;Defect;Defect;Wrong voltage
+ab26;Normal;Defect;Defect;Wrong voltage
+ab27;Defect;Normal;Normal;Normal
+ab28;Defect;Normal;Normal;Wrong voltage
+ab29;Defect;Normal;Normal;Wrong voltage
+ab30;Defect;Normal;Defect;Normal
+ab31;Defect;Normal;Defect;Wrong voltage
+ab32;Defect;Normal;Defect;Wrong voltage
+ab33;Defect;Normal;Defect;Normal
+ab34;Defect;Normal;Defect;Wrong voltage
+ab35;Defect;Normal;Defect;Wrong voltage
+ab36;Defect;Defect;Normal;Normal
+ab37;Defect;Defect;Normal;Wrong voltage
+ab38;Defect;Defect;Normal;Wrong voltage
+ab39;Defect;Defect;Defect;Normal
+ab40;Defect;Defect;Defect;Wrong voltage
+ab41;Defect;Defect;Defect;Wrong voltage
+ab42;Defect;Defect;Defect;Normal
+ab43;Defect;Defect;Defect;Wrong voltage
+ab44;Defect;Defect;Defect;Wrong voltage
+ab45;Defect;Defect;Normal;Normal
+ab46;Defect;Defect;Normal;Wrong voltage
+ab47;Defect;Defect;Normal;Wrong voltage
+ab48;Defect;Defect;Defect;Normal
+ab49;Defect;Defect;Defect;Wrong voltage
+ab50;Defect;Defect;Defect;Wrong voltage
+ab51;Defect;Defect;Defect;Normal
+ab52;Defect;Defect;Defect;Wrong voltage
+ab53;Defect;Defect;Defect;Wrong voltage

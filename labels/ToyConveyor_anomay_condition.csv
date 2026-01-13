@@ -1,99 +1,99 @@
 Name;Tension puly;Tail pulley;Belt;Voltage
-ab01;Normal;Normal;Normal;Under voltage
-ab02;Normal;Normal;Normal;Over voltage
-ab03;Normal;Normal;Attached metallic object 1;Normal
-ab04;Normal;Normal;Attached metallic object 1;Under voltage
-ab05;Normal;Normal;Attached metallic object 1;Over voltage
-ab06;Normal;Normal;Attached metallic object 2;Normal
-ab07;Normal;Normal;Attached metallic object 2;Under voltage
-ab08;Normal;Normal;Attached metallic object 2;Over voltage
-ab09;Normal;Normal;Attached metallic object 3;Normal
-ab10;Normal;Normal;Attached metallic object 3;Under voltage
-ab11;Normal;Normal;Attached metallic object 3;Over voltage
-ab12;Normal;Excessive tension;Normal;Normal
-ab13;Normal;Excessive tension;Normal;Under voltage
-ab14;Normal;Excessive tension;Normal;Over voltage
-ab15;Normal;Excessive tension;Attached metallic object 1;Normal
-ab16;Normal;Excessive tension;Attached metallic object 1;Under voltage
-ab17;Normal;Excessive tension;Attached metallic object 1;Over voltage
-ab18;Normal;Excessive tension;Attached metallic object 2;Normal
-ab19;Normal;Excessive tension;Attached metallic object 2;Under voltage
-ab20;Normal;Excessive tension;Attached metallic object 2;Over voltage
-ab21;Normal;Excessive tension;Attached metallic object 3;Normal
-ab22;Normal;Excessive tension;Attached metallic object 3;Under voltage
-ab23;Normal;Excessive tension;Attached metallic object 3;Over voltage
-ab24;Normal;Removed;Normal;Normal
-ab25;Normal;Removed;Normal;Under voltage
-ab26;Normal;Removed;Normal;Over voltage
-ab27;Normal;Removed;Attached metallic object 1;Normal
-ab28;Normal;Removed;Attached metallic object 1;Under voltage
-ab29;Normal;Removed;Attached metallic object 1;Over voltage
-ab30;Normal;Removed;Attached metallic object 2;Normal
-ab31;Normal;Removed;Attached metallic object 2;Under voltage
-ab32;Normal;Removed;Attached metallic object 2;Over voltage
-ab33;Normal;Removed;Attached metallic object 3;Normal
-ab34;Normal;Removed;Attached metallic object 3;Under voltage
-ab35;Normal;Removed;Attached metallic object 3;Over voltage
-ab36;Excessive tension;Normal;Normal;Normal
-ab37;Excessive tension;Normal;Normal;Under voltage
-ab38;Excessive tension;Normal;Normal;Over voltage
-ab39;Excessive tension;Normal;Attached metallic object 1;Normal
-ab40;Excessive tension;Normal;Attached metallic object 1;Under voltage
-ab41;Excessive tension;Normal;Attached metallic object 1;Over voltage
-ab42;Excessive tension;Normal;Attached metallic object 2;Normal
-ab43;Excessive tension;Normal;Attached metallic object 2;Under voltage
-ab44;Excessive tension;Normal;Attached metallic object 2;Over voltage
-ab45;Excessive tension;Normal;Attached metallic object 3;Normal
-ab46;Excessive tension;Normal;Attached metallic object 3;Under voltage
-ab47;Excessive tension;Normal;Attached metallic object 3;Over voltage
-ab48;Excessive tension;Excessive tension;Normal;Normal
-ab49;Excessive tension;Excessive tension;Normal;Under voltage
-ab50;Excessive tension;Excessive tension;Normal;Over voltage
-ab51;Excessive tension;Excessive tension;Attached metallic object 1;Normal
-ab52;Excessive tension;Excessive tension;Attached metallic object 1;Under voltage
-ab53;Excessive tension;Excessive tension;Attached metallic object 1;Over voltage
-ab54;Excessive tension;Excessive tension;Attached metallic object 2;Normal
-ab55;Excessive tension;Excessive tension;Attached metallic object 2;Under voltage
-ab56;Excessive tension;Excessive tension;Attached metallic object 2;Over voltage
-ab57;Excessive tension;Excessive tension;Attached metallic object 3;Normal
-ab58;Excessive tension;Excessive tension;Attached metallic object 3;Under voltage
-ab59;Excessive tension;Excessive tension;Attached metallic object 3;Over voltage
-ab60;Excessive tension;Removed;Normal;Normal
-ab61;Excessive tension;Removed;Normal;Under voltage
-ab62;Excessive tension;Removed;Normal;Over voltage
-ab63;Excessive tension;Removed;Attached metallic object 1;Normal
-ab64;Excessive tension;Removed;Attached metallic object 1;Under voltage
-ab65;Excessive tension;Removed;Attached metallic object 1;Over voltage
-ab66;Excessive tension;Removed;Attached metallic object 2;Normal
-ab67;Excessive tension;Removed;Attached metallic object 2;Under voltage
-ab68;Excessive tension;Removed;Attached metallic object 2;Over voltage
-ab69;Excessive tension;Removed;Attached metallic object 3;Normal
-ab70;Excessive tension;Removed;Attached metallic object 3;Under voltage
-ab71;Excessive tension;Removed;Attached metallic object 3;Over voltage
-ab72;Aging;Normal;Normal;Normal
-ab73;Aging;Normal;Normal;Under voltage
-ab74;Aging;Normal;Normal;Over voltage
-ab75;Aging;Normal;Attached metallic object 2;Normal
-ab76;Aging;Normal;Attached metallic object 2;Under voltage
-ab77;Aging;Normal;Attached metallic object 2;Over voltage
-ab78;Aging;Normal;Attached metallic object 3;Normal
-ab79;Aging;Normal;Attached metallic object 3;Under voltage
-ab80;Aging;Normal;Attached metallic object 3;Over voltage
-ab81;Aging;Excessive tension;Normal;Normal
-ab82;Aging;Excessive tension;Normal;Under voltage
-ab83;Aging;Excessive tension;Normal;Over voltage
-ab84;Aging;Excessive tension;Attached metallic object 2;Normal
-ab85;Aging;Excessive tension;Attached metallic object 2;Under voltage
-ab86;Aging;Excessive tension;Attached metallic object 2;Over voltage
-ab87;Aging;Excessive tension;Attached metallic object 3;Normal
-ab88;Aging;Excessive tension;Attached metallic object 3;Under voltage
-ab89;Aging;Excessive tension;Attached metallic object 3;Over voltage
-ab90;Aging;Removed;Normal;Normal
-ab91;Aging;Removed;Normal;Under voltage
-ab92;Aging;Normal;Removed;Normal
-ab93;Aging;Normal;Attached metallic object 2;Normal
-ab94;Aging;Normal;Attached metallic object 2;Under voltage
-ab95;Aging;Normal;Attached metallic object 2;Over voltage
-ab96;Aging;Normal;Attached metallic object 3;Normal
-ab97;Aging;Normal;Attached metallic object 3;Under voltage
-ab98;Aging;Normal;Attached metallic object 3;Over voltage
+ab01;Normal;Normal;Normal;Wrong voltage
+ab02;Normal;Normal;Normal;Wrong voltage
+ab03;Normal;Normal;Defect;Normal
+ab04;Normal;Normal;Defect;Wrong voltage
+ab05;Normal;Normal;Defect;Wrong voltage
+ab06;Normal;Normal;Defect;Normal
+ab07;Normal;Normal;Defect;Wrong voltage
+ab08;Normal;Normal;Defect;Wrong voltage
+ab09;Normal;Normal;Defect;Normal
+ab10;Normal;Normal;Defect;Wrong voltage
+ab11;Normal;Normal;Defect;Wrong voltage
+ab12;Normal;Defect;Normal;Normal
+ab13;Normal;Defect;Normal;Wrong voltage
+ab14;Normal;Defect;Normal;Wrong voltage
+ab15;Normal;Defect;Defect;Normal
+ab16;Normal;Defect;Defect;Wrong voltage
+ab17;Normal;Defect;Defect;Wrong voltage
+ab18;Normal;Defect;Defect;Normal
+ab19;Normal;Defect;Defect;Wrong voltage
+ab20;Normal;Defect;Defect;Wrong voltage
+ab21;Normal;Defect;Defect;Normal
+ab22;Normal;Defect;Defect;Wrong voltage
+ab23;Normal;Defect;Defect;Wrong voltage
+ab24;Normal;Defect;Normal;Normal
+ab25;Normal;Defect;Normal;Wrong voltage
+ab26;Normal;Defect;Normal;Wrong voltage
+ab27;Normal;Defect;Defect;Normal
+ab28;Normal;Defect;Defect;Wrong voltage
+ab29;Normal;Defect;Defect;Wrong voltage
+ab30;Normal;Defect;Defect;Normal
+ab31;Normal;Defect;Defect;Wrong voltage
+ab32;Normal;Defect;Defect;Wrong voltage
+ab33;Normal;Defect;Defect;Normal
+ab34;Normal;Defect;Defect;Wrong voltage
+ab35;Normal;Defect;Defect;Wrong voltage
+ab36;Defect;Normal;Normal;Normal
+ab37;Defect;Normal;Normal;Wrong voltage
+ab38;Defect;Normal;Normal;Wrong voltage
+ab39;Defect;Normal;Defect;Normal
+ab40;Defect;Normal;Defect;Wrong voltage
+ab41;Defect;Normal;Defect;Wrong voltage
+ab42;Defect;Normal;Defect;Normal
+ab43;Defect;Normal;Defect;Wrong voltage
+ab44;Defect;Normal;Defect;Wrong voltage
+ab45;Defect;Normal;Defect;Normal
+ab46;Defect;Normal;Defect;Wrong voltage
+ab47;Defect;Normal;Defect;Wrong voltage
+ab48;Defect;Defect;Normal;Normal
+ab49;Defect;Defect;Normal;Wrong voltage
+ab50;Defect;Defect;Normal;Wrong voltage
+ab51;Defect;Defect;Defect;Normal
+ab52;Defect;Defect;Defect;Wrong voltage
+ab53;Defect;Defect;Defect;Wrong voltage
+ab54;Defect;Defect;Defect;Normal
+ab55;Defect;Defect;Defect;Wrong voltage
+ab56;Defect;Defect;Defect;Wrong voltage
+ab57;Defect;Defect;Defect;Normal
+ab58;Defect;Defect;Defect;Wrong voltage
+ab59;Defect;Defect;Defect;Wrong voltage
+ab60;Defect;Defect;Normal;Normal
+ab61;Defect;Defect;Normal;Wrong voltage
+ab62;Defect;Defect;Normal;Wrong voltage
+ab63;Defect;Defect;Defect;Normal
+ab64;Defect;Defect;Defect;Wrong voltage
+ab65;Defect;Defect;Defect;Wrong voltage
+ab66;Defect;Defect;Defect;Normal
+ab67;Defect;Defect;Defect;Wrong voltage
+ab68;Defect;Defect;Defect;Wrong voltage
+ab69;Defect;Defect;Defect;Normal
+ab70;Defect;Defect;Defect;Wrong voltage
+ab71;Defect;Defect;Defect;Wrong voltage
+ab72;Defect;Normal;Normal;Normal
+ab73;Defect;Normal;Normal;Wrong voltage
+ab74;Defect;Normal;Normal;Wrong voltage
+ab75;Defect;Normal;Defect;Normal
+ab76;Defect;Normal;Defect;Wrong voltage
+ab77;Defect;Normal;Defect;Wrong voltage
+ab78;Defect;Normal;Defect;Normal
+ab79;Defect;Normal;Defect;Wrong voltage
+ab80;Defect;Normal;Defect;Wrong voltage
+ab81;Defect;Defect;Normal;Normal
+ab82;Defect;Defect;Normal;Wrong voltage
+ab83;Defect;Defect;Normal;Wrong voltage
+ab84;Defect;Defect;Defect;Normal
+ab85;Defect;Defect;Defect;Wrong voltage
+ab86;Defect;Defect;Defect;Wrong voltage
+ab87;Defect;Defect;Defect;Normal
+ab88;Defect;Defect;Defect;Wrong voltage
+ab89;Defect;Defect;Defect;Wrong voltage
+ab90;Defect;Defect;Normal;Normal
+ab91;Defect;Defect;Normal;Wrong voltage
+ab92;Defect;Normal;Defect;Normal
+ab93;Defect;Normal;Defect;Normal
+ab94;Defect;Normal;Defect;Wrong voltage
+ab95;Defect;Normal;Defect;Wrong voltage
+ab96;Defect;Normal;Defect;Normal
+ab97;Defect;Normal;Defect;Wrong voltage
+ab98;Defect;Normal;Defect;Wrong voltage

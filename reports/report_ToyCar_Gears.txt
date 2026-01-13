@@ -6,50 +6,42 @@ Dataset: ToyCar
 === Classification Report ===
               precision    recall  f1-score   support
 
-    Deformed       0.76      0.91      0.83        74
-      Melted       0.74      0.92      0.82        79
+      Defect       0.79      0.96      0.87       153
       Normal       0.99      0.97      0.98      1139
 
-    accuracy                           0.96      1292
-   macro avg       0.83      0.93      0.88      1292
-weighted avg       0.97      0.96      0.96      1292
+    accuracy                           0.97      1292
+   macro avg       0.89      0.96      0.93      1292
+weighted avg       0.97      0.97      0.97      1292
 
 
 === Confusion Matrix ===
 Klasa: Gears
 
-Rzeczywiste \ Przewidywane	Deformed	Melted	Normal
-Deformed	67	5	2
-Melted	2	73	4
-Normal	19	20	1100
+Rzeczywiste \ Przewidywane	Defect	Normal
+Defect	147	6
+Normal	38	1101
 
 === Szczegółowe metryki ===
 
-Deformed:
-  Precision: 0.7614
-  Recall:    0.9054
-  F1-Score:  0.8272
-  Support:   74
-
-Melted:
-  Precision: 0.7449
-  Recall:    0.9241
-  F1-Score:  0.8249
-  Support:   79
+Defect:
+  Precision: 0.7946
+  Recall:    0.9608
+  F1-Score:  0.8698
+  Support:   153
 
 Normal:
   Precision: 0.9946
-  Recall:    0.9658
-  F1-Score:  0.9800
+  Recall:    0.9666
+  F1-Score:  0.9804
   Support:   1139
 
 
 Macro Average:
-  Precision: 0.8336
-  Recall:    0.9317
-  F1-Score:  0.8773
+  Precision: 0.8946
+  Recall:    0.9637
+  F1-Score:  0.9251
 
 Weighted Average:
-  Precision: 0.9660
-  Recall:    0.9598
-  F1-Score:  0.9617
+  Precision: 0.9709
+  Recall:    0.9659
+  F1-Score:  0.9673

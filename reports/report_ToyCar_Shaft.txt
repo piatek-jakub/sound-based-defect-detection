@@ -6,7 +6,7 @@ Dataset: ToyCar
 === Classification Report ===
               precision    recall  f1-score   support
 
-        Bent       1.00      1.00      1.00       106
+      Defect       1.00      1.00      1.00       106
       Normal       1.00      1.00      1.00      1186
 
     accuracy                           1.00      1292
@@ -17,13 +17,13 @@ weighted avg       1.00      1.00      1.00      1292
 === Confusion Matrix ===
 Klasa: Shaft
 
-Rzeczywiste \ Przewidywane	Bent	Normal
-Bent	106	0
+Rzeczywiste \ Przewidywane	Defect	Normal
+Defect	106	0
 Normal	0	1186
 
 === Szczegółowe metryki ===
 
-Bent:
+Defect:
   Precision: 1.0000
   Recall:    1.0000
   F1-Score:  1.0000

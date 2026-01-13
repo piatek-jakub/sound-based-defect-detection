@@ -4,26 +4,26 @@ Dataset: ToyTrain
 ============================================================
 
 === Classification Report ===
-                    precision    recall  f1-score   support
+              precision    recall  f1-score   support
 
-Chipped wheel axle       0.76      0.94      0.84       123
-            Normal       0.99      0.97      0.98      1173
+      Defect       0.76      0.94      0.84       123
+      Normal       0.99      0.97      0.98      1173
 
-          accuracy                           0.97      1296
-         macro avg       0.88      0.96      0.91      1296
-      weighted avg       0.97      0.97      0.97      1296
+    accuracy                           0.97      1296
+   macro avg       0.88      0.96      0.91      1296
+weighted avg       0.97      0.97      0.97      1296
 
 
 === Confusion Matrix ===
 Klasa: First carriage
 
-Rzeczywiste \ Przewidywane	Chipped wheel axle	Normal
-Chipped wheel axle	116	7
+Rzeczywiste \ Przewidywane	Defect	Normal
+Defect	116	7
 Normal	36	1137
 
 === Szczegółowe metryki ===
 
-Chipped wheel axle:
+Defect:
   Precision: 0.7632
   Recall:    0.9431
   F1-Score:  0.8436

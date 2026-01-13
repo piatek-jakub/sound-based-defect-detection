@@ -54,17 +54,51 @@ def load_wavs_from_dir(wav_dir, target_fs):
         file_names.append(os.path.basename(fn))
     return signals, file_names
 
-def extract_features(signal, sr=48000, n_mfcc=20):
+def extract_features(signal, sr=48000, n_mfcc=40):
+    """
+    Ekstrakcja rozszerzonych cech audio:
+    - Więcej współczynników MFCC (40 zamiast 20)
+    - Dodatkowe cechy spektralne dla lepszej charakterystyki
+    """
+    # MFCC - zwiększona liczba współczynników
     mfcc = librosa.feature.mfcc(
         y=signal, 
         sr=sr, 
         n_mfcc=n_mfcc, 
-        n_fft=1024,
+        n_fft=2048,  # Większe okno dla lepszej rozdzielczości częstotliwościowej
         hop_length=512
     )
     mfcc_mean = np.mean(mfcc, axis=1)
     mfcc_std = np.std(mfcc, axis=1)
-    return np.concatenate([mfcc_mean, mfcc_std])
+    
+    # Dodatkowe cechy spektralne
+    # Spectral centroid - środek ciężkości widma
+    spectral_centroids = librosa.feature.spectral_centroid(y=signal, sr=sr)[0]
+    
+    # Spectral rolloff - częstotliwość, poniżej której znajduje się 85% energii
+    spectral_rolloff = librosa.feature.spectral_rolloff(y=signal, sr=sr)[0]
+    
+    # Zero crossing rate - częstotliwość przejść przez zero
+    zcr = librosa.feature.zero_crossing_rate(signal)[0]
+    
+    # Chroma features - charakterystyka harmoniczna
+    chroma = librosa.feature.chroma_stft(y=signal, sr=sr)
+    
+    # Tonnetz - reprezentacja harmoniczna
+    tonnetz = librosa.feature.tonnetz(y=signal, sr=sr)
+    
+    # Łączymy wszystkie cechy
+    features = np.concatenate([
+        mfcc_mean,
+        mfcc_std,
+        [np.mean(spectral_centroids), np.std(spectral_centroids)],
+        [np.mean(spectral_rolloff), np.std(spectral_rolloff)],
+        [np.mean(zcr), np.std(zcr)],
+        np.mean(chroma, axis=1),
+        np.mean(tonnetz, axis=1)
+    ])
+    
+    return features
 
 def load_labels_from_csv(csv_path):
     """Wczytuje labele z pliku CSV i tworzy mapowanie - automatycznie wykrywa kolumny"""

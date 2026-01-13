@@ -4,52 +4,44 @@ Dataset: ToyConveyor
 ============================================================
 
 === Classification Report ===
-                   precision    recall  f1-score   support
+              precision    recall  f1-score   support
 
-Excessive tension       0.94      1.00      0.97       121
-           Normal       1.00      0.99      1.00      1551
-          Removed       0.99      0.99      0.99        88
+      Defect       0.94      0.99      0.96       209
+      Normal       1.00      0.99      0.99      1551
 
-         accuracy                           0.99      1760
-        macro avg       0.98      0.99      0.98      1760
-     weighted avg       0.99      0.99      0.99      1760
+    accuracy                           0.99      1760
+   macro avg       0.97      0.99      0.98      1760
+weighted avg       0.99      0.99      0.99      1760
 
 
 === Confusion Matrix ===
 Klasa: Tail pulley
 
-Rzeczywiste \ Przewidywane	Excessive tension	Normal	Removed
-Excessive tension	121	0	0
-Normal	8	1542	1
-Removed	0	1	87
+Rzeczywiste \ Przewidywane	Defect	Normal
+Defect	206	3
+Normal	14	1537
 
 === Szczegółowe metryki ===
 
-Excessive tension:
-  Precision: 0.9380
-  Recall:    1.0000
-  F1-Score:  0.9680
-  Support:   121
+Defect:
+  Precision: 0.9364
+  Recall:    0.9856
+  F1-Score:  0.9604
+  Support:   209
 
 Normal:
-  Precision: 0.9994
-  Recall:    0.9942
-  F1-Score:  0.9968
+  Precision: 0.9981
+  Recall:    0.9910
+  F1-Score:  0.9945
   Support:   1551
-
-Removed:
-  Precision: 0.9886
-  Recall:    0.9886
-  F1-Score:  0.9886
-  Support:   88
 
 
 Macro Average:
-  Precision: 0.9753
-  Recall:    0.9943
-  F1-Score:  0.9845
+  Precision: 0.9672
+  Recall:    0.9883
+  F1-Score:  0.9774
 
 Weighted Average:
-  Precision: 0.9946
-  Recall:    0.9943
-  F1-Score:  0.9944
+  Precision: 0.9907
+  Recall:    0.9903
+  F1-Score:  0.9904

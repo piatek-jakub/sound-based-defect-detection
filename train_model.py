@@ -20,7 +20,7 @@ import joblib
 # Parametry - ZMIEŃ TUTAJ TYP OBIEKTU
 # =========================
 # Dostępne opcje: "ToyCar", "ToyConveyor", "ToyTrain"
-subdataset = "ToyConveyor"  # <-- ZMIEŃ TUTAJ
+subdataset = "ToyTrain"  # <-- ZMIEŃ TUTAJ
 
 dataset_base = "ToyADMOS dataset"
 target_fs = 48000

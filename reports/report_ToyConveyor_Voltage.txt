@@ -6,50 +6,42 @@ Dataset: ToyConveyor
 === Classification Report ===
                precision    recall  f1-score   support
 
-       Normal       1.00      0.99      0.99      1528
- Over voltage       0.89      0.99      0.94       114
-Under voltage       0.94      0.99      0.97       118
+       Normal       1.00      0.96      0.98      1528
+Wrong voltage       0.80      0.97      0.88       232
 
-     accuracy                           0.99      1760
-    macro avg       0.94      0.99      0.97      1760
- weighted avg       0.99      0.99      0.99      1760
+     accuracy                           0.96      1760
+    macro avg       0.90      0.97      0.93      1760
+ weighted avg       0.97      0.96      0.97      1760
 
 
 === Confusion Matrix ===
 Klasa: Voltage
 
-Rzeczywiste \ Przewidywane	Normal	Over voltage	Under voltage
-Normal	1507	14	7
-Over voltage	1	113	0
-Under voltage	1	0	117
+Rzeczywiste \ Przewidywane	Normal	Wrong voltage
+Normal	1472	56
+Wrong voltage	6	226
 
 === Szczegółowe metryki ===
 
 Normal:
-  Precision: 0.9987
-  Recall:    0.9863
-  F1-Score:  0.9924
+  Precision: 0.9959
+  Recall:    0.9634
+  F1-Score:  0.9794
   Support:   1528
 
-Over voltage:
-  Precision: 0.8898
-  Recall:    0.9912
-  F1-Score:  0.9378
-  Support:   114
-
-Under voltage:
-  Precision: 0.9435
-  Recall:    0.9915
-  F1-Score:  0.9669
-  Support:   118
+Wrong voltage:
+  Precision: 0.8014
+  Recall:    0.9741
+  F1-Score:  0.8794
+  Support:   232
 
 
 Macro Average:
-  Precision: 0.9440
-  Recall:    0.9897
-  F1-Score:  0.9657
+  Precision: 0.8987
+  Recall:    0.9687
+  F1-Score:  0.9294
 
 Weighted Average:
-  Precision: 0.9879
-  Recall:    0.9869
-  F1-Score:  0.9872
+  Precision: 0.9703
+  Recall:    0.9648
+  F1-Score:  0.9662
