@@ -1,0 +1,44 @@
+============================================================
+Raport klasyfikacji - ToyCar
+============================================================
+
+=== Classification Report ===
+              precision    recall  f1-score   support
+
+     Anomaly       0.98      1.00      0.99       211
+      Normal       1.00      1.00      1.00      1081
+
+    accuracy                           1.00      1292
+   macro avg       0.99      1.00      0.99      1292
+weighted avg       1.00      1.00      1.00      1292
+
+
+=== Confusion Matrix ===
+Rzeczywiste \ Przewidywane	Anomaly	Normal
+Anomaly	211	0
+Normal	4	1077
+
+=== Szczegółowe metryki ===
+
+Anomaly:
+  Precision: 0.9814
+  Recall:    1.0000
+  F1-Score:  0.9906
+  Support:   211
+
+Normal:
+  Precision: 1.0000
+  Recall:    0.9963
+  F1-Score:  0.9981
+  Support:   1081
+
+
+Macro Average:
+  Precision: 0.9907
+  Recall:    0.9981
+  F1-Score:  0.9944
+
+Weighted Average:
+  Precision: 0.9970
+  Recall:    0.9969
+  F1-Score:  0.9969

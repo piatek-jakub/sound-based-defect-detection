@@ -1,39 +1,36 @@
 ============================================================
-Raport klasyfikacji - Shaft
-Dataset: ToyCar
+Raport klasyfikacji - ToyTrain
 ============================================================
 
 === Classification Report ===
               precision    recall  f1-score   support
 
-        Bent       1.00      1.00      1.00       106
-      Normal       1.00      1.00      1.00      1186
+     Anomaly       1.00      1.00      1.00       216
+      Normal       1.00      1.00      1.00      1080
 
-    accuracy                           1.00      1292
-   macro avg       1.00      1.00      1.00      1292
-weighted avg       1.00      1.00      1.00      1292
+    accuracy                           1.00      1296
+   macro avg       1.00      1.00      1.00      1296
+weighted avg       1.00      1.00      1.00      1296
 
 
 === Confusion Matrix ===
-Klasa: Shaft
-
-Rzeczywiste \ Przewidywane	Bent	Normal
-Bent	106	0
-Normal	0	1186
+Rzeczywiste \ Przewidywane	Anomaly	Normal
+Anomaly	216	0
+Normal	0	1080
 
 === Szczegółowe metryki ===
 
-Bent:
+Anomaly:
   Precision: 1.0000
   Recall:    1.0000
   F1-Score:  1.0000
-  Support:   106
+  Support:   216
 
 Normal:
   Precision: 1.0000
   Recall:    1.0000
   F1-Score:  1.0000
-  Support:   1186
+  Support:   1080
 
 
 Macro Average:
