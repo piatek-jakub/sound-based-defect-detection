@@ -1,0 +1,47 @@
+============================================================
+Raport klasyfikacji - Voltage
+Dataset: ToyCar
+============================================================
+
+=== Classification Report ===
+               precision    recall  f1-score   support
+
+       Normal       1.00      0.96      0.98      1131
+Wrong voltage       0.76      0.98      0.86       161
+
+     accuracy                           0.96      1292
+    macro avg       0.88      0.97      0.92      1292
+ weighted avg       0.97      0.96      0.96      1292
+
+
+=== Confusion Matrix ===
+Klasa: Voltage
+
+Rzeczywiste \ Przewidywane	Normal	Wrong voltage
+Normal	1082	49
+Wrong voltage	3	158
+
+=== Szczegółowe metryki ===
+
+Normal:
+  Precision: 0.9972
+  Recall:    0.9567
+  F1-Score:  0.9765
+  Support:   1131
+
+Wrong voltage:
+  Precision: 0.7633
+  Recall:    0.9814
+  F1-Score:  0.8587
+  Support:   161
+
+
+Macro Average:
+  Precision: 0.8803
+  Recall:    0.9690
+  F1-Score:  0.9176
+
+Weighted Average:
+  Precision: 0.9681
+  Recall:    0.9598
+  F1-Score:  0.9619

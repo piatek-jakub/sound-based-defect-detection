@@ -1,0 +1,47 @@
+============================================================
+Raport klasyfikacji - Straight railway track
+Dataset: ToyTrain
+============================================================
+
+=== Classification Report ===
+              precision    recall  f1-score   support
+
+      Defect       0.98      1.00      0.99       169
+      Normal       1.00      1.00      1.00      1127
+
+    accuracy                           1.00      1296
+   macro avg       0.99      1.00      0.99      1296
+weighted avg       1.00      1.00      1.00      1296
+
+
+=== Confusion Matrix ===
+Klasa: Straight railway track
+
+Rzeczywiste \ Przewidywane	Defect	Normal
+Defect	169	0
+Normal	3	1124
+
+=== Szczegółowe metryki ===
+
+Defect:
+  Precision: 0.9826
+  Recall:    1.0000
+  F1-Score:  0.9912
+  Support:   169
+
+Normal:
+  Precision: 1.0000
+  Recall:    0.9973
+  F1-Score:  0.9987
+  Support:   1127
+
+
+Macro Average:
+  Precision: 0.9913
+  Recall:    0.9987
+  F1-Score:  0.9949
+
+Weighted Average:
+  Precision: 0.9977
+  Recall:    0.9977
+  F1-Score:  0.9977

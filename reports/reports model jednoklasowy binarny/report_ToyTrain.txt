@@ -1,0 +1,44 @@
+============================================================
+Raport klasyfikacji - ToyTrain
+============================================================
+
+=== Classification Report ===
+              precision    recall  f1-score   support
+
+     Anomaly       1.00      1.00      1.00       216
+      Normal       1.00      1.00      1.00      1080
+
+    accuracy                           1.00      1296
+   macro avg       1.00      1.00      1.00      1296
+weighted avg       1.00      1.00      1.00      1296
+
+
+=== Confusion Matrix ===
+Rzeczywiste \ Przewidywane	Anomaly	Normal
+Anomaly	216	0
+Normal	0	1080
+
+=== Szczegółowe metryki ===
+
+Anomaly:
+  Precision: 1.0000
+  Recall:    1.0000
+  F1-Score:  1.0000
+  Support:   216
+
+Normal:
+  Precision: 1.0000
+  Recall:    1.0000
+  F1-Score:  1.0000
+  Support:   1080
+
+
+Macro Average:
+  Precision: 1.0000
+  Recall:    1.0000
+  F1-Score:  1.0000
+
+Weighted Average:
+  Precision: 1.0000
+  Recall:    1.0000
+  F1-Score:  1.0000

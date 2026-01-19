@@ -1,0 +1,47 @@
+============================================================
+Raport klasyfikacji - Tension puly
+Dataset: ToyConveyor
+============================================================
+
+=== Classification Report ===
+              precision    recall  f1-score   support
+
+      Defect       0.96      1.00      0.98       227
+      Normal       1.00      0.99      1.00      1533
+
+    accuracy                           0.99      1760
+   macro avg       0.98      1.00      0.99      1760
+weighted avg       1.00      0.99      0.99      1760
+
+
+=== Confusion Matrix ===
+Klasa: Tension puly
+
+Rzeczywiste \ Przewidywane	Defect	Normal
+Defect	227	0
+Normal	9	1524
+
+=== Szczegółowe metryki ===
+
+Defect:
+  Precision: 0.9619
+  Recall:    1.0000
+  F1-Score:  0.9806
+  Support:   227
+
+Normal:
+  Precision: 1.0000
+  Recall:    0.9941
+  F1-Score:  0.9971
+  Support:   1533
+
+
+Macro Average:
+  Precision: 0.9809
+  Recall:    0.9971
+  F1-Score:  0.9888
+
+Weighted Average:
+  Precision: 0.9951
+  Recall:    0.9949
+  F1-Score:  0.9949

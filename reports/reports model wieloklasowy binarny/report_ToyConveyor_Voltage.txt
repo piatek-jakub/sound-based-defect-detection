@@ -1,0 +1,47 @@
+============================================================
+Raport klasyfikacji - Voltage
+Dataset: ToyConveyor
+============================================================
+
+=== Classification Report ===
+               precision    recall  f1-score   support
+
+       Normal       1.00      0.96      0.98      1528
+Wrong voltage       0.80      0.97      0.88       232
+
+     accuracy                           0.96      1760
+    macro avg       0.90      0.97      0.93      1760
+ weighted avg       0.97      0.96      0.97      1760
+
+
+=== Confusion Matrix ===
+Klasa: Voltage
+
+Rzeczywiste \ Przewidywane	Normal	Wrong voltage
+Normal	1472	56
+Wrong voltage	6	226
+
+=== Szczegółowe metryki ===
+
+Normal:
+  Precision: 0.9959
+  Recall:    0.9634
+  F1-Score:  0.9794
+  Support:   1528
+
+Wrong voltage:
+  Precision: 0.8014
+  Recall:    0.9741
+  F1-Score:  0.8794
+  Support:   232
+
+
+Macro Average:
+  Precision: 0.8987
+  Recall:    0.9687
+  F1-Score:  0.9294
+
+Weighted Average:
+  Precision: 0.9703
+  Recall:    0.9648
+  F1-Score:  0.9662

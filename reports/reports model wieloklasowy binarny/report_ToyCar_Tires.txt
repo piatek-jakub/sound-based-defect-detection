@@ -1,0 +1,47 @@
+============================================================
+Raport klasyfikacji - Tires
+Dataset: ToyCar
+============================================================
+
+=== Classification Report ===
+              precision    recall  f1-score   support
+
+      Defect       0.96      0.98      0.97       155
+      Normal       1.00      0.99      1.00      1137
+
+    accuracy                           0.99      1292
+   macro avg       0.98      0.99      0.98      1292
+weighted avg       0.99      0.99      0.99      1292
+
+
+=== Confusion Matrix ===
+Klasa: Tires
+
+Rzeczywiste \ Przewidywane	Defect	Normal
+Defect	152	3
+Normal	6	1131
+
+=== Szczegółowe metryki ===
+
+Defect:
+  Precision: 0.9620
+  Recall:    0.9806
+  F1-Score:  0.9712
+  Support:   155
+
+Normal:
+  Precision: 0.9974
+  Recall:    0.9947
+  F1-Score:  0.9960
+  Support:   1137
+
+
+Macro Average:
+  Precision: 0.9797
+  Recall:    0.9877
+  F1-Score:  0.9836
+
+Weighted Average:
+  Precision: 0.9931
+  Recall:    0.9930
+  F1-Score:  0.9931

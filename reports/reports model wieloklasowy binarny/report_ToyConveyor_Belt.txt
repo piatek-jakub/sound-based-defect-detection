@@ -1,0 +1,47 @@
+============================================================
+Raport klasyfikacji - Belt
+Dataset: ToyConveyor
+============================================================
+
+=== Classification Report ===
+              precision    recall  f1-score   support
+
+      Defect       0.78      0.99      0.88       241
+      Normal       1.00      0.96      0.98      1519
+
+    accuracy                           0.96      1760
+   macro avg       0.89      0.97      0.93      1760
+weighted avg       0.97      0.96      0.96      1760
+
+
+=== Confusion Matrix ===
+Klasa: Belt
+
+Rzeczywiste \ Przewidywane	Defect	Normal
+Defect	239	2
+Normal	66	1453
+
+=== Szczegółowe metryki ===
+
+Defect:
+  Precision: 0.7836
+  Recall:    0.9917
+  F1-Score:  0.8755
+  Support:   241
+
+Normal:
+  Precision: 0.9986
+  Recall:    0.9566
+  F1-Score:  0.9771
+  Support:   1519
+
+
+Macro Average:
+  Precision: 0.8911
+  Recall:    0.9741
+  F1-Score:  0.9263
+
+Weighted Average:
+  Precision: 0.9692
+  Recall:    0.9614
+  F1-Score:  0.9632
