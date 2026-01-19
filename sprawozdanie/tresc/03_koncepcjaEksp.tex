@@ -1,0 +1,46 @@
+\section{Koncepcja części eksperymentalnej}
+\subsection{Dane wejściowe}
+Danymi wejściowymi w projekcie są krótkie nagrania dźwiękowe o określonej długości, przedstawiające pracę wybranego urządzenia (np. zabawkowego samochodu, przenośnika taśmowego czy miniaturowego pociągu). Każde nagranie pochodzi z zestawu danych, który obejmuje zarówno:
+\begin{itemize}
+    \item nagrania przedstawiające normalną pracę urządzenia,
+    \item nagrania zarejestrowane w sytuacji wystąpienia usterki.
+\end{itemize}
+Każda z usterek powiązana jest z konkretnymi parametrami pracy urządzenia, takimi jak napięcie zasilania, stan elementów mechanicznych czy stopień zużycia podzespołów.
+Przed wykorzystaniem w modelu pliki audio zostaną poddane wstępnemu przetwarzaniu. Obejmuje ono m.in. zastosowanie transformacji Fouriera, która pozwala przekształcić sygnał czasowy w spektrogram.
+
+\subsection{Analizowane wyniki}
+Dane wyjściowe modelu to predykcja stanu urządzenia oparta na analizie dźwięku. Predykcja ma charakter:
+\begin{itemize}
+    \item wieloklasowy – model wybiera jedną z kilku możliwych klas, np. „normalny”, „usterka typu A”, „usterka typu B” itd.,
+    \item wieloparametrowy – model w tym samym czasie ocenia wiele aspektów działania urządzenia.
+\end{itemize}
+Każdy model wykonuje klasyfikację wartości parametrów takich jak:
+\begin{itemize}
+    \item stan mechaniczny (np. wał, koła, taśma, napęd),
+    \item obecność obcych obiektów (np. metallic object),
+    \item stan napięcia (under-voltage, normal, over-voltage),
+    \item inne cechy charakterystyczne dla konkretnego urządzenia.
+\end{itemize}
+Oznacza to, że model generuje wiele predykcji równolegle, a każda z nich odnosi się do innego aspektu działania maszyny.
+
+\subsection{Ocena poprawności działania modelu}
+Ponieważ system jednocześnie ocenia wiele parametrów, do weryfikacji jego skuteczności konieczne jest użycie zestawu różnych kryteriów.
+\begin{enumerate}
+    \item Macierz konfuzji (Confusion Matrix) \newline
+    Dla każdego parametru generowana jest osobna macierz konfuzji, która pozwala ocenić:
+    \begin{itemize}
+        \item ile klasyfikacji było poprawnych,
+        \item jakie błędy popełnił model (pomyłki typu FP i FN),
+        \item które klasy okazały się najtrudniejsze do rozpoznania,
+        \item czy model ma tendencję do dominującej klasy („bias”).
+    \end{itemize}
+    
+    \item Precision, Recall, F-measure \newline
+    Dla każdej cechy urządzenia wyliczony zostaje zestaw metryk:
+    \begin{itemize}
+        \item Precision – jak często model się nie myli, kiedy zgłasza daną usterkę,
+        \item Recall – jak wiele faktycznie występujących usterek wykrywa,
+        \item F-measure – miara łącząca oba poprzednie wskaźniki, pokazująca zależność między precyzją, a skutecznością wykryć.
+    \end{itemize}
+
+\end{enumerate}

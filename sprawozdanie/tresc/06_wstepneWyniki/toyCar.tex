@@ -1,0 +1,45 @@
+
+\subsection{ToyCar}
+Zbiór ToyCar zawiera nagrania zabawkowego samochody. Model klasyfikuje cztery atrybuty: Shaft (wał), Gears (przekładnie), Tires (opony) oraz Voltage (napięcie zasilania).
+
+\subsubsection{Shaft (Wał)}
+Klasyfikacja stanu wału osiągnęła niemal idealne wyniki z dokładnością 99\%. Model praktycznie zawsze rozróżnia wał zgięty (Bent) od normalnego stanu pracy.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyCar_Shaft.png}
+    \caption{Raport klasyfikacji atrybutu Shaft dla zbioru ToyCar}
+    \label{fig:toycar_shaft}
+\end{figure}
+
+\newpage
+
+\subsubsection{Gears (Przekładnie)}
+Klasyfikacja stanu przekładni okazała się najtrudniejszym zadaniem w zbiorze ToyCar. Ogólna dokładność wynosi 93\%, jednak metryki dla klas w których występuje defekt są znacznie niższe. Klasa ``Deformed'' osiąga F1-Score 0.56, a ``Melted'' -- 0.58. Macierz konfuzji pokazuje, że klasy te są często mylone ze sobą oraz z klasą ``Normal''.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{reports/report_ToyCar_Gears.png}
+    \caption{Raport klasyfikacji atrybutu Gears dla zbioru ToyCar}
+    \label{fig:toycar_gears}
+\end{figure}
+
+\subsubsection{Tires (Opony)}
+Klasyfikacja stanu opon osiągnęła bardzo dobre wyniki z dokładnością 99\%. Niewielkie pomyłki występują między klasami ``Coiled (plastic ribbon)'' i ``Coiled (steel ribbon)''.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{reports/report_ToyCar_Tires.png}
+    \caption{Raport klasyfikacji atrybutu Tires dla zbioru ToyCar}
+    \label{fig:toycar_tires}
+\end{figure}
+
+\subsubsection{Voltage (Napięcie)}
+Klasyfikacja napięcia zasilania osiąga dokładność 96\%. Stan normalny jest rozpoznawany z bardzo wysoką skutecznością (F1-Score 0.98). Klasy ``Over voltage'' i ``Under voltage'' mają niższe metryki -- odpowiednio F1-Score 0.83 i 0.79. Zauważalna jest tendencja do klasyfikowania przypadków ``Under voltage'' jako ``Normal'', ale nie w drugą stronę.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyCar_Voltage.png}
+    \caption{Raport klasyfikacji atrybutu Voltage dla zbioru ToyCar}
+    \label{fig:toycar_voltage}
+\end{figure}

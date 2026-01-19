@@ -1,0 +1,23 @@
+\section{Opis problemu}
+Współczesne systemy diagnostyczne coraz częściej wykorzystują analizę dźwięku jako jedno z kluczowych narzędzi do oceny stanu technicznego urządzeń. Metody akustyczne pozwalają na wykrywanie anomalii oraz wczesne diagnozowanie uszkodzeń bez konieczności ingerencji w strukturę maszyny. Analiza sygnałów dźwiękowych jest szczególnie istotna w przypadku urządzeń mechanicznych o złożonej dynamice pracy, gdzie nawet niewielkie odchylenia od normy mogą świadczyć o powstawaniu usterek.
+
+Projekt „Detekcja uszkodzeń na bazie dźwięków” koncentruje się na opracowaniu systemu rozpoznawania cech obiektów oraz identyfikacji ich potencjalnych uszkodzeń na podstawie emitowanych dźwięków. Dane wejściowe pochodzą z publicznie dostępnego ToyADMOS Dataset, obejmującego nagrania dźwięków różnych zabawek mechanicznych, takich jak toy car, toy train, toy conveyor, toy plane oraz innych urządzeń wykonujących stałe, powtarzalne ruchy.
+
+Zbiór danych zawiera zarówno nagrania przedstawiające pracujące poprawnie obiekty, jak i takie, które zawierają celowo wprowadzone uszkodzenia lub anomalie pracy. Dzięki temu możliwe jest zbudowanie i przetrenowanie modeli uczenia maszynowego zdolnych do: 
+\begin{itemize}
+    \item klasyfikacji rodzaju obiektu na podstawie jego charakterystyk akustycznych,
+    \item wykrywania odstępstw od normalnej pracy,
+    \item rozpoznawania typu uszkodzenia lub anomalii w strukturze sygnału audio.
+\end{itemize}
+
+Głównym celem projektu jest opracowanie systemu zdolnego do automatycznego rozpoznawania różnych cech obiektów z datasetu ToyADMOS na podstawie ich dźwięków, a w szczególności odróżnianie pracy poprawnej od pracy anormalnej. Aby osiągnąć ten cel, konieczne jest przetworzenie sygnałów audio, ekstrakcja cech (np. MFCC, spektrogramy, cechy czasowo-częstotliwościowe), a następnie budowa i trening odpowiednich modeli analitycznych.
+
+Problem, który staramy się rozwiązać, polega na tym, że różne obiekty mogą generować dźwięki o bardzo podobnym charakterze, szczególnie przy niskim poziomie SNR oraz w warunkach naturalnych. Co więcej, anomalie nie zawsze są jednoznacznie słyszalne, a ich identyfikacja wymaga zaawansowanej analizy widma i dynamiki sygnału. Opracowany system powinien więc potrafić wychwycić subtelne różnice w strukturze dźwięku, które nie są łatwe do wykrycia metodami tradycyjnego odsłuchu.
+
+Rozwiązanie tego problemu ma znaczenie zarówno edukacyjne, jak i praktyczne. Z punktu widzenia przemysłu systemy diagnostyki akustycznej znajdują zastosowanie w predykcyjnym utrzymaniu ruchu, automatycznej kontroli jakości, a także w robotyce i IoT. Projekt pozwala również na zapoznanie się z technikami uczenia maszynowego stosowanymi w detekcji anomalii oraz klasyfikacji sygnałów dźwiękowych, z wykorzystaniem rzeczywistego i dobrze przygotowanego zestawu danych.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{screeny/x1.png}
+    \caption{Fizyczna realizacja obiektów, na bazie których utworzono zbiór ToyADMOS}
+\end{figure}

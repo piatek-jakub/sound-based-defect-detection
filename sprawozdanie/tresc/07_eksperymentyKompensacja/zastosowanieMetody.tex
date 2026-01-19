@@ -1,0 +1,16 @@
+\subsection{Zastosowane metody kompensacji klas niezbalansowanych}
+W ramach niniejszej sekcji wprowadzono szereg modyfikacji mających na celu ograniczenie negatywnego wpływu niezbalansowania klas na skuteczność klasyfikacji:
+\begin{itemize}
+    \item \textbf{Ważenie klas w procesie uczenia} - podstawową metodą kompensacji niezbalansowania klas było zastosowanie mechanizmu ważenia klas (\textit{class weighting}) w modelu regresji logistycznej. Wykorzystano parametr \texttt{class\_weight='balanced'}, który powoduje automatyczne obliczanie wag klas w sposób odwrotnie proporcjonalny do liczby próbek danej klasy. W rezultacie błędy popełniane na klasach mniejszościowych miały większy wpływ na wartość funkcji kosztu, co sprzyjało poprawie czułości modelu względem rzadkich stanów uszkodzeń.
+    \item \textbf{Rozszerzenie przestrzeni cech akustycznych} - wstępne eksperymenty wykazały ograniczoną skuteczność samego ważenia klas, dlatego wprowadzono dodatkowe ulepszenia polegające na rozszerzeniu zbioru cech audio. Zwiększono liczbę współczynników MFCC do 40 oraz zastosowano większe okno transformaty FFT. Ponadto uwzględniono dodatkowe cechy spektralne, takie jak \textit{spectral centroid}, \textit{spectral rolloff}, \textit{zero crossing rate}, cechy chromatyczne oraz reprezentację harmoniczną \textit{Tonnetz}. W efekcie liczba cech opisujących pojedynczą próbkę wzrosła ponad dwukrotnie, co umożliwiło lepsze odwzorowanie subtelnych różnic pomiędzy poszczególnymi stanami urządzenia.
+    \item \textbf{Dostrojenie parametrów modelu i progów decyzyjnych} -dostrojono parametry modelu regresji logistycznej, w tym współczynnika regularyzacji oraz maksymalnej liczby iteracji algorytmu optymalizacyjnego. Dodatkowo zastosowano procedurę dostrajania progów decyzyjnych, której celem było uzyskanie lepszej równowagi pomiędzy precyzją a czułością dla klas mniejszościowych. Podejście to umożliwiło zwiększenie skuteczności wykrywania rzadkich defektów przy jednoczesnym ograniczeniu liczby fałszywych alarmów.
+\end{itemize}
+
+Dodatkowo, utworzono trzy modele z zróżnicowaną zdolnością klasyfikacji:
+\begin{itemize}
+    \item Model wieloklasowy wielokryterialny - model klasyfikujący w ten sam sposób, co model z wstępnego eksperymentu, lecz z zastosowanymi metodami kompensacji klas niezbalansowanych - każda predykcja opiera się na określeniu stanu każdego z elementów, gdzie każdy element potrafi mieć nawet kilka możliwych anomalii,
+    \item Model wieloklasowy binarny - model, w którym każda predykcja opiera się na określeniu stanu każdego z elementów urządzenia mechanicznego, ale w sposób binarny (Dobry/Wadliwy),
+    \item Model jednoklasowy binarny - model opiera swoją predykcję o binarną analizę systemu jako całości (działa poprawnie lub jest awaria gdziekolwiek w systemie). Z uwagi na charakter modelu, ocena poprawności działania modelu opierać się będzie na całych zbiorach, a nie jedynie na 3 klasach wybranych do eksperymentów w przedstawionej sekcji.
+\end{itemize}
+
+Zastosowane modyfikacje miały na celu poprawę jakości klasyfikacji w szczególności dla klas rzadkich, co powinno przejawiać się wzrostem wartości \textit{recall} oraz \textit{Macro F1-score}, zmniejszeniem różnicy pomiędzy średnimi typu \textit{macro} i \textit{weighted}, a także ogólną poprawą zdolności modelu do detekcji rzadko występujących stanów uszkodzeń.

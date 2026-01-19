@@ -1,0 +1,14 @@
+\subsection{Anomalous sound detection using CNN-based models and ensemble \cite{tanaka2023anomalous}}
+Autorzy pracy badają wykorzystanie technik przetwarzania obrazów oraz klasyfikacji pomocniczej, aby polepszyć skuteczność detekcji w systemach monitorowania akustycznego.
+
+Autorzy proponują cztery główne podejścia:
+\begin{enumerate}
+    \item \textbf{Detekcja anomalii na podstawie spektrogramów} z użyciem modelu ResNet18 jako ekstraktora cech. Anomalia oceniana jest poprzez obliczenie odległości Mahalanobisa od rozkładu cech pochodzących z danych normalnych. W procesie trenowania stosowane są augmentacje typowe dla analizy obrazów, takie jak maskowanie czasowe i częstotliwościowe.
+    \item \textbf{Metoda inpainting} inspirowana rozwiązaniami wykorzystywanymi w rekonstrukcji fragmentów obrazów (InTra). Model uczy się odtwarzania zmaskowanych fragmentów spektrogramów, a średni błąd rekonstrukcji pełni funkcję wskaźnika anomalii. Podejście to okazało się konkurencyjne wobec metod bazowych.
+    \item \textbf{Klasyfikacja ustawień maszyny}. Autorzy zauważają, że w danych DCASE można wyróżnić różne ustawienia operacyjne maszyn (np. prędkość, napięcie). Dlatego proponują model autoenkodera, który jednocześnie rekonstruuje części obrazu i przewiduje ustawienie maszyny, poprawiając jakość reprezentacji wykorzystywanej do detekcji anomalii.
+    \item \textbf{Metoda ensemble} dla nowych typów maszyn, w której wynik detektora tworzony jest jako kombinacja wagowa rezultatów modeli wytrenowanych wcześniej dla innych maszyn. Wagi są określane na podstawie klasyfikatora typu maszyny, interpretowanego jako miara podobieństwa między maszynami.
+\end{enumerate}
+
+Wyniki eksperymentalne pokazują, że niektóre z proponowanych metod – zwłaszcza podejście rekonstrukcyjne oraz modele wielozadaniowe – osiągają wyższą skuteczność niż systemy bazowe DCASE dla wybranych kategorii maszyn. Metoda ensemble daje rezultaty mieszane, jednak stanowi ciekawy kierunek dla zastosowań, w których dostęp do danych treningowych jest ograniczony.
+
+Praca wskazuje, że przeniesienie technik z analizy obrazu na grunt analizy akustycznej poprzez reprezentację spektrogramową może istotnie poprawiać wyniki detekcji anomalii, a metody rekonstrukcyjne i klasyfikacyjne mogą zwiększać ogólną jakość systemów monitorowania stanu technicznego.

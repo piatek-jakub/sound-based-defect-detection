@@ -1,0 +1,6 @@
+\subsection{Podsumowanie i analiza wstępnych wyników}
+Z uwagi na niezbalansowaną strukturę zbioru danych uzyskane wyniki należy interpretować z ostrożnością, w szczególności w przypadku atrybutów o wielu klasach decyzyjnych. Najwyższe wartości miar jakości klasyfikacji osiągnięto dla atrybutów binarnych, charakteryzujących się wyraźnie odróżnialnymi stanami pracy urządzenia, takich jak \textit{Shaft} oraz \textit{Last carriage}. W tych przypadkach model był w stanie skutecznie rozróżniać pomiędzy stanem normalnym a stanem uszkodzenia.
+
+Trudniejsze okazały się atrybuty obejmujące wiele klas anomalnych o zbliżonych charakterystykach akustycznych, w szczególności \textit{Gears}, \textit{Belt} oraz \textit{Curved railway track}. Wysoki stopień niezbalansowania klas w połączeniu z dużym podobieństwem sygnałów dźwiękowych pomiędzy poszczególnymi stanami uszkodzeń prowadził do obniżenia wartości miar takich jak \textit{recall} oraz \textit{F1-score} dla klas rzadkich.
+
+Uzyskane rezultaty wskazują, że w przypadku wymienionych atrybutów zastosowanie metod radzenia sobie z niezbalansowaniem klas jest w praktyce niezbędne do dalszej poprawy jakości predykcji. Z tego względu w kolejnym rozdziale przedstawione zostaną wybrane techniki kompensacji niezbalansowania klas oraz ich wpływ na skuteczność działania zaproponowanego systemu.

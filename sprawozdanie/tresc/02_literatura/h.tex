@@ -1,0 +1,11 @@
+\subsection{Anomalous Sound Detection Based on Machine Activity Detection\cite{nishida2022anomaloussounddetectionbased}}
+
+Autorzy proponują nowatorskie podejście do nienadzorowanej detekcji anomalii (UASD), które wykorzystuje zadanie pomocnicze polegające na wykrywaniu momentów aktywności maszyny (active/inactive). Metoda ta została opracowana, aby rozwiązać problem spadku skuteczności systemów monitorowania w warunkach przemysłowych, gdzie szum otoczenia jest często zbliżony charakterystyką do dźwięku samej maszyny.
+
+Zasada działania opiera się na treningu modelu klasyfikującego ramki czasowe jako "aktywne" lub "nieaktywne" na podstawie danych normalnych. Rozróżniono dwa scenariusze wnioskowania:
+\begin{itemize}
+    \item \textbf{UASD-SAD (z etykietami):} Gdy etykiety aktywności są dostępne podczas testów, jako miarę anomalii wykorzystuje się błąd detekcji aktywności (funkcja straty entropii krzyżowej). Anomalne dźwięki powodują błędną klasyfikację stanu maszyny, generując wysoki wynik błędu.
+    \item \textbf{UASD-OD-SAD (bez etykiet):} Gdy etykiety nie są dostępne, model służy jako ekstraktor cech. Wektory osadzeń (embeddings) z modelu detekcji aktywności są przekazywane do detektora wartości odstających (np. GMM), który wyznacza wynik anomalii.
+\end{itemize}
+
+Eksperymenty przeprowadzone na zbiorze MIMII DUE (Slide rail) wykazały, że proponowane podejście przewyższa konwencjonalne metody oparte na autoenkoderach, szczególnie w warunkach niskiego stosunku sygnału do szumu (SNR) oraz wysokiego podobieństwa szumu do sygnału użytecznego. Autorzy wykazali również, że metoda ta działa komplementarnie do rozwiązań standardowych, a najlepsze rezultaty osiąga się poprzez ich połączenie (ensemble).

@@ -1,0 +1,19 @@
+\subsection{Anomalous sound event detection: A survey of machine learning based methods and applications\cite{Mnasri2021}}
+
+Artykuł stanowi kompleksowy przegląd metod i zastosowań w dziedzinie wykrywania anomalnych zdarzeń dźwiękowych (ASED – Anomalous Sound Event Detection). Autorzy systematyzują wiedzę obejmującą publikacje do 2021 roku, koncentrując się na wyzwaniach związanych z rzadkością występowania anomalii oraz trudnościami w ich jednoznacznym zdefiniowaniu w porównaniu do standardowej detekcji zdarzeń akustycznych (SED).
+
+W pracy przedstawiono taksonomię metod modelowania, dzieląc je na trzy główne kategorie:
+\begin{itemize}
+    \item \textbf{Metody generatywne} – oparte na klasycznych modelach statystycznych, takich jak GMM (Gaussian Mixture Models) i HMM (Hidden Markov Models), które modelują rozkład prawdopodobieństwa normalnych danych akustycznych,
+    \item \textbf{Metody dyskryminacyjne} – wykorzystujące techniki takie jak jednoklasowe maszyny wektorów nośnych (OC-SVM), które uczą się wyznaczać granicę decyzyjną oddzielającą dane normalne od odstających (outliers),
+    \item \textbf{Metody oparte na uczeniu głębokim} – obejmujące podejścia nadzorowane (CNN, CRNN), pół-nadzorowane (GAN) oraz nienadzorowane (Autoenkodery, VAE, WaveNet). Szczególną uwagę poświęcono metodom opartym na rekonstrukcji sygnału, gdzie anomalia jest wykrywana na podstawie wysokiego błędu rekonstrukcji generowanego przez model wytrenowany wyłącznie na danych prawidłowych.
+\end{itemize}
+
+W kontekście inżynierii cech, autorzy zauważają wyraźną ewolucję od ręcznie dobieranych deskryptorów niskopoziomowych (takich jak MFCC, ZCR, czy parametry spektralne MPEG-7) w stronę reprezentacji uczonych automatycznie (feature learning/embedding) przy użyciu głębokich sieci neuronowych, często z wykorzystaniem transfer learningu z dziedziny przetwarzania obrazów (analiza spektrogramów).
+
+Kluczowe wnioski i wyzwania zidentyfikowane w przeglądzie:
+\begin{itemize}
+    \item \textbf{Nierównowaga danych (Data Scarcity)} – główną barierą w rozwoju ASED jest brak wystarczającej liczby próbek anomalnych. Autorzy wskazują na konieczność rozwoju technik augmentacji danych oraz metod few-shot learning, które pozwalają na trenowanie modeli na bardzo ograniczonej liczbie przykładów błędów.
+    \item \textbf{Obszary zastosowań} – przegląd potwierdza dominację zastosowań w monitoringu przemysłowym (diagnostyka maszyn, zbiory ToyADMOS i MIMII) oraz nadzorze audio (audio surveillance), ale wskazuje również na rosnące znaczenie w opiece zdrowotnej (analiza dźwięków oddechowych i serca).
+    \item \textbf{Ewaluacja} – autorzy podnoszą kwestię adekwatności metryk. W przypadku silnie niezbalansowanych zbiorów standardowe miary (jak Accuracy) mogą być mylące, dlatego rekomendowane jest stosowanie AUC (Area Under ROC Curve) oraz p-AUC (partial-AUC) dla niskich wartości False Positive Rate, co jest kluczowe w systemach przemysłowych unikających fałszywych alarmów.
+\end{itemize}

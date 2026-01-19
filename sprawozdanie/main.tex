@@ -1,0 +1,114 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{tikz}
+\usepackage{xfrac}
+\usepackage{geometry}
+\pgfplotsset{compat=newest}
+\usepackage[table]{colortbl}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{polski}
+\usepackage{multirow}
+\usepackage[english, polish]{babel}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{placeins}
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+\newgeometry{tmargin=1cm, bmargin=2cm, lmargin=1.2cm, rmargin=1.2cm}
+
+\title{\textbf{Projekt \\\vspace{5mm} \Huge Detekcja uszkodzeń na bazie dźwięków } \\
+\vspace{25mm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.55]{pwrl.png}
+    \label{fig:pwr}
+\end{figure} 
+\vspace{5mm}
+\Large{Projekt przejściowy} \\ \large{Czwartek 17:05}}
+\author{Jakub Piątek 263480\\ Karolina Nowak 263436 \\ Kacper Malinowski 263518 \\ Dawid Różański 263524}
+
+\begin{document}
+\maketitle
+\newpage
+\vspace{35mm}
+\tableofcontents
+
+\newpage
+\input{tresc/01_opisProblemu}
+
+\newpage
+\input{tresc/02_literatura/02_literatura}
+
+\newpage
+\input{tresc/03_koncepcjaEksp}
+
+\newpage
+\input{tresc/04_analizaDanych}
+
+\newpage
+\input{tresc/05_wstepnaArchitektura}
+
+\newpage
+\input{tresc/06_wstepneWyniki/06_wstepneWyniki}
+
+\newpage
+\input{tresc/07_eksperymentyKompensacja/07_eksperymentyKompensacja}
+
+\newpage
+\input{tresc/08_wnioski}
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{Bibliography.bib}
+
+\end{document}
+
+
+
+

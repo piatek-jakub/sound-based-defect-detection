@@ -1,0 +1,16 @@
+\subsection{Machine learning based approach for automatic defect detection and classification in adhesive joints\cite{SMAGULOVA2024103221}} 
+Artykuł dotyczy automatycznej detekcji i klasyfikacji defektów w złączach klejonych, wykorzystując ultradźwięki (ultrasonic pulse-echo) połączone z metodami uczenia maszynowego. Celem jest wykrycie obecności defektu oraz określenie głębokości defektu w materiale. 
+\begin{itemize}
+    \item Na etapie ekstrakcji cech: z danych ultradźwiękowych (ultrasonic pulse-echo) wyodrębniono 32 cechy
+    \item Jako klasyfikator zastosowano Support Vector Machine (SVM)
+    \item Dane były klasyfikowane w dwóch kategoriach: Defekt lub brak defektu oraz głębokości 1, 2 lub 3
+    \item Do testów użyto różnych podzbiorów cech: „initial”, „single interface”, „minimised”, „tree-based”, „recursive”, „sequential”, „LDA” (Linear Discriminant Analysis) do redukcji albo transformacji cech. 
+\end{itemize}
+Dla klasyfikacji binarnej („defekt vs. brak defektu”): model mający 32 cech osiągnął ponad 90\% dokładności na danych treningowych oraz 83\% na danych testowych.
+
+Dla klasyfikacji głębokości defektu na danych testowych przy użyciu recursive feature subset osiągnięto:
+ok. 97\% dokładności dla głębokości 1 
+ok. 62\% dokładności dla głębokości 2
+ok. 91\% dokładności dla głębokości 3
+
+Wnioski autorów pokazują, że ML-model może skutecznie rozróżniać defekty i nawet klasyfikować ich głębokość w materiale, ale także wskazują na ograniczenia - trudniej jest klasyfikować pośredni poziom głębokości defektu, co może wynikać z mniejszej separowalności cech lub mniejszej liczby przykładów.

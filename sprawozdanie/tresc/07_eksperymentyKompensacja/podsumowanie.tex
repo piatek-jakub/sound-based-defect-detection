@@ -1,0 +1,27 @@
+\subsection{Podsumowanie i analiza wyników po kompensacji klas niezbalansowanych}
+\subsubsection{Model wieloklasowy wielokryterialny}
+\begin{itemize}
+    \item Zastosowane metody kompensacji klas niezbalansowanych doprowadziły do istotnej poprawy jakości klasyfikacji we wszystkich analizowanych zbiorach danych. Największe korzyści zaobserwowano dla klas mniejszościowych reprezentujących różne rodzaje anomalii, które przed wprowadzeniem modyfikacji charakteryzowały się niską czułością oraz niestabilnymi wynikami.
+    \item W przypadku zbioru \textit{Gears} odnotowano wyraźny wzrost wartości miary \textit{recall} dla klas \textit{Deformed} oraz \textit{Melted} (odpowiednio z 0.57 do 0.91 oraz z 0.49 do 0.92), co świadczy o znacznie lepszej zdolności modelu do wykrywania rzadkich stanów uszkodzeń. Jednocześnie utrzymano bardzo wysoką skuteczność klasyfikacji klasy \textit{Normal}, co potwierdza brak negatywnego wpływu wprowadzonych zmian na klasę dominującą.
+    \item Analogiczny trend zaobserwowano dla zbioru \textit{Belt}, gdzie nastąpiła istotna poprawa czułości dla klas anormalnych \textit{Attached metallic object 2} oraz \textit{Attached metallic object 3}. Wartości miary \textit{recall} wzrosły odpowiednio z 0.76 do 0.94 oraz z 0.56 do 0.92, co przełożyło się na znaczący wzrost miary F1 oraz średniej makro, szczególnie istotnej w kontekście danych niezbalansowanych.
+    \item Dla zbioru \textit{Curved railway track} poprawa jakości klasyfikacji objęła wszystkie klasy anomalii, czego potwierdzeniem jest wzrost miary F1 dla klas \textit{Broken}, \textit{Disjointed} oraz \textit{Obstructing stone}. Model po modyfikacjach osiągnął bardzo wysoką wartość dokładności ogólnej (0.98) oraz wyraźnie lepszą średnią makro w porównaniu do wyników sprzed kompensacji.
+    \item We wszystkich przypadkach zaobserwowano istotny wzrost wartości średniej makro miary F1, co wskazuje na bardziej zrównoważone traktowanie wszystkich klas przez model. Potwierdza to skuteczność zastosowanych technik kompensacji niezbalansowania klas, w szczególności ważenia klas oraz rozszerzenia przestrzeni cech akustycznych.
+\end{itemize}
+
+Uzyskane wyniki pokazują, że mimo zachowania wieloklasowego charakteru problemu, odpowiednie dostosowanie procesu uczenia pozwala znacząco poprawić wykrywalność rzadkich anomalii bez istotnego pogorszenia jakości klasyfikacji stanów normalnych.
+
+\subsubsection{Model wieloklasowy binarny}
+\begin{itemize}
+    \item Dla zbioru \textit{Gears} model binarny osiągnął bardzo wysoką czułość klasy \textit{Defect} (0.96), co oznacza znaczącą poprawę zdolności wykrywania uszkodzeń w porównaniu do modelu wieloklasowego. Jednocześnie utrzymano wysoką precyzję i czułość dla klasy \textit{Normal}, co przełożyło się na wzrost dokładności ogólnej do poziomu 0.97.
+    \item Dla zbioru \textit{Belt} przejście na klasyfikację binarną przyniosło jedynie nieznaczną poprawę wyników w porównaniu do modelu wieloklasowego. Osiągnięto bardzo wysoką czułość klasy \textit{Defect} (0.99), jednak kosztem obniżenia precyzji, co sugeruje większą liczbę fałszywych alarmów w tym wariancie modelu.
+    \item W przypadku zbioru \textit{Curved railway track} zaobserwowano największą poprawę jakości klasyfikacji. Model binarny osiągnął niemal idealne wyniki dla obu klas, z miarą F1 równą 0.97 dla klasy \textit{Defect} oraz 0.99 dla klasy \textit{Normal}. Wskazuje to, że w tym scenariuszu detekcja samego faktu wystąpienia anomalii jest znacznie łatwiejsza niż jej szczegółowa kategoryzacja.
+\end{itemize}
+Porównanie wyników modeli wieloklasowych i binarnych wskazuje, że scalenie klas anomalii prowadzi do dalszej poprawy skuteczności detekcji defektów, szczególnie w zbiorach o silnym niezbalansowaniu i relatywnie jednorodnych cechach akustycznych anomalii. Jednocześnie podejście to eliminuje możliwość rozróżniania poszczególnych typów uszkodzeń, co stanowi istotne ograniczenie z punktu widzenia diagnostyki przyczynowej.
+
+\subsubsection{Model jednoklasowy binarny}
+\begin{itemize}
+    \item Dla wszystkich analizowanych zbiorów danych (\textit{ToyCar}, \textit{ToyConveyor} oraz \textit{ToyTrain}) model osiągnął niemal idealne wyniki klasyfikacji. Wartości miar \textit{precision}, \textit{recall} oraz \textit{F1-score} dla obu klas wyniosły w większości przypadków 1.00, a dokładność ogólna osiągnęła poziom 1.00.
+    \item Uzyskane rezultaty wskazują, że przy tak dużej liczbie próbek oraz wyraźnej separowalności cech akustycznych pomiędzy stanami normalnymi i anormalnymi, nawet przy wydzieleniu 20\% danych do zbioru testowego model jest w stanie niemal bezbłędnie wykrywać obecność anomalii w systemie.
+    \item Należy jednak podkreślić, że tak wysoka skuteczność wynika w dużej mierze z uproszczenia problemu klasyfikacji oraz globalnego charakteru etykiet. Model nie rozróżnia typów ani źródeł anomalii, a jedynie sygnalizuje fakt wystąpienia nieprawidłowości gdziekolwiek w systemie.
+    \item W konsekwencji, omawiany wariant modelu może być szczególnie przydatny w systemach monitoringu i wczesnego ostrzegania, gdzie kluczowe znaczenie ma szybkie i niezawodne wykrycie stanu awaryjnego. Jednocześnie jego zastosowanie w zaawansowanej diagnostyce technicznej jest ograniczone ze względu na brak informacji o charakterze oraz lokalizacji defektu.
+\end{itemize}

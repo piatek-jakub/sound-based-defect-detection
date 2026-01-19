@@ -1,0 +1,26 @@
+\subsection{ToyADMOS: A Dataset of Miniature-Machine Operating Sounds for Anomalous Sound Detection\cite{Dataset}}
+Artykuł wprowadza i opisuje publicznie dostępny, wielkoskalowy zbiór danych o nazwie ToyADMOS, zaprojektowany do badań nad Detekcją Anomalii w Dźwiękach Operacyjnych Maszyn (ADMOS).
+
+Kontekst i Motywacja publikacji wynika z braku swobodnie dostępnych, dużych zbiorów danych dla ADMOS, ponieważ nietypowe dźwięki są rzadkie i kosztowne w zbieraniu, zwłaszcza w przypadku drogich maszyn przemysłowych. W celu stworzenia obszernego zestawu danych autorzy celowo uszkodzili miniaturowe maszyny (zabawki), rejestrując ich dźwięki operacyjne w kontrolowanych warunkach laboratoryjnych.
+
+Struktura i zawartość zbioru danych zbioru ToyADMOS cechuje się trzema podzbiory (zadania ADMOS), z których każdy wykorzystuje inny rodzaj maszyny miniaturowej:
+\begin{itemize}
+    \item Toy car (Samochód-zabawka) - zadanie inspekcji produktu,
+    \item Toy conveyor (Taśmociąg-zabawka) - diagnoza usterek dla maszyny stacjonarnej,
+    \item Toy train (Pociąg-zabawka) - diagnoza usterek dla maszyny ruchomej (wymagająca łączenia obserwacji z wielu kanałów).
+\end{itemize}
+
+Cechy każdego podzbioru przedstawiają się następująco:
+\begin{itemize}
+    \item Ponad 180 godzin normalnych dźwięków operacyjnych,
+    \item Ponad 4000 próbek anomalnych dźwięków zebranych przez celowe uszkodzenie komponentów (np. wał, przekładnie, koła pasowe),
+    \item Dźwięki są rejestrowane za pomocą czterech mikrofonów przy częstotliwości próbkowania 48 kHz,
+    \item Zbiór zawiera również oddzielnie nagrane szumy środowiskowe z rzeczywistej fabryki, emitowane przez głośniki, co umożliwia symulowanie różnych poziomów szumu (SNR).
+\end{itemize}
+
+Kluczowe wnioski i znaczenie dla projektu:
+\begin{itemize}
+    \item Wielozadaniowość - zbiór danych ma zastosowanie nie tylko do podstawowej detekcji anomalii bez nadzoru (unsupervised ADMOS), ale także do zaawansowanych technik uczenia maszynowego, takich jak redukcja szumu, adaptacja domen (wykorzystanie wielu egzemplarzy tego samego typu maszyny o drobnych różnicach w budowie, aby testować zdolność modelu do generalizacji) i uczenie z małej liczby próbek (few-shot learning).
+    \item Benchmark - autorzy udostępniają system referencyjny (baseline) oparty na prostym Autoenkoderze (AE), który wykorzystuje błąd rekonstrukcji jako wskaźnik anomalii.
+    \item Wyniki Testów - badanie wykazało, że system ma trudności z wykrywaniem anomalii, które powodują jedynie niewielkie zmiany w strukturze czasowo-częstotliwościowej dźwięku lub mają niską amplitudę (np. uszkodzona zakrzywiona szyna w przypadku pociągu-zabawki, która jest daleko od wszystkich mikrofonów). Wskazuje to na kierunek dalszych badań w ADMOS – opracowanie metod wrażliwych na subtelne zmiany w sygnale akustycznym.
+\end{itemize}

@@ -1,0 +1,44 @@
+\subsection{ToyTrain}
+Zbiór ToyTrain zawiera nagrania pociągu-zabawki. Model klasyfikuje cztery atrybuty: First carriage (pierwszy wagon), Last carriage (ostatni wagon), Curved railway track (zakrzywiony tor) oraz Straight railway track (prosty tor).
+
+\subsubsection{Last carriage (Ostatni wagon)}
+Klasyfikacja stanu ostatniego wagonu osiągnęła idealne wyniki z dokładnością 100\%. Model bezbłędnie rozróżnia uszkodzoną oś koła (``Chipped wheel axle'') od stanu normalnego. Jest to najlepszy wynik spośród wszystkich klasyfikowanych atrybutów.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyTrain_Last carriage.png}
+    \caption{Raport klasyfikacji atrybutu Last carriage dla zbioru ToyTrain}
+    \label{fig:toytrain_lastcarriage}
+\end{figure}
+
+\newpage
+\subsubsection{First carriage (Pierwszy wagon)}
+Klasyfikacja stanu pierwszego wagonu osiąga dokładność 95\%. W przeciwieństwie do ostatniego wagonu, wykrywanie uszkodzonej osi koła w pierwszym wagonie jest trudniejsze. Klasa ``Chipped wheel axle'' osiąga recall tylko 0.65, co oznacza, że 43 z 123 przypadków uszkodzenia zostały sklasyfikowane jako ``Normal''.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyTrain_First carriage.png}
+    \caption{Raport klasyfikacji atrybutu First carriage dla zbioru ToyTrain}
+    \label{fig:toytrain_firstcarriage}
+\end{figure}
+\newpage
+\subsubsection{Curved railway track (Zakrzywiony tor)}
+Klasyfikacja stanu zakrzywionego toru jest jednym z trudniejszych zadań z dokładnością 94\%. Model rozróżnia cztery klasy: ``Broken'' (złamany), ``Disjointed'' (rozłączony), ``Normal'' oraz ``Obstructing stone'' (przeszkadzający kamień). Klasy anomalne mają relatywnie niskie metryki -- ``Disjointed'' osiąga F1-Score 0.63, a ``Obstructing stone'' -- 0.66. Macierz konfuzji pokazuje wzajemne pomyłki między wszystkimi klasami anomalnymi.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyTrain_Curved railway track.png}
+    \caption{Raport klasyfikacji atrybutu Curved railway track dla zbioru ToyTrain}
+    \label{fig:toytrain_curvedtrack}
+\end{figure}
+
+\newpage
+\subsubsection{Straight railway track (Prosty tor)}
+Klasyfikacja stanu prostego toru osiąga dokładność 97\%, czyli lepszy wynik niż dla toru zakrzywionego. Klasa ``Broken'' jest rozpoznawana z wysoką skutecznością (F1-Score 0.93). Klasy ``Disjointed'' i ``Obstructing stone'' mają niższe metryki -- odpowiednio F1-Score 0.71 i 0.78. Zauważalna jest tendencja do klasyfikowania ``Disjointed'' jako ``Normal'' (15 przypadków z 56).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyTrain_Straight railway track.png}
+    \caption{Raport klasyfikacji atrybutu Straight railway track dla zbioru ToyTrain}
+    \label{fig:toytrain_straighttrack}
+\end{figure}

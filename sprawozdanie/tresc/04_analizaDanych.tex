@@ -1,0 +1,73 @@
+\section{Analiza zbioru danych}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+Atrybut & Stan     & Ilość próbek (nagrań) & Długość nagrań {[}h{]} \\ \hline
+Gears   & Deformed & 1436                  & 4.39                   \\ \hline
+Gears   & Melted   & 1440                  & 4.40                   \\ \hline
+Gears   & Normal   & 25644                  & 517.49                 \\ \hline
+Shaft   & Bent   & 2160                  & 6.60                 \\ \hline
+Shaft   & Normal   & 26360                  & 519.68                 \\ \hline
+Tires   & Coiled (plastic ribbon)   & 1436                  & 4.39                 \\ \hline
+Tires   & Coiled (steel ribbon)   & 1440                  & 4.40                 \\ \hline
+Tires   & Normal   & 25644                  & 517.49                 \\ \hline
+Voltage   & Normal   & 25640                  & 517.48                 \\ \hline
+Voltage   & Over voltage   & 1440                  & 4.40                 \\ \hline
+Voltage   & Under voltage   & 1440                  & 4.40                 \\ \hline
+\end{tabular}
+\caption{Tabela nagrań dla zbioru ToyCar}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+Atrybut & Stan     & Ilość próbek (nagrań) & Długość nagrań {[}h{]} \\ \hline
+Belt   & Attached metallic object 1 & 720                  & 2.00                   \\ \hline
+Belt   & Attached metallic object 2   & 1260                  & 3.50                   \\ \hline
+Belt   & Attached metallic object 3   & 1260                  & 3.50                 \\ \hline
+Belt   & Normal   & 23492                  & 182.60                 \\ \hline
+Belt   & Removed   & 20                  & 0.06                 \\ \hline
+Tail pulley   & Excessive Tension   & 1500                  & 4.17                 \\ \hline
+Tail pulley   & Normal   & 23892                  & 183.71                 \\ \hline
+Tail pulley   & Removed   & 1360                  & 3.78                 \\ \hline
+Tension pulley   & Aging   & 540                  & 1.50                 \\ \hline
+Tension pulley   & Excessive Tension   & 1980                  & 5.50                 \\ \hline
+Tension pulley   & Normal   & 24232                  & 184.66                 \\ \hline
+Voltage   & Normal   & 23772                  & 183.38                 \\ \hline
+Voltage   & Over voltage   & 1480                  & 4.11                 \\ \hline
+Voltage   & Under voltage   & 1500                  & 4.17                 \\ \hline
+\end{tabular}
+\caption{Tabela nagrań dla zbioru ToyConveyor}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+Atrybut & Stan     & Ilość próbek (nagrań) & Długość nagrań {[}h{]} \\ \hline
+Curved Railway track   & Broken & 1280                  & 3.91                  \\ \hline
+Curved Railway track   & Disjointed   & 1280                  & 3.91                   \\ \hline
+Curved Railway track   & Normal   & 23264                  & 264.80                 \\ \hline
+Curved Railway track   & Obstructing stone   & 1280                  & 3.91                 \\ \hline
+First carriage   & Chipped wheel axle   & 2080                  & 6.36                 \\ \hline
+First carriage   & Normal   & 25024                  & 270.18                 \\ \hline
+Last carriage   & Chipped wheel axle   & 2080                  & 6.36                 \\ \hline
+Last carriage   & Normal   & 25024                  & 270.18                 \\ \hline
+Straight railway track   & Broken   & 1040                  & 3.18                 \\ \hline
+Straight railway track   & Disjointed   & 1040                  & 3.18                 \\ \hline
+Straight railway track   & Normal   & 23984                  & 267.00                 \\ \hline
+Straight railway track   & Obstructing stone   & 1040                  & 3.18                 \\ \hline
+\end{tabular}
+\caption{Tabela nagrań dla zbioru ToyTrain}
+\end{table}
+
+\FloatBarrier
+
+Na podstawie przeprowadzonej analizy struktury zbiorów danych ToyCar, ToyConveyor oraz ToyTrain można zauważyć wyraźną dominację próbek oznaczonych jako stan „Normal” względem próbek reprezentujących stany uszkodzeń. W każdym z analizowanych zbiorów liczba oraz łączny czas trwania nagrań dla klasy normalnej jest wielokrotnie większy niż dla klas anomalii.
+
+Taka struktura danych wskazuje na silne niezbalansowanie klas, co jest typową cechą danych pochodzących z rzeczywistych systemów przemysłowych, gdzie stany awaryjne występują znacznie rzadziej niż poprawna praca urządzeń. Niezbalansowanie to może prowadzić do sytuacji, w której model uczony bez odpowiednich mechanizmów kompensujących będzie faworyzował klasę dominującą, osiągając pozornie wysoką dokładność kosztem słabej detekcji stanów uszkodzeń.
+
+W kolejnych etapach badań wpływ niezbalansowania klas zostanie oceniony przy użyciu miar takich jak precision, recall oraz F1-score, które lepiej niż dokładność (accuracy) odzwierciedlają jakość klasyfikacji w przypadku danych niezbalansowanych. Uzyskane wyniki pozwolą określić, czy konieczne będzie zastosowanie dodatkowych technik radzenia sobie z niezbalansowaniem klas, takich jak ważenie klas, nadpróbkowanie danych anomalii lub modyfikacja funkcji kosztu modelu.

@@ -1,0 +1,13 @@
+\section{Wybrana wstępna architektura rozwiązania}
+W ramach projektu zaimplementowano system klasyfikacji wieloetykietowej (multi-label classification), który jednocześnie przewiduje wartości wielu parametrów urządzenia na podstawie analizy dźwięku. Architektura składa się z następujących elementów:
+
+\begin{itemize}
+    \item \textbf{Ekstrakcja cech} -- do ekstrakcji cech z pliku dźwiękowego zastosowano 20 współczynników MFC. Są one obliczane na podstawie podzielenia spektrogramu wejściowego pliku dźwiękowego. Spektrogram ten (tzw. log-mel spectrogram) dzielony jest gęsto przy niższych częstotliwościach, gdzie niewielkie zmiany w częstotliwości powodują dużą zmianę odbieranego dźwięku. Przy wyższych częstotliwościach podział staje się rzadszy, ponieważ zmiany w częstotliwościach nie są tak istotne.
+    \item \textbf{Preprocessing} -- zastosowano standaryzację cech (StandardScaler) w celu normalizacji danych wejściowych.
+    \item \textbf{Klasyfikator} -- wykorzystano model MultiOutputClassifier oparty na regresji logistycznej (Logistic Regression) z solverem LBFGS i klasyfikacją wieloklasową (multinomial).
+    \item \textbf{Kodowanie etykiet} -- dla każdego atrybutu zastosowano osobny LabelEncoder, co pozwala na niezależne kodowanie klas dla różnych parametrów.
+\end{itemize}
+
+Model trenowany jest na 80\% danych, a pozostałe 20\% stanowi zbiór testowy wykorzystywany do ewaluacji.
+
+Zaproponowana wstępna architektura modelu nie uwzględnia na tym etapie specjalizowanych metod radzenia sobie z problemem niezbalansowania klas. Decyzja ta została podjęta celowo w celu umożliwienia obiektywnej oceny wpływu struktury danych na jakość predykcji. Na podstawie analizy zbioru danych przedstawionej w kolejnym rozdziale oraz wyników pierwszych eksperymentów ewaluacyjnych zostaną podjęte dalsze kroki dotyczące ewentualnego zastosowania technik kompensujących niezbalansowanie klas.e

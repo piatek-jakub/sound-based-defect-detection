@@ -1,0 +1,33 @@
+\subsection{Detection of defective embedded bearings by sound analysis: a machine learning approach\cite{Bearings}}
+
+Artykuł opisuje rozwiązanie z zakresu uczenia maszynowego (machine learning) dla automatycznej detekcji wadliwych wbudowanych łożysk w urządzeniach AGD na podstawie analizy akustycznej. Jest to podejście konieczne, ponieważ łożyska są instalowane głęboko w urządzeniu na wczesnym etapie produkcji i stają się fizycznie niedostępne po pełnym montażu. Dodatkowo, tradycyjne metody wibracyjne wymagają bezpośredniego dostępu do łożysk, a konwencjonalna analiza Fouriera jest nieskuteczna ze względu na wysoki poziom szumu w sygnałach z linii produkcyjnej.
+
+Kontrola jakości odbywa się poprzez włączenie zmontowanego urządzenia i rejestrowanie sygnału akustycznego za pomocą zewnętrznego czujnika.
+
+Zadanie detekcji potraktowano jako problem klasyfikacji binarnej ("wadliwe" lub "niewadliwe"). Po przeprowadzeniu akwizycji danych (w warunkach laboratoryjnych i na linii produkcyjnej) oraz ich wstępnym przetworzeniu (redukcja szumu, selekcja cech do dziewięciu kluczowych częstotliwości ), przetestowano 67 algorytmów klasyfikacji.
+
+Dla czystych sygnałów laboratoryjnych wybrano Drzewo Decyzyjne ze względu na zadowalającą dokładność w połączeniu z prostotą i intuicyjną implementacją, co było preferowane przez firmę.
+
+Dla głośniejszych sygnałów z linii produkcyjnej najlepszą wydajność osiągnął algorytm IB1 oparty na metryce odległości i metodzie najbliższego sąsiada, który poprawnie klasyfikował wszystkie próbki z tego środowiska.
+
+Rozwiązanie to ma służyć jako narzędzie wspomagające dla techników i zastąpić subiektywną, czasochłonną, ręczną analizę sygnałów akustycznych prowadzoną przez ekspertów.
+
+Wyzwania techniczne przedstawione w artykule:
+\begin{itemize}
+    \item Ograniczona liczba próbek (dostępne są tylko 34 próbki z linii produkcyjnej),
+    \item Wysoki poziom szumu w pomiarach, szczególnie na linii produkcyjnej, wynikający z pracy całego urządzenia oraz innych komponentów. 
+\end{itemize}
+Autorzy wykazali, że stosunek sygnału do szumu (SNR) jest wystarczająco wysoki, aby maskować ważne składowe, co uniemożliwia skuteczne zastosowanie tradycyjnych technik dekompozycji Fouriera.
+
+Mechanizm proponowanego rozwiązania: 
+\begin{itemize}
+    \item Akwizycja danych - pomiary w izolowanym laboratorium oraz bezpośrednio na linii produkcyjnej. Każdy sygnał akustyczny reprezentował ciśnienie akustyczne w decybelach dla 24 częstotliwości,
+    \item Przetwarzanie wstępne danych - zastosowano selekcję cech, redukując wymiarowość z 24 do dziewięciu najbardziej dyskryminujących częstotliwości (na podstawie różnicy średnich wartości). Wykorzystano również selekcję instancji za pomocą współczynnika Silhouette, aby usunąć potencjalnie błędnie oznaczone (zgodnie z manualną analizą ekspertów) lub redundantne sygnały,
+    \item Ewaluacja klasyfikatorów - przeprowadzono porównawcze badanie 67 algorytmów klasyfikacji dla obu środowisk pomiarowych.
+\end{itemize}
+
+Wnioski wynikające z publikacji przedstawiają się następująco:
+\begin{itemize}
+    \item Dla sygnałów laboratoryjnych, pomimo osiągnięcia najwyższej dokładności przez inne metody, jako najlepsze rozwiązanie wybrano Drzewo Decyzyjne (Decision Tree) ze względu na prostotę implementacji i łatwą interpretację reguł klasyfikacji, co było kluczowym wymogiem dla firmy.
+    \item Zaproponowana metodyka dostarcza skutecznego narzędzia do automatyzacji kontroli jakości w przemyśle produkcyjnym, przewyższając manualną analizę ekspertów (wykrywając wady, których nie byli w stanie zidentyfikować ludzie).
+\end{itemize}

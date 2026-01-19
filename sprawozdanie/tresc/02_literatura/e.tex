@@ -1,0 +1,8 @@
+\subsection{Engine Fault Detection by Sound Analysis and Machine Learning\cite{tpp14156532}}
+Artykuł dotyczy diagnostyki usterek pojazdów na podstawie analizy sygnałów akustycznych rejestrowanych w warunkach rzeczywistych (serwisy samochodowe Ford/Toyota). Autorzy rozważają sześć klas stanu technicznego silnika (m.in. prawidłowy, problemy ze świecami zapłonowymi, przepływem powietrza, elektryką, turbo oraz przednią osią) i proponują system klasyfikacji dźwięków oparty na ekstrakcji cech oraz uczeniu maszynowym.
+
+W części metodologicznej porównano dwie główne grupy cech: współczynniki MFCC (Mel-frequency cepstral coefficients) oraz cechy uzyskane z DWT (Discrete wavelet transform). Dodatkowo przeprowadzono analizę widmową (FFT z podziałem na pasma 100 Hz) oraz selekcję istotnych częstotliwości przy użyciu algorytmu Relief-F. Do klasyfikacji zastosowano algorytm Extreme Learning Machine (ELM), który jest jednowarstwową siecią neuronową o losowej inicjalizacji wag wejściowych i bardzo szybkim procesie uczenia.
+
+Wyniki pokazały wyraźną przewagę cech MFCC nad DWT. Najlepsze rezultaty uzyskano dla 20 współczynników MFCC i klasyfikatora ELM z funkcją aktywacji sine, osiągając średnią dokładność około 92\%. Cechy DWT wypadły słabiej, z maksymalną dokładnością około 84\%. Dodatkowa analiza widmowa wskazała charakterystyczne pasma częstotliwości powiązane z poszczególnymi rodzajami usterek, co może wspierać dalszą interpretację i rozwój systemów diagnostycznych.
+
+We wnioskach autorzy potwierdzają, że MFCC w połączeniu z ELM stanowią skuteczne i niewymagające obliczeniowo rozwiązanie dla detekcji uszkodzeń silników w warunkach serwisowych, przewyższając alternatywne metody oparte na DWT.

@@ -1,0 +1,45 @@
+\subsection{ToyConveyor}
+Zbiór ToyConveyor zawiera nagrania zabawkowego taśmociągu. Model klasyfikuje cztery atrybuty: Voltage (napięcie), Belt (pas), Tail pulley (koło pasowe tylne) oraz Tension pulley (koło napinające).
+
+\subsubsection{Voltage (Napięcie)}
+Klasyfikacja napięcia dla taśmociągu osiąga dokładność 98\%. Wyniki są lepsze niż dla ToyCar -- klasa ``Under voltage'' osiąga F1-Score 0.95. Klasa ``Over voltage'' czasami jest klasyfikowana jako stan normalny.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyConveyor_Voltage.png}
+    \caption{Raport klasyfikacji atrybutu Voltage dla zbioru ToyConveyor}
+    \label{fig:toyconveyor_voltage}
+\end{figure}
+
+\newpage
+\subsubsection{Belt (Pas)}
+Klasyfikacja stanu pasa jest najbardziej wymagającym zadaniem w zbiorze ToyConveyor. Ogólna dokładność wynosi 93\%, ale klasy reprezentujące przymocowane metalowe obiekty mają znacznie niższe metryki. Macierz konfuzji pokazuje częste pomyłki między tymi dwiema klasami oraz z klasą ``Normal''. Klasa ``Removed'' ma bardzo małą liczbę próbek (2), co ogranicza wiarygodność jej metryki.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyConveyor_Belt.png}
+    \caption{Raport klasyfikacji atrybutu Belt dla zbioru ToyConveyor}
+    \label{fig:toyconveyor_belt}
+\end{figure}
+
+\newpage
+\subsubsection{Tail pulley (Koło pasowe tylne)}
+Klasyfikacja stanu tylnego koła pasowego osiąga bardzo dobre wyniki z dokładnością 99\%. Wszystkie trzy klasy (``Excessive tension'', ``Normal'', ``Removed'') są rozpoznawane z wysoką skutecznością. Najniższy recall (0.90) występuje dla klasy ``Excessive tension'', gdzie 11 przypadków zostało sklasyfikowanych jako ``Normal''.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyConveyor_Tail pulley.png}
+    \caption{Raport klasyfikacji atrybutu Tail pulley dla zbioru ToyConveyor}
+    \label{fig:toyconveyor_tailpulley}
+\end{figure}
+
+\newpage
+\subsubsection{Tension pulley (Koło napinające)}
+Klasyfikacja stanu koła napinającego osiąga dokładność 98\%. Klasa ``Aging'' (starzenie) jest rozpoznawana z bardzo wysoką skutecznością (F1-Score 0.98). Klasa ``Excessive tension'' ma nieco niższe metryki (F1-Score 0.88), z częściowym myleniem z klasą ``Normal''.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{reports/report_ToyConveyor_Tension puly.png}
+    \caption{Raport klasyfikacji atrybutu Tension pulley dla zbioru ToyConveyor}
+    \label{fig:toyconveyor_tensionpulley}
+\end{figure}

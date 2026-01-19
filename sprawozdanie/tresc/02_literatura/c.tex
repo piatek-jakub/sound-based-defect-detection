@@ -1,0 +1,15 @@
+\subsection{Anomalous sound detection with machine learning: A systematic review\cite{review}}
+
+Przegląd ten dostarcza syntetycznych informacji na temat najczęściej stosowanych metod, zbiorów danych oraz metryk oceny w badaniach nad detekcją anomalii dźwiękowych (ASD). Celem pracy było zidentyfikowanie dominujących technik uczenia maszynowego, popularnych baz danych oraz sposobów przetwarzania i oceny sygnałów audio, a także wskazanie aktualnych trendów w tej dziedzinie.
+
+\textbf{Najpopularniejsze modele ML:} Spośród 33 zidentyfikowanych technik, dwie grupy modeli wyraźnie dominują w literaturze: Autoenkodery (AE) oraz Konwolucyjne Sieci Neuronowe (CNN). Modele te są szeroko stosowane ze względu na swoją skuteczność w detekcji nietypowych sygnałów oraz zdolność do wychwytywania istotnych cech w danych audio.
+
+\textbf{Nowy trend:} W najnowszych badaniach, szczególnie po 2020 roku, zauważalny jest trend wykorzystania Transfer Learningu. Polega on na stosowaniu modeli wstępnie wytrenowanych na dużych zbiorach danych, takich jak ResNet-50, MobileNetV2 czy DenseNet-121, co pozwala na szybsze i bardziej efektywne trenowanie modeli dla specyficznych zastosowań w ASD.
+
+\textbf{Najpopularniejsze zbiory danych:} Analiza literatury wykazała, że najczęściej wykorzystywanymi publicznymi zbiorami danych w badaniach nad ASD są ToyADMOS, MIMII oraz Mivia. Jednocześnie autorzy zwracają uwagę, że znaczna część badań (9 z 31) korzystała z własnych, niestandardowych zbiorów danych, co utrudnia bezpośrednie porównania wyników między publikacjami.
+
+\textbf{Najpopularniejsze metody ekstrakcji cech:} Najczęściej stosowaną metodą przekształcania surowego sygnału audio na reprezentację cechową były współczynniki cepstralne częstotliwości Mel (MFCC). Inne często używane podejścia to Log-Mel Energy oraz Mel-spektrogram, które pozwalają na uchwycenie istotnych cech w dziedzinie częstotliwości i czasie.
+
+\textbf{Najpopularniejsze metryki oceny:} Do oceny skuteczności modeli najczęściej wykorzystywano metryki AUC-ROC (Area Under the Receiver Operating Characteristic curve) oraz F1-score. Obie metryki umożliwiają kompleksową ocenę wydajności systemów detekcji anomalii, zarówno pod kątem zdolności rozróżniania klas, jak i równowagi między precyzją a czułością.
+
+Podsumowując, przegląd wskazuje, że dziedzina detekcji anomalii dźwiękowych jest wciąż aktywnie rozwijana, a główne kierunki badań koncentrują się na wykorzystaniu nowoczesnych architektur uczenia maszynowego, adaptacji modeli wstępnie wytrenowanych oraz standaryzacji zbiorów danych i metod oceny. Wyniki te stanowią solidną podstawę do dalszych badań oraz porównywania efektywności różnych podejść w ASD.
