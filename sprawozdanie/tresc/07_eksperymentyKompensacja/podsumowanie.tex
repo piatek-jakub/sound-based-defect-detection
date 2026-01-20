@@ -6,9 +6,78 @@
     \item Analogiczny trend zaobserwowano dla zbioru \textit{Belt}, gdzie nastąpiła istotna poprawa czułości dla klas anormalnych \textit{Attached metallic object 2} oraz \textit{Attached metallic object 3}. Wartości miary \textit{recall} wzrosły odpowiednio z 0.76 do 0.94 oraz z 0.56 do 0.92, co przełożyło się na znaczący wzrost miary F1 oraz średniej makro, szczególnie istotnej w kontekście danych niezbalansowanych.
     \item Dla zbioru \textit{Curved railway track} poprawa jakości klasyfikacji objęła wszystkie klasy anomalii, czego potwierdzeniem jest wzrost miary F1 dla klas \textit{Broken}, \textit{Disjointed} oraz \textit{Obstructing stone}. Model po modyfikacjach osiągnął bardzo wysoką wartość dokładności ogólnej (0.98) oraz wyraźnie lepszą średnią makro w porównaniu do wyników sprzed kompensacji.
     \item We wszystkich przypadkach zaobserwowano istotny wzrost wartości średniej makro miary F1, co wskazuje na bardziej zrównoważone traktowanie wszystkich klas przez model. Potwierdza to skuteczność zastosowanych technik kompensacji niezbalansowania klas, w szczególności ważenia klas oraz rozszerzenia przestrzeni cech akustycznych.
+    \item Analiza wyników dla pozostałych atrybutów wykazała, że niektóre problemy klasyfikacji osiągnęły już bardzo wysokie wyniki w modelu wieloklasowym wielokryterialnym. Atrybuty takie jak \textit{Shaft} (ToyCar), \textit{Last carriage} (ToyTrain) oraz \textit{Tension pulley} (ToyConveyor) osiągnęły Macro F1 równą odpowiednio 1.00, 1.00 oraz 0.99, co wskazuje na wyraźną separowalność cech akustycznych dla tych typów anomalii. Z kolei atrybuty \textit{Tires} (ToyCar), \textit{Tail pulley} (ToyConveyor) oraz \textit{Straight railway track} (ToyTrain) osiągnęły Macro F1 w zakresie 0.97--0.98, co również świadczy o wysokiej skuteczności klasyfikacji. Obserwacja ta sugeruje, że trudność klasyfikacji zależy nie tylko od niezbalansowania klas, lecz także od charakterystyki akustycznej samych anomalii oraz ich wzajemnego podobieństwa.
+    \item Warto zauważyć, że atrybuty związane z napięciem (\textit{Voltage}) osiągnęły różne wyniki w zależności od podzbioru danych. Dla ToyConveyor uzyskano Macro F1 równą 0.97, podczas gdy dla ToyCar wartość ta wyniosła 0.90. Różnica ta może wynikać z różnic w charakterystyce sygnałów akustycznych między tymi urządzeniami oraz z różnego stopnia niezbalansowania klas w poszczególnych podzbiorach danych.
 \end{itemize}
 
 Uzyskane wyniki pokazują, że mimo zachowania wieloklasowego charakteru problemu, odpowiednie dostosowanie procesu uczenia pozwala znacząco poprawić wykrywalność rzadkich anomalii bez istotnego pogorszenia jakości klasyfikacji stanów normalnych.
+
+Analiza wyników dla wszystkich atrybutów wykazała znaczące różnice w trudności klasyfikacji poszczególnych problemów. Niektóre atrybuty, takie jak \textit{Shaft} (ToyCar) oraz \textit{Last carriage} (ToyTrain), osiągnęły idealne wyniki (Macro F1 = 1.00) już w modelu wieloklasowym wielokryterialnym, co wskazuje na wyraźną separowalność cech akustycznych dla tych typów anomalii. Z kolei atrybuty takie jak \textit{Gears}, \textit{Belt} oraz \textit{First carriage} charakteryzowały się niższymi wartościami Macro F1 (odpowiednio 0.88, 0.91 oraz 0.91), co sugeruje większą złożoność problemu klasyfikacji wynikającą z podobieństwa cech akustycznych między różnymi klasami anomalii oraz silnego niezbalansowania danych.
+
+Tabela \ref{tab:porownanie_modeli} przedstawia szczegółowe porównanie wyników F1-score dla wszystkich klas wszystkich analizowanych atrybutów w trzech wariantach modeli. Prezentacja wyników dla poszczególnych klas pozwala na dokładną ocenę skuteczności modeli w kontekście niezbalansowanych danych oraz identyfikację klas, które stanowią największe wyzwanie dla klasyfikacji. Widać wyraźnie, że przejście z modelu wieloklasowego wielokryterialnego do modelu binarnego przynosi poprawę wyników dla większości klas anomalii, szczególnie tych charakteryzujących się małą liczebnością. Największą poprawę zaobserwowano dla atrybutu \textit{Curved railway track}, gdzie F1-score dla klasy \textit{Defect} wzrosło z 0.87--0.92 (w zależności od klasy anomalii) do 0.97 w modelu binarnym.
+
+\begin{table}[H]
+\centering
+\caption{Porównanie wyników F1-score dla wszystkich klas wszystkich atrybutów w trzech wariantach modeli}
+\label{tab:porownanie_modeli}
+\footnotesize
+\begin{tabular}{llccc}
+\toprule
+\textbf{Atrybut} & \textbf{Klasa} & \textbf{Wieloklasowy} & \textbf{Wieloklasowy} & \textbf{Jednoklasowy} \\
+ & & \textbf{wielokryterialny} & \textbf{binarny} & \textbf{binarny} \\
+\midrule
+\multirow{3}{*}{\textit{ToyCar -- Gears}} & Deformed & 0.83 & \multirow{2}{*}{Defect: 0.87} & \multirow{2}{*}{Anomaly: 0.99} \\
+ & Melted & 0.82 & & \\
+ & Normal & 0.98 & Normal: 0.98 & Normal: 1.00 \\
+\midrule
+\multirow{2}{*}{\textit{ToyCar -- Shaft}} & Bent & 1.00 & Defect: 1.00 & Anomaly: 0.99 \\
+ & Normal & 1.00 & Normal: 1.00 & Normal: 1.00 \\
+\midrule
+\multirow{3}{*}{\textit{ToyCar -- Tires}} & Coiled (plastic ribbon) & 0.97 & \multirow{2}{*}{Defect: 0.97} & Anomaly: 0.99 \\
+ & Coiled (steel ribbon) & 0.96 & & \\
+ & Normal & 1.00 & Normal: 1.00 & Normal: 1.00 \\
+\midrule
+\multirow{3}{*}{\textit{ToyCar -- Voltage}} & Over voltage & 0.87 & \multirow{2}{*}{Wrong voltage: 0.86} & Anomaly: 0.99 \\
+ & Under voltage & 0.85 & & \\
+ & Normal & 0.98 & Normal: 0.98 & Normal: 1.00 \\
+\midrule
+\multirow{4}{*}{\textit{ToyConveyor -- Belt}} & Attached metallic object 2 & 0.86 & \multirow{3}{*}{Defect: 0.88} & \multirow{2}{*}{Anomaly: 1.00} \\
+ & Attached metallic object 3 & 0.81 & & \\
+ & Removed & 1.00 & & \\
+ & Normal & 0.98 & Normal: 0.98 & Normal: 1.00 \\
+\midrule
+\multirow{3}{*}{\textit{ToyConveyor -- Tail pulley}} & Excessive tension & 0.97 & \multirow{2}{*}{Defect: 0.96} & Anomaly: 1.00 \\
+ & Removed & 0.99 & & \\
+ & Normal & 1.00 & Normal: 0.99 & Normal: 1.00 \\
+\midrule
+\multirow{3}{*}{\textit{ToyConveyor -- Tension pulley}} & Aging & 0.99 & \multirow{2}{*}{Defect: 0.98} & Anomaly: 1.00 \\
+ & Excessive tension & 0.98 & & \\
+ & Normal & 1.00 & Normal: 1.00 & Normal: 1.00 \\
+\midrule
+\multirow{3}{*}{\textit{ToyConveyor -- Voltage}} & Over voltage & 0.94 & \multirow{2}{*}{Wrong voltage: 0.88} & Anomaly: 1.00 \\
+ & Under voltage & 0.97 & & \\
+ & Normal & 0.99 & Normal: 0.98 & Normal: 1.00 \\
+\midrule
+\multirow{4}{*}{\textit{ToyTrain -- Curved railway track}} & Broken & 0.92 & \multirow{4}{*}{Defect: 0.97} & \multirow{2}{*}{Anomaly: 1.00} \\
+ & Disjointed & 0.87 & & \\
+ & Obstructing stone & 0.87 & & \\
+ & Normal & 0.99 & Normal: 0.99 & Normal: 1.00 \\
+\midrule
+\multirow{2}{*}{\textit{ToyTrain -- First carriage}} & Chipped wheel axle & 0.84 & Defect: 0.84 & Anomaly: 1.00 \\
+ & Normal & 0.98 & Normal: 0.98 & Normal: 1.00 \\
+\midrule
+\multirow{2}{*}{\textit{ToyTrain -- Last carriage}} & Chipped wheel axle & 1.00 & Defect: 1.00 & Anomaly: 1.00 \\
+ & Normal & 1.00 & Normal: 1.00 & Normal: 1.00 \\
+\midrule
+\multirow{4}{*}{\textit{ToyTrain -- Straight railway track}} & Broken & 0.99 & \multirow{4}{*}{Defect: 0.99} & Anomaly: 1.00 \\
+ & Disjointed & 0.92 & & \\
+ & Obstructing stone & 0.97 & & \\
+ & Normal & 1.00 & Normal: 1.00 & Normal: 1.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Warto zauważyć, że różnice między wartościami Macro F1 a Weighted F1 są szczególnie widoczne dla atrybutów o silnym niezbalansowaniu klas. Na przykład dla atrybutu \textit{Gears} w modelu wieloklasowym wielokryterialnym Macro F1 wynosi 0.88, podczas gdy Weighted F1 osiąga wartość 0.96, co wskazuje na dominację klasy \textit{Normal} w obliczaniu średniej ważonej. Ta różnica potwierdza skuteczność zastosowanych metod kompensacji niezbalansowania, które poprawiły traktowanie klas mniejszościowych, co jest lepiej odzwierciedlone w wartości Macro F1. W tabeli \ref{tab:porownanie_modeli} zastosowano Macro F1-score, ponieważ jest to bardziej odpowiednia miara dla oceny jakości klasyfikacji w kontekście niezbalansowanych danych, traktująca wszystkie klasy równo i lepiej odzwierciedlająca skuteczność kompensacji niezbalansowania.
 
 \subsubsection{Model wieloklasowy binarny}
 \begin{itemize}
@@ -18,9 +87,11 @@ Uzyskane wyniki pokazują, że mimo zachowania wieloklasowego charakteru problem
 \end{itemize}
 Porównanie wyników modeli wieloklasowych i binarnych wskazuje, że scalenie klas anomalii prowadzi do dalszej poprawy skuteczności detekcji defektów, szczególnie w zbiorach o silnym niezbalansowaniu i relatywnie jednorodnych cechach akustycznych anomalii. Jednocześnie podejście to eliminuje możliwość rozróżniania poszczególnych typów uszkodzeń, co stanowi istotne ograniczenie z punktu widzenia diagnostyki przyczynowej.
 
+Analiza wyników dla pozostałych atrybutów w modelu wieloklasowym binarnym potwierdza ogólny trend poprawy wyników w porównaniu do modelu wieloklasowego wielokryterialnego. Największą poprawę zaobserwowano dla atrybutu \textit{Curved railway track} (Macro F1 wzrosła z 0.91 do 0.98), podczas gdy dla atrybutów już osiągających wysokie wyniki (np. \textit{Shaft}, \textit{Last carriage}) poprawa była minimalna lub nieistotna. Warto zauważyć, że dla niektórych atrybutów, takich jak \textit{Voltage} w ToyConveyor, zaobserwowano nieznaczne obniżenie Macro F1 (z 0.97 do 0.93), co może wynikać z faktu, że scalenie klas \textit{Over voltage} i \textit{Under voltage} w jedną klasę \textit{Wrong voltage} utrudnia modelowi rozróżnienie między różnymi typami anomalii napięciowych, które mogą mieć różne charakterystyki akustyczne.
+
 \subsubsection{Model jednoklasowy binarny}
 \begin{itemize}
-    \item Dla wszystkich analizowanych zbiorów danych (\textit{ToyCar}, \textit{ToyConveyor} oraz \textit{ToyTrain}) model osiągnął niemal idealne wyniki klasyfikacji. Wartości miar \textit{precision}, \textit{recall} oraz \textit{F1-score} dla obu klas wyniosły w większości przypadków 1.00, a dokładność ogólna osiągnęła poziom 1.00.
+    \item Dla wszystkich analizowanych zbiorów danych (\textit{ToyCar}, \textit{ToyConveyor} oraz \textit{ToyTrain}) model osiągnął niemal idealne wyniki klasyfikacji. Dla zbioru \textit{ToyConveyor} oraz \textit{ToyTrain} wszystkie metryki (\textit{precision}, \textit{recall} oraz \textit{F1-score}) osiągnęły wartość 1.00, a dokładność ogólna wyniosła 1.00. W przypadku zbioru \textit{ToyCar} uzyskano również bardzo wysokie wyniki: \textit{recall} klasy \textit{Anomaly} wyniósł 1.00, \textit{precision} 0.98, \textit{F1-score} 0.99, przy dokładności ogólnej 1.00.
     \item Uzyskane rezultaty wskazują, że przy tak dużej liczbie próbek oraz wyraźnej separowalności cech akustycznych pomiędzy stanami normalnymi i anormalnymi, nawet przy wydzieleniu 20\% danych do zbioru testowego model jest w stanie niemal bezbłędnie wykrywać obecność anomalii w systemie.
     \item Należy jednak podkreślić, że tak wysoka skuteczność wynika w dużej mierze z uproszczenia problemu klasyfikacji oraz globalnego charakteru etykiet. Model nie rozróżnia typów ani źródeł anomalii, a jedynie sygnalizuje fakt wystąpienia nieprawidłowości gdziekolwiek w systemie.
     \item W konsekwencji, omawiany wariant modelu może być szczególnie przydatny w systemach monitoringu i wczesnego ostrzegania, gdzie kluczowe znaczenie ma szybkie i niezawodne wykrycie stanu awaryjnego. Jednocześnie jego zastosowanie w zaawansowanej diagnostyce technicznej jest ograniczone ze względu na brak informacji o charakterze oraz lokalizacji defektu.

@@ -1,8 +1,40 @@
 \section{Wybrana wstępna architektura rozwiązania}
 W ramach projektu zaimplementowano system klasyfikacji wieloetykietowej (multi-label classification), który jednocześnie przewiduje wartości wielu parametrów urządzenia na podstawie analizy dźwięku. Architektura składa się z następujących elementów:
 
+\subsection{Ekstrakcja cech -- współczynniki MFCC}
+Do ekstrakcji cech z pliku dźwiękowego zastosowano współczynniki MFCC (Mel-Frequency Cepstral Coefficients). MFCC to szeroko stosowana metoda reprezentacji sygnałów audio, która przekształca sygnał czasowy w zbiór współczynników numerycznych opisujących charakterystykę częstotliwościową dźwięku.
+
+Algorytm obliczania MFCC składa się z następujących etapów:
+\begin{enumerate}
+    \item \textbf{Preemfaza} -- filtracja wysokoprzepustowa sygnału w celu wzmocnienia wysokich częstotliwości
+    \item \textbf{Okienkowanie} -- podział sygnału na nakładające się ramki czasowe (zwykle z oknem Hamminga) w celu analizy krótkoterminowej
+    \item \textbf{Transformata Fouriera (FFT)} -- przekształcenie każdej ramki z dziedziny czasu do dziedziny częstotliwości, uzyskując widmo mocy
+    \item \textbf{Bank filtrów Mel} -- zastosowanie zestawu filtrów trójkątnych rozmieszczonych w skali Mel, która jest skalą percepcyjną odzwierciedlającą sposób, w jaki ludzkie ucho postrzega różnice częstotliwości. Skala Mel jest nieliniowa -- gęsto rozmieszczona przy niższych częstotliwościach (gdzie ucho jest bardziej wrażliwe) i rzadziej przy wyższych częstotliwościach
+    \item \textbf{Logarytmowanie} -- obliczenie logarytmu energii w każdym paśmie Mel, co pozwala na lepsze odwzorowanie percepcji głośności przez człowieka
+    \item \textbf{DCT (Discrete Cosine Transform)} -- zastosowanie dyskretnej transformaty kosinusowej w celu dekorrelacji współczynników i uzyskania kompaktowej reprezentacji. Pierwsze współczynniki DCT (MFCC) zawierają informację o ogólnej charakterystyce widmowej, podczas gdy wyższe współczynniki reprezentują szczegóły widma
+\end{enumerate}
+
+W implementacji wstępnej wykorzystano 20 współczynników MFCC, które stanowią kompaktową reprezentację charakterystyki częstotliwościowej sygnału. Współczynniki te są szczególnie skuteczne w zadaniach klasyfikacji audio, ponieważ:
 \begin{itemize}
-    \item \textbf{Ekstrakcja cech} -- do ekstrakcji cech z pliku dźwiękowego zastosowano 20 współczynników MFC. Są one obliczane na podstawie podzielenia spektrogramu wejściowego pliku dźwiękowego. Spektrogram ten (tzw. log-mel spectrogram) dzielony jest gęsto przy niższych częstotliwościach, gdzie niewielkie zmiany w częstotliwości powodują dużą zmianę odbieranego dźwięku. Przy wyższych częstotliwościach podział staje się rzadszy, ponieważ zmiany w częstotliwościach nie są tak istotne.
+    \item Odzwierciedlają percepcję dźwięku przez człowieka dzięki zastosowaniu skali Mel
+    \item Są odporne na zmiany amplitudy sygnału dzięki logarytmowaniu
+    \item Zawierają informację zarówno o charakterystyce widmowej (pierwsze współczynniki), jak i o szczegółach widma (wyższe współczynniki)
+    \item Pozwalają na efektywną reprezentację sygnału o dużej wymiarowości w postaci niewielkiej liczby współczynników
+\end{itemize}
+
+Dla każdej próbki dźwiękowej obliczane są wartości MFCC w kolejnych ramkach czasowych, a następnie z tych wartości wyznaczane są statystyki (średnia i odchylenie standardowe) w celu uzyskania reprezentacji niezależnej od długości nagrania.
+
+Rysunek \ref{fig:mfcc_comparison} przedstawia porównanie trzech różnych reprezentacji tego samego sygnału audio: sygnału w dziedzinie czasu (time domain waveform), spektrogramu oraz spektrogramu MFCC. Wizualizacja ta ilustruje, jak kolejne etapy przetwarzania sygnału prowadzą do coraz bardziej kompaktowej i zrozumiałej reprezentacji, która zachowuje istotne informacje o charakterystyce dźwięku przy jednoczesnym redukowaniu wymiarowości danych.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{screeny/mfcc.png}
+    \caption{Porównanie reprezentacji sygnału audio: (a) sygnał w dziedzinie czasu (time domain waveform), (b) spektrogram (widmo czasowo-częstotliwościowe), (c) spektrogram MFCC. Wizualizacja pokazuje transformację sygnału przez kolejne etapy przetwarzania w algorytmie MFCC.}
+    \label{fig:mfcc_comparison}
+\end{figure}
+
+\subsection{Pozostałe elementy architektury}
+\begin{itemize}
     \item \textbf{Preprocessing} -- zastosowano standaryzację cech (StandardScaler) w celu normalizacji danych wejściowych.
     \item \textbf{Klasyfikator} -- wykorzystano model MultiOutputClassifier oparty na regresji logistycznej (Logistic Regression) z solverem LBFGS i klasyfikacją wieloklasową (multinomial).
     \item \textbf{Kodowanie etykiet} -- dla każdego atrybutu zastosowano osobny LabelEncoder, co pozwala na niezależne kodowanie klas dla różnych parametrów.

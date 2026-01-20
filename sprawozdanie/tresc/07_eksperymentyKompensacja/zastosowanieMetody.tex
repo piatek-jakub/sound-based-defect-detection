@@ -1,16 +1,85 @@
 \subsection{Zastosowane metody kompensacji klas niezbalansowanych}
-W ramach niniejszej sekcji wprowadzono szereg modyfikacji mających na celu ograniczenie negatywnego wpływu niezbalansowania klas na skuteczność klasyfikacji:
+Wprowadzono następujące modyfikacje mające na celu ograniczenie negatywnego wpływu niezbalansowania klas:
+
+\subsubsection{Ważenie klas w procesie uczenia}
+Podstawową metodą kompensacji niezbalansowania klas było zastosowanie mechanizmu ważenia klas (\textit{class weighting}) w modelu regresji logistycznej. Wykorzystano parametr \texttt{class\_weight='balanced'}, który powoduje automatyczne obliczanie wag klas zgodnie ze wzorem:
+\begin{equation}
+w_i = \frac{n_{samples}}{n_{classes} \times n_i}
+\end{equation}
+gdzie $w_i$ to waga klasy $i$, $n_{samples}$ to całkowita liczba próbek, $n_{classes}$ to liczba klas, a $n_i$ to liczba próbek w klasie $i$. W rezultacie błędy popełniane na klasach mniejszościowych miały większy wpływ na wartość funkcji kosztu, co sprzyjało poprawie czułości modelu względem rzadkich stanów uszkodzeń.
+
+Dodatkowo dostrojono parametry modelu regresji logistycznej:
 \begin{itemize}
-    \item \textbf{Ważenie klas w procesie uczenia} - podstawową metodą kompensacji niezbalansowania klas było zastosowanie mechanizmu ważenia klas (\textit{class weighting}) w modelu regresji logistycznej. Wykorzystano parametr \texttt{class\_weight='balanced'}, który powoduje automatyczne obliczanie wag klas w sposób odwrotnie proporcjonalny do liczby próbek danej klasy. W rezultacie błędy popełniane na klasach mniejszościowych miały większy wpływ na wartość funkcji kosztu, co sprzyjało poprawie czułości modelu względem rzadkich stanów uszkodzeń.
-    \item \textbf{Rozszerzenie przestrzeni cech akustycznych} - wstępne eksperymenty wykazały ograniczoną skuteczność samego ważenia klas, dlatego wprowadzono dodatkowe ulepszenia polegające na rozszerzeniu zbioru cech audio. Zwiększono liczbę współczynników MFCC do 40 oraz zastosowano większe okno transformaty FFT. Ponadto uwzględniono dodatkowe cechy spektralne, takie jak \textit{spectral centroid}, \textit{spectral rolloff}, \textit{zero crossing rate}, cechy chromatyczne oraz reprezentację harmoniczną \textit{Tonnetz}. W efekcie liczba cech opisujących pojedynczą próbkę wzrosła ponad dwukrotnie, co umożliwiło lepsze odwzorowanie subtelnych różnic pomiędzy poszczególnymi stanami urządzenia.
-    \item \textbf{Dostrojenie parametrów modelu i progów decyzyjnych} -dostrojono parametry modelu regresji logistycznej, w tym współczynnika regularyzacji oraz maksymalnej liczby iteracji algorytmu optymalizacyjnego. Dodatkowo zastosowano procedurę dostrajania progów decyzyjnych, której celem było uzyskanie lepszej równowagi pomiędzy precyzją a czułością dla klas mniejszościowych. Podejście to umożliwiło zwiększenie skuteczności wykrywania rzadkich defektów przy jednoczesnym ograniczeniu liczby fałszywych alarmów.
+    \item \textbf{Współczynnik regularyzacji} $C=0.5$ -- umiarkowana regularyzacja L2, która pomaga uniknąć overfittingu na klasach mniejszościowych przy jednoczesnym zachowaniu zdolności do uczenia się subtelnych różnic między klasami
+    \item \textbf{Maksymalna liczba iteracji} $max\_iter=3000$ -- zwiększona w stosunku do wartości domyślnej, aby zapewnić pełną zbieżność algorytmu optymalizacyjnego LBFGS
+    \item \textbf{Seed losowości} $random\_state$ -- zapewnia reprodukowalność wyników treningu
 \end{itemize}
+
+\subsubsection{Rozszerzenie przestrzeni cech akustycznych}
+Wstępne eksperymenty wykazały ograniczoną skuteczność samego ważenia klas, dlatego wprowadzono dodatkowe ulepszenia polegające na rozszerzeniu zbioru cech audio. W szczególności:
+
+\begin{itemize}
+    \item \textbf{Zwiększenie liczby współczynników MFCC} z 20 do 40, co pozwoliło na bardziej szczegółowe odwzorowanie charakterystyki częstotliwościowej sygnału
+    \item \textbf{Zwiększenie rozmiaru okna FFT} z 1024 do 2048 próbek, co poprawiło rozdzielczość częstotliwościową analizy spektralnej
+    \item \textbf{Parametr hop\_length=512} -- określa przesunięcie okna analizy w czasie, zapewniając odpowiednią rozdzielczość czasową
+    \item \textbf{Dodatkowe cechy spektralne}:
+    \begin{itemize}
+        \item \textit{Spectral centroid} -- środek ciężkości widma częstotliwościowego (średnia i odchylenie standardowe)
+        \item \textit{Spectral rolloff} -- częstotliwość, poniżej której znajduje się 85\% energii widmowej (średnia i odchylenie standardowe)
+        \item \textit{Zero crossing rate} -- częstotliwość przejść sygnału przez zero (średnia i odchylenie standardowe)
+        \item \textit{Chroma features} -- 12-wymiarowa charakterystyka harmoniczna reprezentująca rozkład energii w skali chromatycznej
+        \item \textit{Tonnetz} -- 6-wymiarowa reprezentacja harmoniczna oparta na relacjach interwałowych
+    \end{itemize}
+\end{itemize}
+
+Z każdego współczynnika MFCC obliczono średnią i odchylenie standardowe w czasie (80 cech: 40 średnich + 40 odchyleń). W połączeniu z dodatkowymi cechami spektralnymi (24 cechy: 2 + 2 + 2 + 12 + 6) otrzymano łącznie \textbf{104 cechy} na próbkę, co umożliwiło lepsze odwzorowanie subtelnych różnic między stanami urządzenia.
+
+\subsubsection{Analiza rozkładu klas}
+Przed zastosowaniem metod kompensacyjnych przeprowadzono szczegółową analizę rozkładu klas dla każdego atrybutu. Dla każdej klasy obliczono:
+\begin{itemize}
+    \item Liczbę próbek oraz procentowy udział w zbiorze danych
+    \item Automatycznie obliczone wagi klas zgodnie z formułą ważenia zbalansowanego
+    \item Wskaźnik niezbalansowania definiowany jako stosunek liczebności największej klasy do najmniejszej klasy
+\end{itemize}
+
+Wskaźnik niezbalansowania pozwala na szybką identyfikację atrybutów wymagających szczególnej uwagi. Wartości powyżej 10:1 wskazują na wysokie niezbalansowanie, wartości 5-10:1 na umiarkowane, a poniżej 5:1 na niskie niezbalansowanie. Analiza ta umożliwiła świadome podejście do kompensacji niezbalansowania, z uwzględnieniem specyfiki każdego atrybutu.
+
+\subsubsection{Dostrojenie progów decyzyjnych}
+Oprócz ważenia klas podczas treningu, wprowadzono zaawansowany mechanizm dostrajania progów decyzyjnych na etapie predykcji. Procedura składa się z dwóch etapów:
+
+\textbf{Etap 1: Znajdowanie optymalnych progów} -- dla każdego atrybutu i każdej klasy mniejszościowej:
+\begin{enumerate}
+    \item Konwersja problemu wieloklasowego na binarny (dana klasa vs. reszta)
+    \item Obliczenie krzywej precision-recall dla różnych progów prawdopodobieństwa
+    \item Obliczenie F1-score dla każdego progu: $F1 = \frac{2 \times precision \times recall}{precision + recall}$
+    \item Wybór progu maksymalizującego F1-score
+    \item Zapisanie progu tylko w przypadku, gdy różni się znacząco od domyślnego (0.5) o więcej niż 0.05
+\end{enumerate}
+
+\textbf{Etap 2: Modyfikacja prawdopodobieństw podczas predykcji} -- zamiast bezpośredniego użycia progów jako wartości decyzyjnych, zastosowano bardziej elastyczne podejście:
+\begin{enumerate}
+    \item Dla każdej klasy mniejszościowej z dostosowanym progiem obliczany jest współczynnik wzmocnienia (\textit{boost factor}):
+    \begin{equation}
+    \text{boost\_factor} = 1.0 + (0.5 - \text{threshold}) \times 0.5
+    \end{equation}
+    gdzie $\text{threshold}$ to optymalny próg znaleziony w etapie 1. Im niższy próg (czyli im bardziej klasa jest niedoreprezentowana), tym większy współczynnik wzmocnienia.
+    \item Prawdopodobieństwa klas mniejszościowych są mnożone przez odpowiedni współczynnik wzmocnienia
+    \item Prawdopodobieństwa są normalizowane, aby zachować sumę równą 1
+    \item Wybór klasy następuje poprzez argmax znormalizowanych prawdopodobieństw
+\end{enumerate}
+
+Takie podejście pozwala na płynną modyfikację prawdopodobieństw zamiast sztywnego progu decyzyjnego, co jest szczególnie istotne w problemach wieloklasowych, gdzie bezpośrednie użycie progów może prowadzić do niespójności (suma prawdopodobieństw może przekraczać 1).
+
+\subsubsection{Preprocessing i podział danych}
+Dane wejściowe zostały poddane standaryzacji przy użyciu \texttt{StandardScaler}, która normalizuje każdą cechę do średniej równej 0 i odchylenia standardowego równego 1. Standaryzacja jest kluczowa dla algorytmów opartych na odległościach, takich jak regresja logistyczna.
+
+Zbiór danych został podzielony na zbiór treningowy (80\%) i testowy (20\%) przy użyciu funkcji \texttt{train\_test\_split}. Podział został wykonany losowo, bez stratyfikacji, co jest akceptowalne ze względu na wielkość zbioru danych oraz fakt, że niezbalansowanie jest kompensowane na poziomie modelu poprzez ważenie klas.
 
 Dodatkowo, utworzono trzy modele z zróżnicowaną zdolnością klasyfikacji:
 \begin{itemize}
     \item Model wieloklasowy wielokryterialny - model klasyfikujący w ten sam sposób, co model z wstępnego eksperymentu, lecz z zastosowanymi metodami kompensacji klas niezbalansowanych - każda predykcja opiera się na określeniu stanu każdego z elementów, gdzie każdy element potrafi mieć nawet kilka możliwych anomalii,
-    \item Model wieloklasowy binarny - model, w którym każda predykcja opiera się na określeniu stanu każdego z elementów urządzenia mechanicznego, ale w sposób binarny (Dobry/Wadliwy),
-    \item Model jednoklasowy binarny - model opiera swoją predykcję o binarną analizę systemu jako całości (działa poprawnie lub jest awaria gdziekolwiek w systemie). Z uwagi na charakter modelu, ocena poprawności działania modelu opierać się będzie na całych zbiorach, a nie jedynie na 3 klasach wybranych do eksperymentów w przedstawionej sekcji.
+    \item Model wieloklasowy binarny - model, w którym każda predykcja opiera się na określeniu stanu każdego z elementów urządzenia mechanicznego, ale w sposób binarny (Dobry/Wadliwy). Implementacja tego modelu wykorzystuje tę samą architekturę i kod co model wieloklasowy wielokryterialny, różnica polega jedynie na modyfikacji plików CSV z etykietami, gdzie wszystkie klasy anomalii zostały scalone do jednej klasy \textit{Defect}. Dzięki temu każdy atrybut ma tylko dwie klasy decyzyjne (\textit{Normal} i \textit{Defect}), co upraszcza problem klasyfikacji i może prowadzić do lepszej skuteczności detekcji uszkodzeń kosztem utraty informacji o konkretnym typie anomalii,
+    \item Model jednoklasowy binarny - binarna klasyfikacja systemu jako całości (Normal/Anomaly). Wykorzystuje pojedynczy klasyfikator \texttt{LogisticRegression} zamiast \texttt{MultiOutputClassifier}, etykiety przypisywane bezpośrednio (bez CSV), oraz stratyfikowany podział danych (\texttt{stratify=Y\_encoded}). Model nie stosuje dostrajania progów ze względu na prostotę problemu binarnego.
 \end{itemize}
 
-Zastosowane modyfikacje miały na celu poprawę jakości klasyfikacji w szczególności dla klas rzadkich, co powinno przejawiać się wzrostem wartości \textit{recall} oraz \textit{Macro F1-score}, zmniejszeniem różnicy pomiędzy średnimi typu \textit{macro} i \textit{weighted}, a także ogólną poprawą zdolności modelu do detekcji rzadko występujących stanów uszkodzeń.
+Zastosowane modyfikacje mają na celu poprawę klasyfikacji klas rzadkich, wyrażoną wzrostem \textit{recall} i \textit{Macro F1-score} oraz zmniejszeniem różnicy między średnimi \textit{macro} i \textit{weighted}.

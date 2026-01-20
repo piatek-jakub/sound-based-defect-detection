@@ -1,9 +1,5 @@
 \section{Eksperymenty z kompensacją klas niezbalansowanych}
-Niniejszy rozdział poświęcony jest próbie poprawy jakości klasyfikacji wyrażonej za pomocą miar \textit{precision}, \textit{recall} oraz \textit{F1-score} dla atrybutów, które we wcześniejszych eksperymentach okazały się najtrudniejsze do poprawnej predykcji, tj. \textit{Gears}, \textit{Belt} oraz \textit{Curved railway track}. Atrybuty te charakteryzują się zarówno znacznym niezbalansowaniem klas, jak i obecnością wielu klas anomalnych o zbliżonych właściwościach akustycznych.
-
-W ramach przeprowadzonych eksperymentów zastosowano metody kompensacji niezbalansowania klas na etapie uczenia modelu, bez ingerencji w oryginalny rozkład danych wejściowych. W szczególności wykorzystano mechanizm ważenia klas (\textit{class weighting}), który zwiększa wpływ próbek klas mniejszościowych na proces optymalizacji modelu. Celem takiego podejścia było zwiększenie czułości modelu na klasy rzadkie oraz poprawa wartości miar \textit{recall} i \textit{F1-score}, które są kluczowe z punktu widzenia detekcji stanów uszkodzeń.
-
-W kolejnych podrozdziałach przedstawiono szczegółowe wyniki eksperymentów oraz analizę wpływu zastosowanych metod na skuteczność klasyfikacji dla wybranych atrybutów.
+Rozdział przedstawia metody kompensacji niezbalansowania klas zastosowane w celu poprawy jakości klasyfikacji dla atrybutów \textit{Gears}, \textit{Belt} oraz \textit{Curved railway track}, charakteryzujących się znacznym niezbalansowaniem klas oraz wieloma klasami anomalnymi o zbliżonych właściwościach akustycznych. Wykorzystano mechanizm ważenia klas (\textit{class weighting}), który zwiększa wpływ próbek klas mniejszościowych na proces optymalizacji modelu, oraz dodatkowe techniki opisane w kolejnych podrozdziałach.
 
 \input{tresc/07_eksperymentyKompensacja/zastosowanieMetody}
 \input{tresc/07_eksperymentyKompensacja/wyniki}
